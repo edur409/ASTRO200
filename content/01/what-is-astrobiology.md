@@ -20,3 +20,15 @@ Data science is all of these things, but it is more than the sum of its parts
 because of the applications. Through understanding a particular domain, data
 scientists learn to ask appropriate questions about their data and correctly
 interpret the answers provided by our inferential and computational tools.
+
+## Astronomy (Macro)
+
+The largest scale of observation and search for life in the universe.
+
+## Geosciences (Meso)
+
+The role of geosciences to link the macro and micro scales 
+
+## Biology and Chemistry (Micro)
+
+The smallest scale
