@@ -1,5 +1,5 @@
 ---
-title: 'Data Science'
+title: 'Astrobiology'
 prev_page:
   url: /features/notebooks.html
   title: 'Jupyter notebooks'
@@ -11,25 +11,23 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
 What is Astrobiology
 ====================
 
-Data Science is about drawing useful conclusions from large and diverse data
-sets through exploration, prediction, and inference.  Exploration involves
-identifying patterns in information.  Prediction involves using information
-we know to make informed guesses about values we wish we knew.  Inference
-involves quantifying our degree of certainty: will those patterns we found
-also appear in new observations? How accurate are our predictions? Our primary
-tools for exploration are visualizations and descriptive statistics, for
-prediction are machine learning and optimization, and for inference are
-statistical tests and models.
+Astrobiology, formerly known as exobiology, is an interdisciplinary scientific field
+concerned with the origins, early evolution, distribution, and future of life in the universe. 
+Astrobiology considers the question of whether extraterrestrial life exists, and if it does, how 
+humans can detect it.  Astrobiology makes use of molecular biology, biophysics, biochemistry, 
+chemistry, astronomy, physical cosmology, exoplanetology and geology to investigate the possibility
+of life on other worlds and help recognize biospheres that might be different from that on Earth.
+The origin and early evolution of life is an inseparable part of the discipline of astrobiology.
+Astrobiology concerns itself with interpretation of existing scientific data, and although speculation
+is entertained to give context, astrobiology concerns itself primarily with hypotheses that fit firmly 
+into existing scientific theories.
 
-Statistics is a central component of data science because statistics
-studies how to make robust conclusions with incomplete information. Computing
-is a central component because programming allows us to apply analysis
-techniques to the large and diverse data sets that arise in real-world
-applications: not just numbers, but text, images, videos, and sensor readings.
-Data science is all of these things, but it is more than the sum of its parts
-because of the applications. Through understanding a particular domain, data
-scientists learn to ask appropriate questions about their data and correctly
-interpret the answers provided by our inferential and computational tools.
+This interdisciplinary field encompasses research on the origin of planetary systems, origins of organic
+compounds in space, rock-water-carbon interactions, abiogenesis on Earth, planetary habitability, research
+on biosignatures for life detection, and studies on the potential for life to adapt to challenges on Earth 
+and in outer space.
+
+![](../images/Astrobiology.png)
 
 ## Astronomy (Macro)
 
