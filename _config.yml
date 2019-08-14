@@ -16,9 +16,9 @@
 
 #######################################################################################
 # Jekyll site settings
-title: YOUR BOOK NAME
-author: YOUR AUTHOR NAME
-email: YOUR EMAIL
+title: ASTRO200 UoA
+author: Evert Duran
+email: edur409@aucklanduni.ac.nz
 description: >-
   This is an example book built with Jupyter Books.
 

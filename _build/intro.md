@@ -4,10 +4,15 @@ prev_page:
   url: 
   title: ''
 next_page:
-  url: https://github.com/jupyter/jupyter-book
+  url: https://github.com/edur409/ASTRO200.git
   title: 'GitHub repository'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
+# ASTRO200 Jupyter Book
+
+This book is an attempt to organize the content for the students of Astrobiology 200 at 
+The University of Auckland.
+
 # Books with Jupyter and Jekyll
 
 <img src="https://circleci.com/gh/jupyter/jupyter-book.svg?style=svg" class="left">

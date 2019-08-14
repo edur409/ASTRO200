@@ -1,3 +1,8 @@
+# ASTRO200 Jupyter Book
+
+This book is an attempt to organize the content for the students of Astrobiology 200 at 
+The University of Auckland.
+
 # Books with Jupyter and Jekyll
 
 <img src="https://circleci.com/gh/jupyter/jupyter-book.svg?style=svg" class="left">
