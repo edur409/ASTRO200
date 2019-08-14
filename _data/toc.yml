@@ -54,3 +54,9 @@
   - title: Jupyter notebooks
     url: /features/notebooks
     not_numbered: true
+
+- divider: true
+- header: Demo textbook
+
+- title: Data Science
+  url: /01/what-is-astrobiology
