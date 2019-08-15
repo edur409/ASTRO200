@@ -1,7 +1,7 @@
 ---
 redirect_from:
   - "/01/curl-vector-field"
-interact_link: content/C:\Users\edur409\Documents\ASTRO 200\ASTRO_Jupyter_Book\ASTRO200\content\01/Curl_vector_field.ipynb
+interact_link: content/01/Curl_vector_field.ipynb
 kernel_name: python3
 has_widgets: false
 title: 'Curl of Vector Field'
