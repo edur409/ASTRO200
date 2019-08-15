@@ -61,26 +61,19 @@
 # ===== PART I ========================================
 - title: Intro
   url: intro
-- title: License
-  url: LICENSE
-
-# ===== INTRODUCTRION ========================================
-- title: What-is-astrobiology
-  url: /01/what-is-astrobiology
-# ===== NEW SECTION ========================================
-- title: Intro
-  url: /01/1/intro
-# ===== NEW SECTION ========================================
-- title: The-ways-of-science
-  url: /01/2/the-ways-of-science
-# ===== NEW SECTION ========================================
-- title: From Ptolemy To Kepler
-  url: /01/3/from_ptolemy_to_kepler
-# ===== NEW SECTION ========================================
-- title: Distances In The Universe
-  url: /01/4/distances_in_the_universe
-# ===== NEW SECTION ========================================
-- title: Curl Vector Field
-  url: /01/4/subsection/Curl_vector_field
-- title: Smallangleequation
-  url: /01/4/subsection/SmallAngleEquation
+  sections:
+ - title: What-is-astrobiology
+   url: /01/what-is-astrobiology
+ - title: Intro
+   url: /01/1/intro
+ - title: The-ways-of-science
+   url: /01/2/the-ways-of-science
+ - title: From Ptolemy To Kepler
+   url: /01/3/from_ptolemy_to_kepler
+ - title: Distances In The Universe
+   url: /01/4/distances_in_the_universe
+   subsections:
+   - title: Curl Vector Field
+     url: /01/4/subsection/Curl_vector_field
+   - title: Smallangleequation
+     url: /01/4/subsection/SmallAngleEquation
