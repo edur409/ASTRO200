@@ -41,23 +41,6 @@
 
 # Add a header and sample content section
 - header: ASTRO200 Demo textbook
-
-# A chapter w/ a collection of sections beneath it
-- title: Features and customization
-  url: /features/features
-  not_numbered: true
-  expand_sections: true
-  sections:
-  - title: Markdown files
-    url: /features/markdown
-    not_numbered: true
-  - title: Jupyter notebooks
-    url: /features/notebooks
-    not_numbered: true
-
-- divider: true
-- header: Demo textbook
-
 # ===== PART I ========================================
 - title: Intro
   url: intro
