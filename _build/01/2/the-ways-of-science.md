@@ -1,8 +1,8 @@
 ---
 title: 'The-ways-of-science'
 prev_page:
-  url: /01/1/intro.html
-  title: 'Intro'
+  url: /01/1/what-is-astrobiology.html
+  title: 'What-is-astrobiology'
 next_page:
   url: /01/3/from_ptolemy_to_kepler.html
   title: 'From Ptolemy To Kepler'
