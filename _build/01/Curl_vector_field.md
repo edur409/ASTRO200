@@ -1,7 +1,7 @@
 ---
 redirect_from:
   - "/01/curl-vector-field"
-interact_link: content/01/Curl_vector_field.ipynb
+interact_link: content/C:\Users\edur409\Documents\ASTRO 200\ASTRO_Jupyter_Book\ASTRO200\content\01/Curl_vector_field.ipynb
 kernel_name: python3
 has_widgets: false
 title: 'Curl of Vector Field'
@@ -9,8 +9,8 @@ prev_page:
   url: /01/Life_In_The_Universe.html
   title: 'Life in the Universe'
 next_page:
-  url: 
-  title: ''
+  url: /01/SmallAngleEquation.html
+  title: 'Small Angle Approximation'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 
