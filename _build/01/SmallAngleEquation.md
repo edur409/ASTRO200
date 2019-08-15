@@ -1,7 +1,7 @@
 ---
 redirect_from:
   - "/01/smallangleequation"
-interact_link: content/C:\Users\edur409\Documents\ASTRO 200\ASTRO_Jupyter_Book\ASTRO200\content\01/SmallAngleEquation.ipynb
+interact_link: content/01/SmallAngleEquation.ipynb
 kernel_name: python3
 has_widgets: false
 title: 'Small Angle Approximation'
