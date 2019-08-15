@@ -58,11 +58,29 @@
 - divider: true
 - header: Demo textbook
 
-- title: Astrobiology
+# ===== PART I ========================================
+- title: Intro
+  url: intro
+- title: License
+  url: LICENSE
+
+# ===== INTRODUCTRION ========================================
+- title: What-is-astrobiology
   url: /01/what-is-astrobiology
-- title: Life in the Universe
-  url: /01/Life_In_The_Universe
-- title: Curl of Vector Field
-  url: /01/Curl_vector_field
-- title: Small Angle Approximation
-  url: /01/SmallAngleEquation
+# ===== NEW SECTION ========================================
+- title: Intro
+  url: /01/1/intro
+# ===== NEW SECTION ========================================
+- title: The-ways-of-science
+  url: /01/2/the-ways-of-science
+# ===== NEW SECTION ========================================
+- title: From Ptolemy To Kepler
+  url: /01/3/from_ptolemy_to_kepler
+# ===== NEW SECTION ========================================
+- title: Distances In The Universe
+  url: /01/4/distances_in_the_universe
+# ===== NEW SECTION ========================================
+- title: Curl Vector Field
+  url: /01/4/subsection/Curl_vector_field
+- title: Smallangleequation
+  url: /01/4/subsection/SmallAngleEquation

@@ -1,13 +1,13 @@
 ---
 redirect_from:
-  - "/01/smallangleequation"
-interact_link: content/01/SmallAngleEquation.ipynb
+  - "/01/4/subsection/smallangleequation"
+interact_link: content/01/4/subsection/SmallAngleEquation.ipynb
 kernel_name: python3
 has_widgets: false
-title: 'Small Angle Approximation'
+title: 'Smallangleequation'
 prev_page:
-  url: /01/Curl_vector_field.html
-  title: 'Curl of Vector Field'
+  url: /01/4/subsection/Curl_vector_field.html
+  title: 'Curl Vector Field'
 next_page:
   url: 
   title: ''

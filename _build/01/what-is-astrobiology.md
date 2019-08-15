@@ -1,11 +1,11 @@
 ---
-title: 'Astrobiology'
+title: 'What-is-astrobiology'
 prev_page:
-  url: /features/notebooks.html
-  title: 'Jupyter notebooks'
+  url: /LICENSE.html
+  title: 'License'
 next_page:
-  url: /01/Life_In_The_Universe.html
-  title: 'Life in the Universe'
+  url: /01/1/intro.html
+  title: 'Intro'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 What is Astrobiology
@@ -27,7 +27,7 @@ compounds in space, rock-water-carbon interactions, abiogenesis on Earth, planet
 on biosignatures for life detection, and studies on the potential for life to adapt to challenges on Earth 
 and in outer space.
 
-![](../images/Astrobiology.png)
+![](../images/01/Astrobiology.png)
 
 ## Astronomy (Macro)
 

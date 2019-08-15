@@ -7,8 +7,8 @@ prev_page:
   url: /features/markdown.html
   title: 'Markdown files'
 next_page:
-  url: /01/what-is-astrobiology.html
-  title: 'Astrobiology'
+  url: /intro.html
+  title: 'Intro'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 

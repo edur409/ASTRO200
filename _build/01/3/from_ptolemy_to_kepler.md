@@ -1,16 +1,16 @@
 ---
 redirect_from:
-  - "/01/life-in-the-universe"
-interact_link: content/01/Life_In_The_Universe.ipynb
+  - "/01/3/from-ptolemy-to-kepler"
+interact_link: content/01/3/from_ptolemy_to_kepler.ipynb
 kernel_name: python3
 has_widgets: false
-title: 'Life in the Universe'
+title: 'From Ptolemy To Kepler'
 prev_page:
-  url: /01/what-is-astrobiology.html
-  title: 'Astrobiology'
+  url: /01/2/the-ways-of-science.html
+  title: 'The-ways-of-science'
 next_page:
-  url: /01/Curl_vector_field.html
-  title: 'Curl of Vector Field'
+  url: /01/4/distances_in_the_universe.html
+  title: 'Distances In The Universe'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 

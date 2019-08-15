@@ -1,16 +1,16 @@
 ---
 redirect_from:
-  - "/01/curl-vector-field"
-interact_link: content/01/Curl_vector_field.ipynb
+  - "/01/4/subsection/curl-vector-field"
+interact_link: content/01/4/subsection/Curl_vector_field.ipynb
 kernel_name: python3
 has_widgets: false
-title: 'Curl of Vector Field'
+title: 'Curl Vector Field'
 prev_page:
-  url: /01/Life_In_The_Universe.html
-  title: 'Life in the Universe'
+  url: /01/4/distances_in_the_universe.html
+  title: 'Distances In The Universe'
 next_page:
-  url: /01/SmallAngleEquation.html
-  title: 'Small Angle Approximation'
+  url: /01/4/subsection/SmallAngleEquation.html
+  title: 'Smallangleequation'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 

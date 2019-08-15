@@ -1,3 +1,13 @@
+---
+title: 'Intro'
+prev_page:
+  url: /01/what-is-astrobiology.html
+  title: 'What-is-astrobiology'
+next_page:
+  url: /01/2/the-ways-of-science.html
+  title: 'The-ways-of-science'
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
 What is Astrobiology
 ====================
 
@@ -17,7 +27,7 @@ compounds in space, rock-water-carbon interactions, abiogenesis on Earth, planet
 on biosignatures for life detection, and studies on the potential for life to adapt to challenges on Earth 
 and in outer space.
 
-![](../images/01/Astrobiology.png)
+![](../images/Astrobiology.png)
 
 ## Astronomy (Macro)
 
