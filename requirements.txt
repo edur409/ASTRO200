@@ -11,3 +11,7 @@ nbinteract
 scipy
 jupyter-book
 bqplot
+appmode
+traitlets
+traittypes
+pythreejs

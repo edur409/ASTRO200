@@ -58,3 +58,8 @@
       url: /01/4/subsection/Curl_vector_field
     - title: Smallangleequation
       url: /01/4/subsection/SmallAngleEquation
+  sections:
+  - title: Radioactive decay
+    url: /02/Radioactivity
+  - title: Dopple Shift
+    url: /02/DopplerShift
