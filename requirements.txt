@@ -15,4 +15,4 @@ appmode
 traitlets
 traittypes
 pythreejs
-number_formatting
+
