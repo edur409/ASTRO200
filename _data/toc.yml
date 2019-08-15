@@ -63,9 +63,7 @@
   url: intro
   sections:
   - title: What-is-astrobiology
-    url: /01/what-is-astrobiology
-  - title: Intro
-    url: /01/1/intro
+    url: /01/1/what-is-astrobiology
   - title: The-ways-of-science
     url: /01/2/the-ways-of-science
   - title: From Ptolemy To Kepler
