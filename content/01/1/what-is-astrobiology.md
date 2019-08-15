@@ -17,7 +17,7 @@ compounds in space, rock-water-carbon interactions, abiogenesis on Earth, planet
 on biosignatures for life detection, and studies on the potential for life to adapt to challenges on Earth 
 and in outer space.
 
-![](../images/Astrobiology.png)
+![](./content/images/Astrobiology.png)
 
 ## Astronomy (Macro)
 
