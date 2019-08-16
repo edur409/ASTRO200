@@ -58,6 +58,10 @@
       url: /01/4/subsection/Curl_vector_field
     - title: Smallangleequation
       url: /01/4/subsection/SmallAngleEquation
+
+# ===== PART II ========================================
+- title: Astronomy
+  url: astronomy
   sections:
   - title: Radioactive decay
     url: /02/Radioactivity
