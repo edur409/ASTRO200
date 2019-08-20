@@ -271,6 +271,10 @@ The planet orbits its star at an average distance of $0.40~AU$, which is nearly 
 
 These observations offered clear proof that Earth is not the center of everything.* Although we now recognize that Galileo won the day, the story was more complex in his own time, when Catholic Church doctrine still held Earth to be the center of the universe. On June 22, 1633, Galileo was brought before a Church inquisition in Rome and ordered to recant his claim that Earth orbits the Sun. Nearly 70 years old and fearing for his life, Galileo did as ordered and his life was spared. However, legend has it that as he rose from his knees, he whispered under his breath, Eppur si muove— Italian for “And yet it moves.” (Given the likely consequences if Church ofﬁcials had heard him say this, most historians doubt the legend.) The Church did not formally vindicate Galileo until 1992, but the Church had given up the argument long before that. Today, Catholic scientists are at the forefront of much astronomical research, and ofﬁcial Church teachings are compatible not only with Earth’s planetary status but also with the theories of the Big Bang and the subsequent evolution of the cosmos and of life.
 
+
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="750" height="400"><param name="movie" value="KeplerFirstLaw.swf" /><!--[if !IE]>--><object type="application/x-shockwave-flash" data="KeplerFirstLaw.swf" width="750" height="400"><!--<![endif]--><p>flash animation</p><!--[if !IE]>--></object><!--<![endif]--></object>
+
+
 [Go back to the top of the page](#top-title)
 
 
