@@ -9,8 +9,8 @@ prev_page:
   url: /01/4/subsection/Curl_vector_field.html
   title: 'Curl Vector Field'
 next_page:
-  url: 
-  title: ''
+  url: /astronomy.html
+  title: 'Astronomy'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 

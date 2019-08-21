@@ -6,8 +6,8 @@ kernel_name: python3
 has_widgets: false
 title: 'Radioactive decay'
 prev_page:
-  url: /intro.html
-  title: 'Intro'
+  url: /astronomy.html
+  title: 'Astronomy'
 next_page:
   url: /02/DopplerShift.html
   title: 'Dopple Shift'
