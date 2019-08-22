@@ -41,7 +41,4 @@ The role of geosciences to link the macro and micro scales
 
 The smallest scale
 
-{% cite holdgraf_evidence_2014 %}
 
-
-{% bibliography --cited %}
