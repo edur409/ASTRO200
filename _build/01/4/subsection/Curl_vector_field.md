@@ -22,13 +22,8 @@ The curl of a vector field ($\vec v$) is also known as the rotor or rotational o
 
 
 <div markdown="1" class="cell code_cell">
-<div class="input_area" markdown="1">
+<div class="input_area hidecode" markdown="1">
 ```python
-{
-    "tags": [
-        "hide_input",
-    ]
-}
 #Python Toolboxes needed
 import numpy as np
 import matplotlib.pyplot as plt
@@ -54,7 +49,7 @@ where $\hat x$ and $\hat y$ are the unit vectors in directions $x$ and $y$ respe
 
 
 <div markdown="1" class="cell code_cell">
-<div class="input_area" markdown="1">
+<div class="input_area hidecode" markdown="1">
 ```python
 {
     "tags": [
