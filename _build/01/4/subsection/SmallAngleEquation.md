@@ -16,7 +16,7 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
 
 
 <div markdown="1" class="cell code_cell">
-<div class="input_area" markdown="1">
+<div class="input_area hidecode" markdown="1">
 ```python
 from IPython.display import HTML
 
@@ -80,7 +80,7 @@ $$\theta_{exact} = 2\arctan\left(\frac{s}{2d}\right) \;\;\;\;\;\;\;\;\;\;\;\;\;\
 
 
 <div markdown="1" class="cell code_cell">
-<div class="input_area" markdown="1">
+<div class="input_area hidecode" markdown="1">
 ```python
 # Originally created on June 13, 2018 by Samuel Holen
 
@@ -97,7 +97,7 @@ from IPython.display import display
 
 
 <div markdown="1" class="cell code_cell">
-<div class="input_area" markdown="1">
+<div class="input_area hidecode" markdown="1">
 ```python
 def approx_theta(s,d):
     # Small angle approximation equation
@@ -158,7 +158,7 @@ def update(change=None):
 
 
 <div markdown="1" class="cell code_cell">
-<div class="input_area" markdown="1">
+<div class="input_area hidecode" markdown="1">
 ```python
 h_slider = widgets.FloatSlider(
     value=5,
@@ -206,7 +206,7 @@ blank = widgets.Label(value='')
 
 
 <div markdown="1" class="cell code_cell">
-<div class="input_area" markdown="1">
+<div class="input_area hidecode" markdown="1">
 ```python
 ## PLOT/FIGURE ##
 
