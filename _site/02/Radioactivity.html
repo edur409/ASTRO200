@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+
+  <title>Radioactive decay</title>
+  <meta name="description" content="      ```pythonfrom IPython.display import HTML  ">
+
+  <link rel="canonical" href="http://0.0.0.0:4000//02/Radioactivity.html">
+  <link rel="alternate" type="application/rss+xml" title="ASTRO200 UoA" href="http://0.0.0.0:4000//feed.xml">
+
+  <meta property="og:url"         content="http://0.0.0.0:4000//02/Radioactivity.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Radioactive decay" />
+<meta property="og:description" content="      ```pythonfrom IPython.display import HTML  " />
+<meta property="og:image"       content="" />
+
+
+  <script type="application/ld+json">
+  {
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage":
+    "http://0.0.0.0:4000//02/Radioactivity.html",
+  "headline":
+    "Radioactive decay",
+  "datePublished":
+    "2019-08-25T22:23:30-05:00",
+  "dateModified":
+    "2019-08-25T22:23:30-05:00",
+  "description":
+    "      ```pythonfrom IPython.display import HTML  ",
+  "author": {
+    "@type": "Person",
+    "name": "Evert Duran"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Data 100 at UC Berkeley",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://0.0.0.0:4000/",
+      "width": 60,
+      "height": 60
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "http://0.0.0.0:4000/",
+    "height": 60,
+    "width": 60
+  }
+}
+
+  </script>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css ">
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+  <!-- <link rel="manifest" href="/manifest.json"> -->
+  <!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#efae0a"> -->
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#233947">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/images/logo/favicon.ico">
+
+  <!-- MathJax Config -->
+  <!-- Allow inline math using $ and automatically break long math lines -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+        processEnvironments: true
+    },
+    CommonHTML: {
+        linebreaks: {
+            automatic: true,
+        },
+    },
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML' async></script>
+
+  <!-- DOM updating function -->
+  <script>
+const runWhenDOMLoaded = cb => {
+  if (document.readyState != 'loading') {
+    cb()
+  } else if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', cb)
+  } else {
+    document.attachEvent('onreadystatechange', function() {
+      if (document.readyState == 'complete') cb()
+    })
+  }
+}
+
+// Helper function to init things quickly
+initFunction = function(myfunc) {
+  runWhenDOMLoaded(myfunc);
+  document.addEventListener('turbolinks:load', myfunc);
+};
+</script>
+
+  <!-- Define some javascript variables that will be useful in other javascript -->
+  <script>
+    const site_basename = '/';
+  </script>
+
+  <!-- Add AnchorJS to let headers be linked -->
+  <script src="/assets/js/anchor.min.js"  type="text/javascript"></script>
+  <script>
+
+initFunction(function () {
+    anchors.add("main h1, main h2, main h3, main h4")
+});
+
+</script>
+
+  <!-- Include Turbolinks to make page loads fast -->
+  <!-- https://github.com/turbolinks/turbolinks -->
+  <script src="/assets/js/turbolinks.js" async></script>
+  <meta name="turbolinks-cache-control" content="no-cache">
+
+  <!-- Load nbinteract for widgets -->
+  
+
+  <!-- Load Thebelab for interactive widgets -->
+  <!-- Include Thebelab for interactive code if it's enabled -->
+
+
+<!-- Display Thebelab button in each code cell -->
+<script>
+/**
+ * Set up thebelab button for code blocks
+ */
+
+const thebelabCellButton = id =>
+  `<a id="thebelab-cell-button-${id}" class="btn thebebtn o-tooltip--left" data-tooltip="Interactive Mode">
+    <img src="/assets/images/edit-button.svg" alt="Start interactive mode">
+  </a>`
+
+
+const addThebelabButtonToCodeCells =  () => {
+
+  const codeCells = document.querySelectorAll('div.input_area > div.highlighter-rouge:not(.output) pre')
+  codeCells.forEach((codeCell, index) => {
+    const id = codeCellId(index)
+    codeCell.setAttribute('id', id)
+    if (document.getElementById("thebelab-cell-button-" + id) == null) {
+      codeCell.insertAdjacentHTML('afterend', thebelabCellButton(id));
+    }
+  })
+}
+
+initFunction(addThebelabButtonToCodeCells);
+</script>
+
+
+
+<script type="text/x-thebe-config">
+    {
+      requestKernel: true,
+      binderOptions: {
+        repo: 'edur409/ASTRO200',
+        ref: 'master',
+      },
+      codeMirrorConfig: {
+        theme: "abcdef"
+      },
+      kernelOptions: {
+        name: 'python3',
+      }
+    }
+</script>
+<script src="https://unpkg.com/thebelab@0.4.0/lib/index.js"></script>
+<script>
+    /**
+     * Add attributes to Thebelab blocks
+     */
+
+    const initThebelab = () => {
+        const addThebelabToCodeCells = () => {
+            console.log("Adding thebelab to code cells...");
+            // If Thebelab hasn't loaded, wait a bit and try again. This
+            // happens because we load ClipboardJS asynchronously.
+            if (window.thebelab === undefined) {
+                setTimeout(addThebelabToCodeCells, 250)
+            return
+            }
+
+            // If we already detect a Thebelab cell, don't re-run
+            if (document.querySelectorAll('div.thebelab-cell').length > 0) {
+                return;
+            }
+
+            // Find all code cells, replace with Thebelab interactive code cells
+            const codeCells = document.querySelectorAll('.input_area pre')
+            codeCells.forEach((codeCell, index) => {
+                const id = codeCellId(index)
+                codeCell.setAttribute('data-executable', 'true')
+
+                // Figure out the language it uses and add this too
+                var parentDiv = codeCell.parentElement.parentElement;
+                var arrayLength = parentDiv.classList.length;
+                for (var ii = 0; ii < arrayLength; ii++) {
+                    var parts = parentDiv.classList[ii].split('language-');
+                    if (parts.length === 2) {
+                        // If found, assign dataLanguage and break the loop
+                        var dataLanguage = parts[1];
+                        break;
+                    }
+                }
+                codeCell.setAttribute('data-language', dataLanguage)
+
+                // If the code cell is hidden, show it
+                var inputCheckbox = document.querySelector(`input#hidebtn${codeCell.id}`);
+                if (inputCheckbox !== null) {
+                    setCodeCellVisibility(inputCheckbox, 'visible');
+                }
+            });
+
+            // Remove the event listener from the page so keyboard press doesn't
+            // Change page
+            document.removeEventListener('keydown', initPageNav)
+            keyboardListener = false;
+
+            // Init thebelab
+            thebelab.bootstrap();
+
+            // Remove copy buttons since they won't work anymore
+            const copyAndThebeButtons = document.querySelectorAll('.copybtn, .thebebtn')
+            copyAndThebeButtons.forEach((button, index) => {
+                button.remove();
+            });
+
+            // Remove outputs since they'll be stale
+            const outputs = document.querySelectorAll('.output *, .output')
+            outputs.forEach((output, index) => {
+                output.remove();
+            });
+        }
+
+        // Add event listener for the function to modify code cells
+        const thebelabButtons = document.querySelectorAll('[id^=thebelab], [id$=thebelab]')
+        thebelabButtons.forEach((thebelabButton,index) => {
+            if (thebelabButton === null) {
+                setTimeout(initThebelab, 250)
+                return
+            };
+            thebelabButton.addEventListener('click', addThebelabToCodeCells);
+        });
+    }
+
+    // Initialize Thebelab
+    initFunction(initThebelab);
+</script>
+
+
+
+  <!-- Load the auto-generating TOC -->
+  <script src="/assets/js/tocbot.min.js"  type="text/javascript"></script>
+  <script>
+var initToc = function () {
+  tocbot.init({
+    tocSelector: 'nav.onthispage',
+    contentSelector: '.c-textbook__content',
+    headingSelector: 'h2, h3',
+    orderedList: false,
+    collapseDepth: 6,
+    listClass: 'toc__menu',
+    activeListItemClass: "",  // Not using
+    activeLinkClass: "", // Not using
+  });
+  tocbot.refresh();
+}
+initFunction(initToc);
+</script>
+
+  <!-- Google analytics -->
+  <script src="/assets/js/ga.js" async></script>
+
+  <!-- Clipboard copy button -->
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" async></script>
+
+  <!-- Load JS that depends on site variables -->
+  <script>
+/**
+ * Set up copy/paste for code blocks
+ */
+const codeCellId = index => `codecell${index}`
+
+const clipboardButton = id =>
+  `<a id="copy-button-${id}" class="btn copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#${id}">
+    <img src="/assets/images/copy-button.svg" alt="Copy to clipboard">
+  </a>`
+
+// Clears selected text since ClipboardJS will select the text when copying
+const clearSelection = () => {
+  if (window.getSelection) {
+    window.getSelection().removeAllRanges()
+  } else if (document.selection) {
+    document.selection.empty()
+  }
+}
+
+// Changes tooltip text for two seconds, then changes it back
+const temporarilyChangeTooltip = (el, newText) => {
+  const oldText = el.getAttribute('data-tooltip')
+  el.setAttribute('data-tooltip', newText)
+  setTimeout(() => el.setAttribute('data-tooltip', oldText), 2000)
+}
+
+const addCopyButtonToCodeCells = () => {
+  // If ClipboardJS hasn't loaded, wait a bit and try again. This
+  // happens because we load ClipboardJS asynchronously.
+  if (window.ClipboardJS === undefined) {
+    setTimeout(addCopyButtonToCodeCells, 250)
+    return
+  }
+
+  const codeCells = document.querySelectorAll('div.c-textbook__content > div.highlighter-rouge > div.highlight > pre, div.input_area pre')
+  codeCells.forEach((codeCell, index) => {
+    const id = codeCellId(index)
+    codeCell.setAttribute('id', id)
+    if (document.getElementById("copy-button" + id) == null) {
+      codeCell.insertAdjacentHTML('afterend', clipboardButton(id));
+    }
+  })
+
+  const clipboard = new ClipboardJS('.copybtn')
+  clipboard.on('success', event => {
+    clearSelection()
+    temporarilyChangeTooltip(event.trigger, 'Copied!')
+  })
+
+  clipboard.on('error', event => {
+    temporarilyChangeTooltip(event.trigger, 'Failed to copy')
+  })
+
+  // Get rid of clipboard before the next page visit to avoid memory leak
+  document.addEventListener('turbolinks:before-visit', () =>
+    clipboard.destroy()
+  )
+}
+
+initFunction(addCopyButtonToCodeCells);
+</script>
+
+
+  <!-- Hide cell code -->
+  <script>
+    /**
+    Add buttons to hide code cells
+    */
+
+
+    var setCodeCellVisibility = function (inputField, kind) {
+        // Update the image and class for hidden
+        var id = inputField.getAttribute('data-id');
+        var codeCell = document.querySelector(`#${id} div.highlight`);
+
+        if (kind === "visible") {
+            codeCell.classList.remove('hidden');
+            inputField.checked = true;
+        } else {
+            codeCell.classList.add('hidden');
+            inputField.checked = false;
+        }
+    }
+
+    var toggleCodeCellVisibility = function (event) {
+        // The label is clicked, and now we decide what to do based on the input field's clicked status
+        if (event.target.tagName === "LABEL") {
+            var inputField = event.target.previousElementSibling;
+        } else {
+            // It is the span inside the target
+            var inputField = event.target.parentElement.previousElementSibling;
+        }
+
+        if (inputField.checked === true) {
+            setCodeCellVisibility(inputField, "visible");
+        } else {
+            setCodeCellVisibility(inputField, "hidden");
+        }
+    }
+
+
+    // Button constructor
+    const hideCodeButton = id => `<input class="hidebtn" type="checkbox" id="hidebtn${id}" data-id="${id}"><label title="Toggle cell" for="hidebtn${id}" class="plusminus"><span class="pm_h"></span><span class="pm_v"></span></label>`
+
+    var addHideButton = function () {
+        // If a hide button is already added, don't add another
+        if (document.querySelector('div.hidecode input') !== null) {
+            return;
+        }
+
+        // Find the input cells and add a hide button
+        document.querySelectorAll('div.input_area').forEach(function (item, index) {
+            if (!item.classList.contains("hidecode")) {
+                // Skip the cell if it doesn't have a hidecode class
+                return;
+            }
+
+            const id = codeCellId(index)
+            item.setAttribute('id', id);
+            // Insert the button just inside the end of the next div
+            item.querySelector('div').insertAdjacentHTML('beforeend', hideCodeButton(id))
+
+            // Set up the visibility toggle
+            hideLink = document.querySelector(`#${id} div.highlight + input + label`);
+            hideLink.addEventListener('click', toggleCodeCellVisibility)
+        });
+    }
+
+
+    // Initialize the hide buttos
+    var initHiddenCells = function () {
+        // Add hide buttons to the cells
+        addHideButton();
+
+        // Toggle the code cells that should be hidden
+        document.querySelectorAll('div.hidecode input').forEach(function (item) {
+            setCodeCellVisibility(item, 'hidden');
+            item.checked = true;
+        })
+    }
+
+    initFunction(initHiddenCells);
+
+</script>
+
+  <!-- Load custom website scripts -->
+  <script src="/assets/js/scripts.js" async></script>
+
+  <!-- Load custom user CSS and JS  -->
+  <script src="/assets/custom/custom.js" async></script>
+  <link rel="stylesheet" href="/assets/custom/custom.css">
+
+  <!-- Update interact links w/ REST param, is defined in includes so we can use templates -->
+  
+<script>
+/**
+  * To auto-embed hub URLs in interact links if given in a RESTful fashion
+ */
+
+function getJsonFromUrl(url) {
+  var query = url.split('?');
+  if (query.length < 2) {
+    // No queries so just return false
+    return false;
+  }
+  query = query[1];
+  // Collect REST params into a dictionary
+  var result = {};
+  query.split("&").forEach(function(part) {
+    var item = part.split("=");
+    result[item[0]] = decodeURIComponent(item[1]);
+  });
+  return result;
+}
+    
+function dict2param(dict) {
+    params = Object.keys(dict).map(function(k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(dict[k])
+    });
+    return params.join('&')
+}
+
+// Parse a Binder URL, converting it to the string needed for JupyterHub
+function binder2Jupyterhub(url) {
+  newUrl = {};
+  parts = url.split('v2/gh/')[1];
+  // Grab the base repo information
+  repoinfo = parts.split('?')[0];
+  var [org, repo, ref] = repoinfo.split('/');
+  newUrl['repo'] = ['https://github.com', org, repo].join('/');
+  newUrl['branch'] = ref
+  // Grab extra parameters passed
+  params = getJsonFromUrl(url);
+  if (params['filepath'] !== undefined) {
+    newUrl['subPath'] = params['filepath']
+  }
+  return dict2param(newUrl);
+}
+
+// Filter out potentially unsafe characters to prevent xss
+function safeUrl(url)
+{
+   return String(encodeURIComponent(url))
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+}
+
+function addParamToInternalLinks(hub) {
+  var links = document.querySelectorAll("a").forEach(function(link) {
+    var href = link.href;
+    // If the link is an internal link...
+    if (href.search("http://0.0.0.0:4000") !== -1 || href.startsWith('/') || href.search("127.0.0.1:") !== -1) {
+      // Assume we're an internal link, add the hub param to it
+      var params = getJsonFromUrl(href);
+      if (params !== false) {
+        // We have REST params, so append a new one
+        params['jupyterhub'] = hub;
+      } else {
+        // Create the REST params
+        params = {'jupyterhub': hub};
+      }
+      // Update the link
+      var newHref = href.split('?')[0] + '?' + dict2param(params);
+      link.setAttribute('href', decodeURIComponent(newHref));
+    }
+  });
+  return false;
+}
+
+
+// Update interact links
+function updateInteractLink() {
+    // hack to make this work since it expects a ? in the URL
+    rest = getJsonFromUrl("?" + location.search.substr(1));
+    jupyterHubUrl = rest['jupyterhub'];
+    var hubType = null;
+    var hubUrl = null;
+    if (jupyterHubUrl !== undefined) {
+      hubType = 'jupyterhub';
+      hubUrl = jupyterHubUrl;
+    }
+
+    if (hubType !== null) {
+      // Sanitize the hubUrl
+      hubUrl = safeUrl(hubUrl);
+
+      // Add HTTP text if omitted
+      if (hubUrl.indexOf('http') < 0) {hubUrl = 'http://' + hubUrl;}
+      var interactButtons = document.querySelectorAll("button.interact-button")
+      var lastButton = interactButtons[interactButtons.length-1];
+      var link = lastButton.parentElement;
+
+      // If we've already run this, skip the link updating
+      if (link.nextElementSibling !== null) {
+        return;
+      }
+
+      // Update the link and add context div
+      var href = link.getAttribute('href');
+      if (lastButton.id === 'interact-button-binder') {
+        // If binder links exist, we need to re-work them for jupyterhub
+        if (hubUrl.indexOf('http%3A%2F%2Flocalhost') > -1) {
+          // If localhost, assume we're working from a local Jupyter server and remove `/hub`
+          first = [hubUrl, 'git-sync'].join('/')
+        } else {
+          first = [hubUrl, 'hub', 'user-redirect', 'git-sync'].join('/')
+        }
+        href = first + '?' + binder2Jupyterhub(href);
+      } else {
+        // If interact button isn't binderhub, assume it's jupyterhub
+        // If JupyterHub links, we only need to replace the hub url
+        href = href.replace("", hubUrl);
+        if (hubUrl.indexOf('http%3A%2F%2Flocalhost') > -1) {
+          // Assume we're working from a local Jupyter server and remove `/hub`
+          href = href.replace("/hub/user-redirect", "");
+        }
+      }
+      link.setAttribute('href', decodeURIComponent(href));
+
+      // Add text after interact link saying where we're launching
+      hubUrlNoHttp = decodeURIComponent(hubUrl).replace('http://', '').replace('https://', '');
+      link.insertAdjacentHTML('afterend', '<div class="interact-context">on ' + hubUrlNoHttp + '</div>');
+
+      // Update internal links so we retain the hub url
+      addParamToInternalLinks(hubUrl);
+    }
+}
+
+runWhenDOMLoaded(updateInteractLink)
+document.addEventListener('turbolinks:load', updateInteractLink)
+</script>
+
+
+  <!-- Lunr search code - will only be executed on the /search page -->
+  <script src="/assets/js/lunr/lunr.min.js" type="text/javascript"></script>
+  <script>var initQuery = function() {
+  // See if we have a search box
+  var searchInput = document.querySelector('input#lunr_search');
+  if (searchInput === null) {
+    return;
+  }
+
+  // Function to parse our lunr cache
+  var idx = lunr(function () {
+    this.field('title')
+    this.field('excerpt')
+    this.field('categories')
+    this.field('tags')
+    this.ref('id')
+
+    this.pipeline.remove(lunr.trimmer)
+
+    for (var item in store) {
+      this.add({
+        title: store[item].title,
+        excerpt: store[item].excerpt,
+        categories: store[item].categories,
+        tags: store[item].tags,
+        id: item
+      })
+    }
+  });
+
+  // Run search upon keyup
+  searchInput.addEventListener('keyup', function () {
+    var resultdiv = document.querySelector('#results');
+    var query = document.querySelector("input#lunr_search").value.toLowerCase();
+    var result =
+      idx.query(function (q) {
+        query.split(lunr.tokenizer.separator).forEach(function (term) {
+          q.term(term, { boost: 100 })
+          if(query.lastIndexOf(" ") != query.length-1){
+            q.term(term, {  usePipeline: false, wildcard: lunr.Query.wildcard.TRAILING, boost: 10 })
+          }
+          if (term != ""){
+            q.term(term, {  usePipeline: false, editDistance: 1, boost: 1 })
+          }
+        })
+      });
+
+      // Empty the results div
+      while (resultdiv.firstChild) {
+        resultdiv.removeChild(resultdiv.firstChild);
+      }
+
+    resultdiv.insertAdjacentHTML('afterbegin', '<p class="results__found">'+result.length+' Result(s) found</p>');
+    for (var item in result) {
+      var ref = result[item].ref;
+      if(store[ref].teaser){
+        var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<div class="archive__item-teaser">'+
+                '<img src="'+store[ref].teaser+'" alt="">'+
+              '</div>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      else{
+    	  var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      resultdiv.insertAdjacentHTML('beforeend', searchitem);
+    }
+  });
+};
+
+initFunction(initQuery);
+</script>
+</head>
+
+  <body>
+    <!-- .js-show-sidebar shows sidebar by default -->
+    <div id="js-textbook" class="c-textbook js-show-sidebar">
+      
+
+
+
+<nav id="js-sidebar" class="c-textbook__sidebar">
+  <a href="https://jupyter.org/jupyter-book/"><img src="/images/logo/Astro_200_logo.png" class="textbook_logo" id="sidebar-logo" data-turbolinks-permanent/></a>
+  <h2 class="c-sidebar__title">ASTRO200 UoA</h2>
+  <ul class="c-sidebar__chapters">
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/intro.html"
+        >
+          
+          Home
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="https://github.com/edur409/ASTRO200.git"
+        >
+          
+          GitHub repository
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+        <li class="c-sidebar__chapter"><a class="c-sidebar__entry" href="/search.html">Search</a></li>
+        
+      
+      
+        <li class="c-sidebar__divider"></li>
+        
+      
+      
+        <li><h2 class="c-sidebar__title">ASTRO200 Demo textbook</li>
+        
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/intro.html"
+        >
+          
+            1.
+          
+          Intro
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections u-hidden-visually">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/01/1/what-is-astrobiology.html"
+                >
+                  
+                    1.1
+                  
+                  What-is-astrobiology
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/01/2/the-ways-of-science.html"
+                >
+                  
+                    1.2
+                  
+                  The-ways-of-science
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/01/3/from_ptolemy_to_kepler.html"
+                >
+                  
+                    1.3
+                  
+                  From Ptolemy To Kepler
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/01/4/distances_in_the_universe.html"
+                >
+                  
+                    1.4
+                  
+                  Distances In The Universe
+                </a>
+
+                
+                
+                  
+                  
+
+                  <li class="c-sidebar__subsection">
+                    <a class="c-sidebar__entry "
+                      href="/01/4/subsection/Curl_vector_field.html"
+                    >
+                      
+                        1.4.1
+                        
+                      
+                      Curl Vector Field
+                    </a>
+                
+                  
+                  
+
+                  <li class="c-sidebar__subsection">
+                    <a class="c-sidebar__entry "
+                      href="/01/4/subsection/SmallAngleEquation.html"
+                    >
+                      
+                        1.4.2
+                        
+                      
+                      Smallangleequation
+                    </a>
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/astronomy.html"
+        >
+          
+            2.
+          
+          Astronomy
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry c-sidebar__entry--active"
+                  href="/02/Radioactivity.html"
+                >
+                  
+                    2.1
+                  
+                  Radioactive decay
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/DopplerShift.html"
+                >
+                  
+                    2.2
+                  
+                  Dopple Shift
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+  </ul>
+  <p class="sidebar_footer">Powered by <a href="https://github.com/jupyter/jupyter-book">Jupyter Book</a></p>
+</nav>
+
+      
+      <!-- Empty sidebar placeholder that we'll auto-fill with javascript -->
+      <aside class="sidebar__right">
+          <header><h4 class="nav__title"><i class="fa fa-list"></i>   On this page</h4></header>
+          <nav class="onthispage">
+          </nav>
+      </aside>
+      
+      <main class="c-textbook__page" tabindex="-1">
+          <div class="o-wrapper">
+            <div class="c-sidebar-toggle">
+  <!-- We show the sidebar by default so we use .is-active -->
+  <button
+    id="js-sidebar-toggle"
+    class="hamburger hamburger--arrowalt is-active"
+  >
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+    <span class="c-sidebar-toggle__label">Toggle Sidebar</span>
+  </button>
+</div>
+
+            
+<div class="buttons">
+<a href="/content/02/Radioactivity.ipynb" download>
+<button id="interact-button-download" class="interact-button">Download</button>
+</a>
+
+<button id="interact-button-thebelab" class="interact-button">Thebelab</button>
+
+
+
+
+
+
+
+
+
+<a href="https://mybinder.org/v2/gh/edur409/ASTRO200/master?filepath=content%2F02%2FRadioactivity.ipynb"><button class="interact-button" id="interact-button-binder"><img class="interact-button-logo" src="/assets/images/logo_binder.svg" alt="Interact" />Interact</button></a>
+
+
+</div>
+
+
+            <div class="c-textbook__content">
+              <div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+
+<span class="n">HTML</span><span class="p">(</span><span class="s">'''&lt;script&gt;
+code_show=true; 
+function code_toggle() {
+ if (code_show){
+ $('div.input').hide();
+ } else {
+ $('div.input').show();
+ }
+ code_show = !code_show
+} 
+$( document ).ready(code_toggle);
+&lt;/script&gt;
+The raw code for this IPython notebook is by default hidden for easier reading.
+To toggle on/off the raw code, click &lt;a href="javascript:code_toggle()"&gt;here&lt;/a&gt;.'''</span><span class="p">)</span>
+
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<script>
+code_show=true; 
+function code_toggle() {
+ if (code_show){
+ $('div.input').hide();
+ } else {
+ $('div.input').show();
+ }
+ code_show = !code_show
+} 
+$( document ).ready(code_toggle);
+</script>
+The raw code for this IPython notebook is by default hidden for easier reading.
+To toggle on/off the raw code, click <a href="javascript:code_toggle()">here</a>.
+</div>
+
+    </div>
+  </div>
+</div>
+
+<h1 id="radioactive-decay-interactives">Radioactive Decay Interactives</h1>
+
+<h2 id="interactive-figure-1-model-of-radioactive-decay">Interactive Figure 1: Model of Radioactive Decay</h2>
+
+<p>This first figure takes a population of 900 atoms and models their radioactive decay.</p>
+
+<p>This first interactive is designed to allow you to explore what happens during radioactive decay of some isotope. An <em>isotope</em> refers to a particular version of an element.  For example, the non-radioactive Carbon-12 isotope has 6 protons and 6 neutrons in its nucleus but the radioactive Carbon-14 isotope has 6 protons and 8 neutrons in its nucleus.  Different isotopes of the same element behave identically in terms of chemistry and bonding to other atoms, but their nuclear properties can differ.</p>
+
+<p>During radioactive decay, a <em>parent isotope</em> is said to decay into a <em>daughter isotope</em>.  So, for example, the parent isotope of Carbon-14 decays into Nitrogen-14.  There is no way to predict when any one nucleus of a <em>parent isotope</em> will decay into a <em>daughter isotope</em>.   That said, if you look at a large number of nuclei of a parent isotope, they exhibit a very simple property:</p>
+
+<blockquote>
+  <p><strong>The same <em>fraction</em> of a radioactive parent isotope will decay over the same amount of time.</strong></p>
+</blockquote>
+
+<p>The time it takes for one-half of a population of parent isotopes to decay (on average) into daughter isotopes is called the <em>half-life</em> of that isotope.  Different parent isotopes can have very different half-lifes.   <strong>NOTE:</strong> This interactive shows a simulation of the decay of only 900 atoms.  The radioactive decay is still modelled as occurring randomly for any one atom, so the simulation will show slightly different results on different runs!!</p>
+
+<p>Some questions to consider</p>
+<ol>
+  <li>After 1 half-life, about 50% of a parent isotope should have decayed and become daughter isotope.  Use the interactive graphic below and adjust the elapsed time to figure out how long one half-life is for each isotope.  Explain your approach.</li>
+  <li>How much of a parent isotope is left after 2 half-lifes? 3 half-lifes? 4 half-lifes? 5 half-lifes?  Explain how you figured this out.</li>
+  <li>You should have found about 25% of the original amount of parent isotope is left after 2 half-lifes.  This may seem surprising since in the first half-life 50% of the original amount of parent isotope decayed.  Explain why ‘less’ of it decayed during the second half-life.  <strong>HINT</strong> Consider the very simple property of radioactive decay we highlighted above.</li>
+</ol>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">bqplot</span> <span class="k">as</span> <span class="n">bq</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="n">widgets</span>
+<span class="kn">import</span> <span class="nn">random</span> <span class="k">as</span> <span class="n">random</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">number_formatting</span> <span class="k">as</span> <span class="n">nf</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span><span class="p">,</span> <span class="n">floor</span><span class="p">,</span> <span class="n">log10</span>
+
+</code></pre></div>    </div>
+  </div>
+
+</div>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## Originally developed June 2018 by Samuel Holen</span>
+<span class="c">##</span>
+<span class="c">## Edits by Juan Cabanela October 2018 to allow changes in the GUI.</span>
+<span class="c">## - Made the display of the precise number/faction of parent/daught atoms instructor</span>
+<span class="c">##   configurable.</span>
+<span class="c">## - Fixed a problem with the display of data, forced data to only be displayed for first</span>
+<span class="c">##   10 half-lifes regardless of actual generated decay times (this allows hard-coding of)</span>
+<span class="c">##   num_ticks and tick values.</span>
+
+<span class="c">## Pre-construct model of radioactive decay of a population</span>
+<span class="c">## of parent and daughter atoms.</span>
+<span class="c">## </span>
+
+<span class="c"># GUI Configuration Parameters</span>
+<span class="n">show_counts</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">max_half_lifes</span> <span class="o">=</span> <span class="mi">10</span>   <span class="c"># maximum half-lives to graph</span>
+<span class="n">time_ticks</span> <span class="o">=</span> <span class="mi">6</span>  <span class="c"># number of ticks for the time axis</span>
+<span class="c"># half-lives to place ticks on horizontal axis</span>
+<span class="n">half_life_ticks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_half_lifes</span><span class="p">,</span> <span class="n">time_ticks</span><span class="p">)</span>
+
+<span class="c"># Constants Related to decay of the parent species to the daughter species</span>
+<span class="n">N_parent</span> <span class="o">=</span> <span class="mi">900</span>          <span class="c"># initial number of parent atoms (should be a perfect square)</span>
+<span class="n">N_daughter</span> <span class="o">=</span> <span class="mi">0</span>          <span class="c"># initial number of daughter atoms</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="mi">1</span>                 <span class="c"># placeholder for the half-life of the parent species </span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">0.025</span>               <span class="c"># time step (in half lives)</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span>   <span class="c"># constant for decay time distribution </span>
+<span class="n">Plot_all_times</span> <span class="o">=</span> <span class="bp">True</span>   <span class="c"># Plot all times (otherwise, selects only before time slider value)</span>
+
+<span class="c"># Initialize tracking of number of atoms</span>
+<span class="n">Parent_counts</span> <span class="o">=</span> <span class="p">[]</span>          <span class="c"># list of number of parent atoms </span>
+<span class="n">Dauther_counts</span> <span class="o">=</span> <span class="p">[]</span>          <span class="c"># list of number of daughter atoms</span>
+
+<span class="c"># Generate a uniform random distribution of N_parent numbers from 0 to 1</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N_parent</span><span class="p">)</span>
+
+<span class="c"># Function to convert uniform distribution of random numbers to</span>
+<span class="c"># a distribution weighted to model radiactive decay. The times are in number of </span>
+<span class="c"># half-lives. </span>
+<span class="c">#</span>
+<span class="c"># The unsorted data representing the number of half-lifes until the individual</span>
+<span class="c"># decay of each atom.</span>
+<span class="n">decay_times</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">/</span> <span class="n">mu</span>
+<span class="n">decay_times_sorted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span> <span class="n">decay_times</span> <span class="p">)</span>
+
+<span class="c"># Genereate array of numbers of atoms left</span>
+<span class="c"># Adjusted so that each count contains 0 and N_parent</span>
+<span class="n">Parent_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_parent</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s">'int'</span><span class="p">)</span> <span class="c"># Number of parent atoms</span>
+<span class="n">Daughter_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">Parent_counts</span><span class="p">)</span>
+<span class="n">Daughter_counts</span> <span class="o">=</span> <span class="n">N_parent</span> <span class="o">-</span> <span class="n">Parent_counts</span>   <span class="c"># Number of daughter atoms</span>
+
+<span class="c">#</span>
+<span class="c"># Construct Pandas data frames</span>
+<span class="c">#</span>
+
+<span class="c"># Time column adjusted to include t=0</span>
+<span class="n">decay_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">decay_data</span><span class="p">[</span><span class="s">'time'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">decay_times_sorted</span><span class="p">))</span>
+<span class="n">decay_data</span><span class="p">[</span><span class="s">'Parent'</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parent_counts</span>
+<span class="n">decay_data</span><span class="p">[</span><span class="s">'Daughter'</span><span class="p">]</span> <span class="o">=</span> <span class="n">Daughter_counts</span>
+
+<span class="c"># Data array for species</span>
+<span class="n">species</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">species</span><span class="p">[</span><span class="s">'parent_long'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Generic'</span><span class="p">,</span> <span class="s">'Carbon'</span><span class="p">,</span> <span class="s">'Thallium'</span><span class="p">,</span><span class="s">'Uranium'</span><span class="p">,</span><span class="s">'Rubidium'</span><span class="p">]</span>
+<span class="n">species</span><span class="p">[</span><span class="s">'daughter_long'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Generic'</span><span class="p">,</span> <span class="s">'Nitrogen'</span><span class="p">,</span><span class="s">'Lead'</span><span class="p">,</span><span class="s">'Thorium'</span><span class="p">,</span><span class="s">'Strontium'</span><span class="p">]</span>
+<span class="n">species</span><span class="p">[</span><span class="s">'parent_short'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Parent'</span><span class="p">,</span> <span class="s">'C-14'</span><span class="p">,</span><span class="s">'Tl-208'</span><span class="p">,</span><span class="s">'U-235'</span><span class="p">,</span><span class="s">'Rb-87'</span><span class="p">]</span>
+<span class="n">species</span><span class="p">[</span><span class="s">'daughter_short'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Daughter'</span><span class="p">,</span> <span class="s">'N-14'</span><span class="p">,</span><span class="s">'Pb-208'</span><span class="p">,</span><span class="s">'Th-231'</span><span class="p">,</span><span class="s">'Sr-87'</span><span class="p">]</span>
+<span class="n">species</span><span class="p">[</span><span class="s">'half-lives'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">tau</span><span class="p">,</span> <span class="mi">5730</span><span class="p">,</span> <span class="mf">3.053</span> <span class="o">*</span> <span class="mi">60</span><span class="p">,</span> <span class="mf">703.8</span><span class="p">,</span> <span class="mf">48.8</span><span class="p">]</span>
+<span class="n">species</span><span class="p">[</span><span class="s">'step-size'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">h</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">species</span><span class="p">[</span><span class="s">'timeunits'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'half-lives'</span><span class="p">,</span> <span class="s">'years'</span><span class="p">,</span> <span class="s">'seconds'</span><span class="p">,</span> <span class="s">'million years'</span><span class="p">,</span> <span class="s">'billion years'</span><span class="p">]</span>
+
+</code></pre></div>    </div>
+  </div>
+
+</div>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">##</span>
+<span class="c">## Define functions to respond to controls on population plots.</span>
+<span class="c">##</span>
+
+<span class="k">def</span> <span class="nf">UpdateSpecies</span><span class="p">(</span><span class="n">change</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="c">##</span>
+    <span class="c">## Deal with possible changes of species</span>
+    <span class="c">##</span>
+    
+    <span class="c"># Generate a new uniform random distribution of N_parent numbers from 0 to 1 and</span>
+    <span class="c"># then convert uniform distribution to one weighted to model radioactive decay.</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N_parent</span><span class="p">)</span>
+    <span class="n">decay_times</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">/</span> <span class="n">mu</span>
+    <span class="n">decay_times_sorted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span> <span class="n">decay_times</span> <span class="p">)</span>
+    <span class="n">decay_data</span><span class="p">[</span><span class="s">'time'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">decay_times_sorted</span><span class="p">))</span>
+    
+    <span class="c"># Reset the time to zero</span>
+    <span class="n">Time_slide</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="c"># Adjust half-life data and limits on plots appropriately </span>
+    <span class="n">new_index</span> <span class="o">=</span> <span class="n">species</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">species</span><span class="o">.</span><span class="n">parent_long</span> <span class="o">==</span> <span class="n">pick_Species</span><span class="o">.</span><span class="n">value</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c"># Set the half-life based the selected species</span>
+    <span class="n">hf</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="s">'half-lives'</span><span class="p">][</span><span class="n">new_index</span><span class="p">]</span>
+    
+    <span class="c"># Set the limit on the time sider to be 10 half-lifes</span>
+    <span class="n">Time_slide</span><span class="o">.</span><span class="nb">max</span> <span class="o">=</span> <span class="n">max_half_lifes</span><span class="o">*</span><span class="n">hf</span>
+    
+    <span class="c"># Set the time step on slider</span>
+    <span class="n">Time_slide</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="s">'step-size'</span><span class="p">][</span><span class="n">new_index</span><span class="p">]</span>
+
+    <span class="c"># Updates the time slider label/units</span>
+    <span class="n">unit_label</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="s">'timeunits'</span><span class="p">][</span><span class="n">new_index</span><span class="p">]</span>
+    
+    <span class="c"># Updates the time axes on the plot</span>
+    <span class="n">x_time</span><span class="o">.</span><span class="nb">max</span> <span class="o">=</span> <span class="n">Time_slide</span><span class="o">.</span><span class="nb">max</span>
+    <span class="n">ax_x_time</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">x_time</span>
+    <span class="n">ax_x_time</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">unit_label</span><span class="o">.</span><span class="n">value</span>
+    
+    <span class="c"># Update tick values</span>
+    <span class="n">ax_x_time</span><span class="o">.</span><span class="n">tick_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">half_life_ticks</span><span class="o">*</span><span class="n">hf</span><span class="p">)</span>
+
+    <span class="c"># Update the legend</span>
+    <span class="n">parent_label_new</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="s">'parent_short'</span><span class="p">][</span><span class="n">new_index</span><span class="p">]</span>
+    <span class="n">daughter_label_new</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="s">'daughter_short'</span><span class="p">][</span><span class="n">new_index</span><span class="p">]</span>
+    <span class="n">line_parent</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">parent_label_new</span><span class="p">]</span>
+    <span class="n">line_daughter</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">daughter_label_new</span><span class="p">]</span>
+    
+    <span class="c"># Update the species in the box that shows how many are present    </span>
+    <span class="n">parent_label</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">parent_label_new</span> <span class="o">+</span> <span class="s">' produced'</span>
+    <span class="n">daughter_label</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">daughter_label_new</span> <span class="o">+</span> <span class="s">' remaining'</span>
+
+    <span class="c"># Now call the function for updating the plot in the event of a time change</span>
+    <span class="n">UpdateTimes</span><span class="p">()</span>
+
+    
+<span class="k">def</span> <span class="nf">UpdateFraction</span><span class="p">(</span><span class="n">change</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="c">##</span>
+    <span class="c">## Deal with whether fraction view or number view selected to set scales for plot,</span>
+    <span class="c">## y values for plot, and label values</span>
+    <span class="c">##</span>
+    <span class="k">if</span> <span class="n">frac_or_num</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="c"># Number count mode enabled</span>
+
+        <span class="c"># Update axes and scales</span>
+        <span class="n">fig_counts</span><span class="o">.</span><span class="n">axes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ax_x_time</span><span class="p">,</span> <span class="n">ax_y_number</span><span class="p">]</span>
+        <span class="n">line_parent</span><span class="o">.</span><span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_time</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_number</span><span class="p">}</span>
+        <span class="n">line_daughter</span><span class="o">.</span><span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_time</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_number</span><span class="p">}</span>
+        <span class="n">pts_parent</span><span class="o">.</span><span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_time</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_number</span><span class="p">}</span>
+        <span class="n">pts_daughter</span><span class="o">.</span><span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_time</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_number</span><span class="p">}</span>
+        <span class="n">line_time</span><span class="o">.</span><span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_time</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_number</span><span class="p">}</span>
+
+        <span class="c"># Update 'time line' limits</span>
+        <span class="n">line_time</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">N_parent</span><span class="p">]</span>    
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c"># Fraction mode enabled</span>
+
+        <span class="c"># Updated axes and scales</span>
+        <span class="n">fig_counts</span><span class="o">.</span><span class="n">axes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ax_x_time</span><span class="p">,</span> <span class="n">ax_y_fraction</span><span class="p">]</span>
+        <span class="n">line_parent</span><span class="o">.</span><span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_time</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_fraction</span><span class="p">}</span>
+        <span class="n">line_daughter</span><span class="o">.</span><span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_time</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_fraction</span><span class="p">}</span>
+        <span class="n">pts_parent</span><span class="o">.</span><span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_time</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_fraction</span><span class="p">}</span>
+        <span class="n">pts_daughter</span><span class="o">.</span><span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_time</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_fraction</span><span class="p">}</span>
+        <span class="n">line_time</span><span class="o">.</span><span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_time</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_fraction</span><span class="p">}</span>
+
+        <span class="c"># Update 'time line' limits</span>
+        <span class="n">line_time</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">UpdateTimes</span><span class="p">()</span>
+
+    
+<span class="k">def</span> <span class="nf">UpdateTimes</span><span class="p">(</span><span class="n">change</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="c">##</span>
+    <span class="c">## Deal with changes in the time slider</span>
+    <span class="c">##</span>
+
+    <span class="c"># Recall half-life of this species</span>
+    <span class="n">species_idx</span> <span class="o">=</span> <span class="n">species</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">species</span><span class="o">.</span><span class="n">parent_long</span> <span class="o">==</span> <span class="n">pick_Species</span><span class="o">.</span><span class="n">value</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">hf</span> <span class="o">=</span> <span class="n">species</span><span class="p">[</span><span class="s">'half-lives'</span><span class="p">][</span><span class="n">species_idx</span><span class="p">]</span>
+
+    <span class="c"># Update time label with 3 significant figures</span>
+    <span class="n">Time_label</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">nf</span><span class="o">.</span><span class="n">SigFig</span><span class="p">(</span><span class="n">Time_slide</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        
+    <span class="c"># Get the array of times</span>
+    <span class="n">time_arr</span> <span class="o">=</span> <span class="n">hf</span> <span class="o">*</span> <span class="n">decay_data</span><span class="p">[</span><span class="s">'time'</span><span class="p">]</span>
+    
+    <span class="c"># Set the times to be x values</span>
+    <span class="n">line_daughter</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">time_arr</span>
+    <span class="n">line_parent</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">line_daughter</span><span class="o">.</span><span class="n">x</span>
+    <span class="n">pts_daughter</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">line_daughter</span><span class="o">.</span><span class="n">x</span>
+    <span class="n">pts_parent</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">line_daughter</span><span class="o">.</span><span class="n">x</span>
+    <span class="n">line_time</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">Time_slide</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">Time_slide</span><span class="o">.</span><span class="n">value</span><span class="p">]</span>
+    
+    <span class="c"># Changes the color of population to reflect the decays</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_parent</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">Time_slide</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;=</span> <span class="n">decay_times</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">hf</span><span class="p">:</span>
+            <span class="n">Colors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s">'blue'</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">Colors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s">'red'</span>
+    <span class="n">population_scat</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="n">Colors</span>
+    
+    <span class="c"># Identify where we are in the data set</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N_parent</span> <span class="o">+</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">hf</span><span class="o">*</span><span class="n">decay_data</span><span class="p">[</span><span class="s">'time'</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Time_slide</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>        
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
+        
+    <span class="c"># Update selection of the parent and daughter data to be plotted</span>
+    <span class="k">if</span> <span class="n">Plot_all_times</span><span class="p">:</span>
+        <span class="n">daughter_decay</span> <span class="o">=</span> <span class="n">decay_data</span><span class="p">[</span><span class="s">'Daughter'</span><span class="p">]</span>
+        <span class="n">parent_decay</span> <span class="o">=</span> <span class="n">decay_data</span><span class="p">[</span><span class="s">'Parent'</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">daughter_decay</span> <span class="o">=</span> <span class="n">decay_data</span><span class="p">[</span><span class="s">'Daughter'</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">parent_decay</span> <span class="o">=</span> <span class="n">decay_data</span><span class="p">[</span><span class="s">'Parent'</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> 
+    
+    <span class="n">line_parent</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">parent_decay</span>
+    <span class="n">line_daughter</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">daughter_decay</span>
+        
+    <span class="c">##</span>
+    <span class="c">## Deal with whether fraction view or number view selected to set scales for plot,</span>
+    <span class="c">## y values for plot, and label values</span>
+    <span class="c">##</span>
+    <span class="k">if</span> <span class="n">frac_or_num</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="c"># Number count mode enabled</span>
+
+        <span class="c"># Update number of parent and daughter in labels</span>
+        <span class="n">parent_present</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">decay_data</span><span class="p">[</span><span class="s">'Parent'</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">daughter_present</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">decay_data</span><span class="p">[</span><span class="s">'Daughter'</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c"># Fraction mode enabled</span>
+        
+        <span class="c"># Update the x and y arrays for the parent and daughter lines</span>
+        <span class="n">line_parent</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">N_parent</span><span class="p">)</span><span class="o">*</span><span class="n">parent_decay</span>
+        <span class="n">line_daughter</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">N_parent</span><span class="p">)</span><span class="o">*</span><span class="n">daughter_decay</span>
+    
+        <span class="c"># Update number of parent and daughter in labels</span>
+        <span class="n">parent_present</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s">'{:.3f}'</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="n">N_parent</span><span class="p">)</span><span class="o">*</span><span class="n">decay_data</span><span class="p">[</span><span class="s">'Parent'</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">daughter_present</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s">'{:.3f}'</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="n">N_parent</span><span class="p">)</span><span class="o">*</span><span class="n">decay_data</span><span class="p">[</span><span class="s">'Daughter'</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+    
+    <span class="c"># Update parent and daughter lines</span>
+    <span class="n">pts_parent</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">line_parent</span><span class="o">.</span><span class="n">y</span>
+    <span class="n">pts_daughter</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">line_daughter</span><span class="o">.</span><span class="n">y</span>
+    
+    <span class="c"># Update the tooltip labels and formats (Bug? Doesn't appear to be working)</span>
+    <span class="c">#pts_parent.tooltip.labels[1] = parent_label_new</span>
+    <span class="c">#pts_daughter.tooltip.labels[1] = daughter_label_new</span>
+    <span class="c">#if frac_or_num.value == False:</span>
+    <span class="c">#    pts_parent.tooltip.formats[1] = '3.0f'</span>
+    <span class="c">#    pts_daughter.tooltip.formats[1] = '3.0f'</span>
+    <span class="c">#else:</span>
+    <span class="c">#    pts_parent.tooltip.formats[1] = '0.3f'</span>
+    <span class="c">#    pts_daughter.tooltip.formats[1] = '0.3f'</span>
+        
+
+
+</code></pre></div>    </div>
+  </div>
+
+</div>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">##</span>
+<span class="c">## Set up counts versus time plot</span>
+<span class="c">##</span>
+
+<span class="c"># Set up Species to be Generic</span>
+<span class="n">init_species_ind</span> <span class="o">=</span> <span class="mi">0</span>  
+
+<span class="c"># Set up initial time</span>
+<span class="n">init_time</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">init_time_idx</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c"># Set up axes</span>
+<span class="n">x_time</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">LinearScale</span><span class="p">(</span><span class="nb">min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">max_half_lifes</span><span class="p">)</span>
+<span class="n">y_number</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">LinearScale</span><span class="p">(</span><span class="nb">min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">N_parent</span><span class="p">)</span>
+<span class="n">y_fraction</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">LinearScale</span><span class="p">(</span><span class="nb">min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c"># Labels and scales for Axes</span>
+<span class="n">ax_x_time</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">species</span><span class="p">[</span><span class="s">'timeunits'</span><span class="p">][</span><span class="n">init_species_ind</span><span class="p">],</span> <span class="n">scale</span><span class="o">=</span><span class="n">x_time</span><span class="p">,</span> <span class="n">num_ticks</span> <span class="o">=</span> <span class="n">time_ticks</span><span class="p">,</span>
+                    <span class="n">tick_values</span> <span class="o">=</span> <span class="n">half_life_ticks</span> <span class="p">)</span>
+<span class="n">ax_y_number</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">'Number of atoms'</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">y_number</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s">'vertical'</span><span class="p">)</span>
+<span class="n">ax_y_fraction</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">'Fraction of atoms'</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">y_fraction</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s">'vertical'</span><span class="p">)</span>
+
+<span class="c"># Define tooltip (Bug: doesn't allow relabeling Tooltips, also needs to apply to Scatter, not Lines)</span>
+<span class="c">#def_tt_parent = bq.Tooltip(fields=['x', 'y'], formats=['.2f', '3.0f'], labels=['time', species['parent_short'][init_species_ind]])</span>
+<span class="c">#def_tt_daughter = bq.Tooltip(fields=['x', 'y'], formats=['.2f', '3.0f'], labels=['time', species['daughter_short'][init_species_ind]])</span>
+<span class="n">def_tt_parent</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Tooltip</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">],</span> <span class="n">formats</span><span class="o">=</span><span class="p">[</span><span class="s">'.2f'</span><span class="p">,</span> <span class="s">'.3f'</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s">'time'</span><span class="p">,</span> <span class="s">'amount of parent isotope'</span><span class="p">])</span>
+<span class="n">def_tt_daughter</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Tooltip</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s">'x'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">],</span> <span class="n">formats</span><span class="o">=</span><span class="p">[</span><span class="s">'.2f'</span><span class="p">,</span> <span class="s">'.3f'</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s">'time'</span><span class="p">,</span> <span class="s">'amount of daughter isotope'</span><span class="p">])</span>
+
+<span class="c"># Define the Lines and Scatter plots</span>
+<span class="c"># NOTE: Scatter only necessary to allow tooltips to function.</span>
+<span class="n">init_x</span> <span class="o">=</span> <span class="n">decay_data</span><span class="p">[</span><span class="s">'time'</span><span class="p">]</span><span class="o">*</span><span class="n">species</span><span class="p">[</span><span class="s">'half-lives'</span><span class="p">][</span><span class="n">init_species_ind</span><span class="p">]</span>
+<span class="k">if</span> <span class="n">Plot_all_times</span><span class="p">:</span>
+    <span class="n">init_parent</span> <span class="o">=</span> <span class="n">decay_data</span><span class="p">[</span><span class="s">'Parent'</span><span class="p">]</span>
+    <span class="n">init_daughter</span> <span class="o">=</span> <span class="n">decay_data</span><span class="p">[</span><span class="s">'Daughter'</span><span class="p">]</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">init_parent</span> <span class="o">=</span> <span class="n">decay_data</span><span class="p">[</span><span class="s">'Parent'</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="n">init_time_idx</span><span class="p">]</span>
+    <span class="n">init_daughter</span> <span class="o">=</span> <span class="n">decay_data</span><span class="p">[</span><span class="s">'Daughter'</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="n">init_time_idx</span><span class="p">]</span>
+    
+<span class="n">pts_parent</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">init_x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">init_parent</span><span class="p">,</span>
+                      <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_time</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_number</span><span class="p">},</span> <span class="n">marker</span><span class="o">=</span><span class="s">'circle'</span><span class="p">,</span> <span class="n">default_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                      <span class="n">display_legend</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s">'red'</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="n">species</span><span class="p">[</span><span class="s">'parent_short'</span><span class="p">][</span><span class="n">init_species_ind</span><span class="p">]],</span> 
+                      <span class="n">tooltip</span><span class="o">=</span><span class="n">def_tt_parent</span><span class="p">)</span>
+<span class="n">pts_daughter</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">init_x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">init_daughter</span><span class="p">,</span>
+                        <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_time</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_number</span><span class="p">},</span> <span class="n">marker</span><span class="o">=</span><span class="s">'circle'</span><span class="p">,</span> <span class="n">default_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                        <span class="n">display_legend</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s">'blue'</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="n">species</span><span class="p">[</span><span class="s">'daughter_short'</span><span class="p">][</span><span class="n">init_species_ind</span><span class="p">]],</span>
+                        <span class="n">tooltip</span><span class="o">=</span><span class="n">def_tt_daughter</span><span class="p">)</span>
+<span class="n">line_parent</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Lines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">init_x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">init_parent</span><span class="p">,</span> 
+                       <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_time</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_number</span><span class="p">},</span> <span class="n">display_legend</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s">'red'</span><span class="p">],</span> 
+                       <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="n">species</span><span class="p">[</span><span class="s">'parent_short'</span><span class="p">][</span><span class="n">init_species_ind</span><span class="p">]],</span> <span class="p">)</span>
+<span class="n">line_daughter</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Lines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">init_x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">init_daughter</span><span class="p">,</span> 
+                         <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_time</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_number</span><span class="p">},</span> <span class="n">display_legend</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s">'blue'</span><span class="p">],</span> 
+                         <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="n">species</span><span class="p">[</span><span class="s">'daughter_short'</span><span class="p">][</span><span class="n">init_species_ind</span><span class="p">]]</span> <span class="p">)</span>
+
+<span class="c"># Set up a vertical line on this plot to indicate the current time</span>
+<span class="n">times_x</span> <span class="o">=</span> <span class="p">[</span><span class="n">init_time</span><span class="p">,</span> <span class="n">init_time</span><span class="p">]</span>
+<span class="n">times_y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">N_parent</span><span class="p">]</span>
+<span class="n">line_time</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Lines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">times_x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">times_y</span><span class="p">,</span>
+                     <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_time</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_number</span><span class="p">},</span> 
+                     <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s">'greenyellow'</span><span class="p">])</span>
+
+<span class="c"># Creates figure for plot</span>
+<span class="n">fig_counts</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="p">[</span><span class="n">ax_x_time</span><span class="p">,</span> <span class="n">ax_y_number</span><span class="p">],</span> <span class="n">marks</span><span class="o">=</span><span class="p">[</span><span class="n">line_parent</span><span class="p">,</span> <span class="n">line_daughter</span><span class="p">,</span> <span class="n">line_time</span><span class="p">,</span> <span class="n">pts_parent</span><span class="p">,</span> <span class="n">pts_daughter</span><span class="p">],</span> 
+                       <span class="n">legend_location</span><span class="o">=</span><span class="s">'right'</span><span class="p">,</span> <span class="n">legend_style</span><span class="o">=</span><span class="p">{</span><span class="s">'fill'</span><span class="p">:</span> <span class="s">'white'</span><span class="p">},</span> 
+                       <span class="n">title</span><span class="o">=</span><span class="s">'Counts versus Time'</span><span class="p">,</span> <span class="n">background_style</span><span class="o">=</span><span class="p">{</span><span class="s">'fill'</span><span class="p">:</span> <span class="s">'black'</span><span class="p">},</span> 
+                       <span class="n">layout</span><span class="o">=</span><span class="p">{</span><span class="s">'width'</span><span class="p">:</span> <span class="s">'500px'</span><span class="p">,</span> <span class="s">'min_height'</span><span class="p">:</span> <span class="s">'400px'</span><span class="p">},</span>
+                      <span class="n">animation</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+</code></pre></div>    </div>
+  </div>
+
+</div>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Slider widget to control the amount of time that has passed</span>
+<span class="c"># Set for generic half-life situation initially (0 to 10 half-lifes)</span>
+<span class="n">Time_slide</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s">'Time'</span><span class="p">,</span>
+    <span class="nb">min</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+    <span class="nb">max</span><span class="o">=</span><span class="n">max_half_lifes</span><span class="p">,</span>
+    <span class="n">step</span><span class="o">=</span><span class="n">h</span><span class="p">,</span>
+    <span class="n">disabled</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">continuous_update</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">orientation</span><span class="o">=</span><span class="s">'horizontal'</span><span class="p">,</span>
+    <span class="n">readout</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">readout_format</span><span class="o">=</span><span class="s">'.1f'</span><span class="p">,</span>
+    <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">overflow_x</span><span class="o">=</span><span class="s">'visible'</span><span class="p">,</span>
+                          <span class="n">overflow_y</span><span class="o">=</span><span class="s">'visible'</span><span class="p">,</span>
+                          <span class="n">width</span><span class="o">=</span><span class="s">'400px'</span><span class="p">,</span>
+                          <span class="n">max_width</span><span class="o">=</span><span class="s">'500px'</span><span class="p">,</span>
+                          <span class="n">min_width</span><span class="o">=</span><span class="s">'250px'</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c"># Widget to display the number of parent atoms present</span>
+<span class="n">parent_present</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">N_parent</span><span class="p">),</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="p">{</span><span class="s">'description_width'</span><span class="p">:</span> <span class="s">'initial'</span><span class="p">},</span>
+    <span class="c">#description = species['parent_short'][0]+' remaining',</span>
+    <span class="n">disabled</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">overflow_x</span><span class="o">=</span><span class="s">'visible'</span><span class="p">,</span>
+                          <span class="n">overflow_y</span><span class="o">=</span><span class="s">'visible'</span><span class="p">,</span>
+                          <span class="n">width</span><span class="o">=</span><span class="s">'175px'</span><span class="p">,</span>
+                          <span class="n">max_width</span><span class="o">=</span><span class="s">'300px'</span><span class="p">,</span>
+                          <span class="n">min_width</span><span class="o">=</span><span class="s">'125px'</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c"># Widget to display the number of daughter atoms present</span>
+<span class="n">daughter_present</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="p">{</span><span class="s">'description_width'</span><span class="p">:</span> <span class="s">'initial'</span><span class="p">},</span>
+    <span class="c">#description = species['daughter_short'][0]+' produced',</span>
+    <span class="n">disabled</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">overflow_x</span><span class="o">=</span><span class="s">'visible'</span><span class="p">,</span>
+                          <span class="n">overflow_y</span><span class="o">=</span><span class="s">'visible'</span><span class="p">,</span>
+                          <span class="n">width</span><span class="o">=</span><span class="s">'175px'</span><span class="p">,</span>
+                          <span class="n">max_width</span><span class="o">=</span><span class="s">'300px'</span><span class="p">,</span>
+                          <span class="n">min_width</span><span class="o">=</span><span class="s">'125px'</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c"># Widgets to label the time slider with units</span>
+<span class="n">Time_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">Time_slide</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
+<span class="n">unit_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">species</span><span class="p">[</span><span class="s">'timeunits'</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">Composite_Time_Label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">Time_label</span><span class="p">,</span> <span class="n">unit_label</span><span class="p">],</span>
+                                   <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s">'200px'</span><span class="p">))</span>
+
+<span class="c"># Labels for the parent/daughter present displays</span>
+<span class="n">parent_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">species</span><span class="p">[</span><span class="s">'parent_short'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s">' remaining'</span><span class="p">,</span>
+                             <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s">'200px'</span><span class="p">,</span> 
+                                                   <span class="n">overflow_x</span><span class="o">=</span><span class="s">'visible'</span><span class="p">,</span>
+                                                   <span class="n">overflow_y</span><span class="o">=</span><span class="s">'visible'</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">daughter_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">species</span><span class="p">[</span><span class="s">'daughter_short'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s">' produced'</span><span class="p">,</span>
+                             <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s">'200px'</span><span class="p">,</span> 
+                                                   <span class="n">overflow_x</span><span class="o">=</span><span class="s">'visible'</span><span class="p">,</span>
+                                                   <span class="n">overflow_y</span><span class="o">=</span><span class="s">'visible'</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="c"># Checkbox to choose whether to display the number of each species</span>
+<span class="c"># or the fraction of each</span>
+<span class="n">frac_or_num</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Checkbox</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">'Display as fraction of atoms'</span><span class="p">)</span>
+
+<span class="c"># Widget to allow one to choose which species to work with</span>
+<span class="n">pick_Species</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">RadioButtons</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">species</span><span class="p">[</span><span class="s">'parent_long'</span><span class="p">][:],</span>
+                                    <span class="n">value</span><span class="o">=</span><span class="s">'Generic'</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">'Species:'</span><span class="p">,</span> <span class="n">disabled</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                    <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s">'250px'</span><span class="p">))</span>
+
+
+</code></pre></div>    </div>
+  </div>
+
+</div>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Scale for population figure</span>
+<span class="n">x_sc</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">LinearScale</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N_parent</span><span class="p">))</span>
+<span class="n">y_sc</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">LinearScale</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N_parent</span><span class="p">))</span>
+
+<span class="c"># Axes for population figure</span>
+<span class="n">ax_x</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">x_sc</span><span class="p">,</span> <span class="n">num_ticks</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ax_y</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">y_sc</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s">'vertical'</span><span class="p">,</span> <span class="n">num_ticks</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c"># Creates an array of x values: [1,2,...,30,1,2,...30,.....,1,2,...,30]</span>
+<span class="n">x_ls</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N_parent</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">x_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="n">x_ls</span> <span class="o">=</span> <span class="n">x_ls</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N_parent</span><span class="p">))</span>
+<span class="n">x_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_ls</span><span class="p">)</span>
+
+<span class="c"># Creates an array of y values: [1,1,...,1,2,2,...2,......,30,30,...,30]</span>
+<span class="n">y_ls</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N_parent</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">y_ls</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N_parent</span><span class="p">))</span>
+<span class="n">y_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_ls</span><span class="p">)</span>    
+
+<span class="c"># Creates a color array with the same number of entries as the number of atoms in</span>
+<span class="c"># the sample</span>
+<span class="n">Colors</span> <span class="o">=</span> <span class="p">[</span><span class="s">'red'</span><span class="p">]</span> <span class="o">*</span> <span class="n">N_parent</span>
+
+<span class="c"># Plot the population model</span>
+<span class="n">population_scat</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_arr</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_arr</span><span class="p">,</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">},</span> <span class="n">colors</span> <span class="o">=</span><span class="p">[</span><span class="s">'red'</span><span class="p">])</span>
+
+</code></pre></div>    </div>
+  </div>
+
+</div>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Picking a new species resets everything</span>
+<span class="n">pick_Species</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">UpdateSpecies</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">'value'</span><span class="p">])</span>
+
+<span class="c"># Update view from fraction to/from number</span>
+<span class="n">frac_or_num</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">UpdateFraction</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">'value'</span><span class="p">])</span>
+
+<span class="c"># Update times</span>
+<span class="n">Time_slide</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">UpdateTimes</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">'value'</span><span class="p">])</span>
+<span class="n">Time_label</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">UpdateTimes</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">'value'</span><span class="p">])</span>
+
+<span class="c"># Figure for the population</span>
+<span class="n">fig_population</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">'Population of Atoms'</span><span class="p">,</span> <span class="n">marks</span><span class="o">=</span><span class="p">[</span><span class="n">population_scat</span><span class="p">],</span> <span class="n">axes</span><span class="o">=</span><span class="p">[</span><span class="n">ax_x</span><span class="p">,</span> <span class="n">ax_y</span><span class="p">],</span> 
+                <span class="n">background_style</span><span class="o">=</span><span class="p">{</span><span class="s">'fill'</span> <span class="p">:</span> <span class="s">'black'</span><span class="p">},</span><span class="n">padding_x</span> <span class="o">=</span> <span class="mf">0.025</span><span class="p">,</span>
+                <span class="n">min_aspect_ratio</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_aspect_ratio</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c"># Boxes to organize display</span>
+<span class="n">parent_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">parent_label</span><span class="p">,</span> <span class="n">parent_present</span><span class="p">],</span>
+                          <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">overflow_x</span><span class="o">=</span><span class="s">'visible'</span><span class="p">,</span> <span class="n">overflow_y</span><span class="o">=</span><span class="s">'visible'</span><span class="p">))</span>
+<span class="n">daughter_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">daughter_label</span><span class="p">,</span> <span class="n">daughter_present</span><span class="p">],</span>
+                            <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">overflow_x</span><span class="o">=</span><span class="s">'visible'</span><span class="p">,</span> <span class="n">overflow_y</span><span class="o">=</span><span class="s">'visible'</span><span class="p">))</span>
+<span class="c"># Set visibility of the exact counts/fractions</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">show_counts</span> <span class="o">==</span> <span class="bp">False</span><span class="p">):</span>
+    <span class="n">parent_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">visibility</span> <span class="o">=</span> <span class="s">'hidden'</span>
+    <span class="n">daughter_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">visibility</span> <span class="o">=</span> <span class="s">'hidden'</span>
+
+<span class="n">value_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">parent_box</span><span class="p">,</span> <span class="n">daughter_box</span><span class="p">])</span>
+<span class="n">species_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">value_box</span><span class="p">,</span> <span class="n">pick_Species</span><span class="p">])</span>
+
+<span class="n">slide_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">Time_slide</span><span class="p">,</span> <span class="n">Composite_Time_Label</span><span class="p">])</span>
+<span class="n">slide_check_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">slide_box</span><span class="p">,</span> <span class="n">frac_or_num</span><span class="p">])</span>
+
+<span class="n">top_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">fig_counts</span><span class="p">,</span> <span class="n">fig_population</span><span class="p">],</span>
+                      <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s">'900px'</span><span class="p">))</span>
+<span class="n">top_box</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="s">'450px'</span>
+<span class="n">top_box</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="s">'450px'</span>
+
+<span class="n">bottom_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">species_box</span><span class="p">,</span> <span class="n">slide_check_box</span><span class="p">],</span>
+                      <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s">'900px'</span><span class="p">))</span>
+<span class="n">bottom_box</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="s">'450px'</span>
+<span class="n">bottom_box</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="s">'450px'</span>
+
+<span class="c"># Final display</span>
+<span class="n">Final</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">top_box</span><span class="p">,</span> <span class="n">bottom_box</span><span class="p">])</span>
+<span class="n">Final</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">overflow</span> <span class="o">=</span> <span class="s">'hidden'</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Final</span><span class="p">)</span>
+
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>VBox(children=(HBox(children=(Figure(axes=[Axis(label='half-lives', num_ticks=6, scale=LinearScale(max=10.0, m…
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<h2 id="interactive-figure-2-geochron-plot">Interactive Figure 2: Geochron Plot</h2>
+
+<p>Assuming a non-radiogenic isotope (that is, an isotope that is not the result of radioactive decay) that also will not decay, its amount should be constant.  This means that for different mineral samples we can measure the ratio of parent isotope versus the non-radiogenic isotope ($P/D_i$) and daughter isotope ($D$) versus the non-radiogenic isotope ($D/D_i$) to build an geochron plot.  For example, using the following isotopes</p>
+
+<ul>
+  <li>$D_i$ (non-radiogenic isotope of daughter element)</li>
+  <li>$D$ (Daughter Isoptope)</li>
+  <li>$P$ (Parent isotope)</li>
+</ul>
+
+<p>an geochron plot could plot $D/D_i$ versus $P/D_i$.</p>
+
+<p>What sets the <em>geochron method</em> (also known as the <em>isochron method</em>) apart from the just measuring parent and daughter abundances is the use of the non-radiogenic isotope of the daughter element.  This avoids the assumption of no initial daughter isotope before the rock solidified (radioactive decay can occur while rock is molten).</p>
+
+<p>Some minerals in the rock incorporate the parent better than daughter which is why the initial amount of parent 
+isotope versus daughter isotope can vary.  We expect daughter versus non-radiogenic isotope ratio to be constant
+if we pick the non-radiogenic isotope to be the same element as the daughter isotope.</p>
+
+<p>With all this said, it is actually often not this simple as many daughter isotopes are themselves radioactive and decay, leading to a chain of reactions, so comparing abundances of parent to daughter isotopes is not simple.</p>
+
+<p><em>Note:</em> The idea for the geochron dating interactive came from a Isochron Diagram Java app at <em>ScienceCourseware.org</em>.  However that app had some issues in that it didn’t divide by a non-radiogenic isotope (or at least didn’t mention it).  In fact, they used $D_i$ for the initial amount of daughter isotope instead of the non-radiogenic isotope of the same element as the daughter isotope.</p>
+
+<p>Consider the following questions:</p>
+
+<ol>
+  <li>Notice that the geochron shown here is using the parent and daugther isotope ratios for 4 mineral samples in a rock.  Consider the sample that starts off with the most parent isotope initially (the point initially farthest to the right).  Adjust the geochron to show the samples after 1 half-life.  How much of that parent isotope was there initially?  How much is there after 1 half-life?  Does this make sense?</li>
+  <li>Consider the sample that starts off with the least parent isotope initially (the point initially farthest to the left).  Adjust the geochron to show the samples after 1 half-life.  How much of that parent isotope was there initially?  How much is there after 1 half-life?  Does this make sense?</li>
+  <li>What fraction of the parent isotope should have decayed into daughter isotope after one half-life?  Does it matter if the mineral sample we look at started with more parent isotope than another mineral sample in the same rock?  Why or why not?</li>
+  <li>Why is it as time elapses that the points representing the 4 mineral samples all move toward the upper left?  Can you explain why their motions are parallel to one another?</li>
+  <li>Imagine you are looking at the parent isotope Rubidium-87 which decays into Strontium-87.  You examine 4 mineral samples in an meteorite and they line up in a line with a slope of 0.0666.  Determine the age of that meteorite (or rather, the time since it solidified).  Also explain how we can determine how much of the daughter isotope was in the meteorite initially.</li>
+</ol>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">##</span>
+<span class="c">## Define the various isotopes we want to consider</span>
+<span class="c">##</span>
+
+<span class="n">isotope_info</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Name'</span><span class="p">,</span> <span class="s">'PName'</span><span class="p">,</span> <span class="s">'PAbbrev'</span><span class="p">,</span> <span class="s">'DName'</span><span class="p">,</span> <span class="s">'DAbbrev'</span><span class="p">,</span> <span class="s">'DiName'</span><span class="p">,</span> <span class="s">'DiAbbrev'</span><span class="p">,</span> <span class="s">'HalfLife'</span><span class="p">,</span> <span class="s">'HLUnits'</span><span class="p">])</span>
+<span class="n">isotope_info</span><span class="p">[</span><span class="s">'index'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'generic'</span><span class="p">,</span> <span class="s">'Rb87'</span><span class="p">]</span>
+<span class="n">isotope_info</span><span class="p">[</span><span class="s">'Name'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Generic'</span><span class="p">,</span> <span class="s">'Rb-87-&gt;Sr-87'</span><span class="p">]</span>
+<span class="n">isotope_info</span><span class="p">[</span><span class="s">'PName'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Parent'</span><span class="p">,</span> <span class="s">'Rubidium-87'</span><span class="p">]</span>
+<span class="n">isotope_info</span><span class="p">[</span><span class="s">'PAbbrev'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'P'</span><span class="p">,</span> <span class="s">'Rb-87'</span><span class="p">]</span>
+<span class="n">isotope_info</span><span class="p">[</span><span class="s">'DName'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Daughter'</span><span class="p">,</span> <span class="s">'Strontium-87'</span><span class="p">]</span>
+<span class="n">isotope_info</span><span class="p">[</span><span class="s">'DAbbrev'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'D'</span><span class="p">,</span> <span class="s">'Sr-87'</span><span class="p">]</span>
+<span class="n">isotope_info</span><span class="p">[</span><span class="s">'DiName'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Non-Radiogenic Isotope of Daughter Element'</span><span class="p">,</span> <span class="s">'Strontium-86'</span><span class="p">]</span>
+<span class="n">isotope_info</span><span class="p">[</span><span class="s">'DiAbbrev'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'D_i'</span><span class="p">,</span> <span class="s">'Sr-86'</span><span class="p">]</span>
+<span class="n">isotope_info</span><span class="p">[</span><span class="s">'HalfLife'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">48.8</span> <span class="p">]</span>
+<span class="n">isotope_info</span><span class="p">[</span><span class="s">'HLUnits'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="s">'half-lives'</span><span class="p">,</span> <span class="s">'Billion years'</span><span class="p">]</span>
+<span class="n">isotope_info</span> <span class="o">=</span> <span class="n">isotope_info</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s">'index'</span><span class="p">)</span>
+
+<span class="c"># Set initial isotope to plot</span>
+<span class="n">init_isotope</span> <span class="o">=</span> <span class="s">'generic'</span>
+
+</code></pre></div>    </div>
+  </div>
+
+</div>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">##</span>
+<span class="c">## Define the initial amounts of parent and daughter in the sample.</span>
+<span class="c">##</span>
+<span class="c">## In principle, I would change this depending on the isotopes we plot.  But I am only plotting</span>
+<span class="c">## Rb87 --&gt; Sr-87, since that is the most classical use of this Geochron approach.</span>
+<span class="c">##</span>
+
+<span class="c"># Range of P to D_i fractions and initial amounts of D to D_i to consider</span>
+<span class="n">P2Di_min</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">P2Di_max</span> <span class="o">=</span> <span class="mf">0.40</span>
+<span class="n">D2Di0_min</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">D2Di0_max</span> <span class="o">=</span> <span class="mf">0.75</span>
+
+<span class="c"># Generate three mineral samples in different thirds of the entire range</span>
+<span class="n">range_P2Di</span>  <span class="o">=</span> <span class="p">(</span><span class="n">P2Di_max</span><span class="o">-</span><span class="n">P2Di_min</span><span class="p">)</span>
+
+<span class="c"># Create sample amounts</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">nums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">initial_samples</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">nums</span><span class="p">)</span>
+<span class="n">initial_D2Di0</span> <span class="o">=</span> <span class="n">D2Di0_min</span> <span class="o">+</span> <span class="p">(</span><span class="n">D2Di0_max</span> <span class="o">-</span> <span class="n">D2Di0_min</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+<span class="n">initial_samples</span><span class="p">[</span><span class="s">'P2Di'</span><span class="p">]</span> <span class="o">=</span> <span class="n">P2Di_min</span> <span class="o">+</span> <span class="p">(</span><span class="n">range_P2Di</span><span class="o">/</span><span class="n">n_samples</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">nums</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n_samples</span><span class="p">))</span>
+<span class="n">initial_samples</span><span class="p">[</span><span class="s">'D2Di'</span><span class="p">]</span> <span class="o">=</span> <span class="n">initial_D2Di0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+
+
+</code></pre></div>    </div>
+  </div>
+
+</div>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">##</span>
+<span class="c">## Define functions to call when building interactive plot</span>
+<span class="c">##</span>
+
+<span class="k">def</span> <span class="nf">amt_left</span><span class="p">(</span><span class="n">sample_in</span><span class="p">,</span> <span class="n">taus</span><span class="p">):</span>
+    <span class="c"># Generate a sample DataFrame after tau half-lifes given an initial DataFrame</span>
+    <span class="n">sample</span> <span class="o">=</span> <span class="n">sample_in</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+    <span class="n">sample</span><span class="p">[</span><span class="s">'P2Di'</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample_in</span><span class="p">[</span><span class="s">'P2Di'</span><span class="p">]</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">taus</span><span class="p">))</span>
+    <span class="n">sample</span><span class="p">[</span><span class="s">'D2Di'</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample_in</span><span class="p">[</span><span class="s">'D2Di'</span><span class="p">]</span> <span class="o">+</span> <span class="n">sample_in</span><span class="p">[</span><span class="s">'P2Di'</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">taus</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">sample</span>
+
+<span class="k">def</span> <span class="nf">line_points</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="n">initial_D2Di0</span>
+    
+    <span class="c"># Determine the end points of a line going through the sample points.</span>
+    <span class="n">x_range</span> <span class="o">=</span> <span class="n">x_max</span> <span class="o">-</span> <span class="n">x_min</span>
+    <span class="n">y_range</span> <span class="o">=</span> <span class="n">y_max</span> <span class="o">-</span> <span class="n">y_min</span>
+    
+    <span class="c"># Slope (extrapolate from first two points - could be done by a fit to the points)</span>
+    <span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s">'D2Di'</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">sample</span><span class="p">[</span><span class="s">'D2Di'</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s">'P2Di'</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">sample</span><span class="p">[</span><span class="s">'P2Di'</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">y_final</span> <span class="o">=</span> <span class="n">initial_D2Di0</span> <span class="o">+</span> <span class="n">slope</span><span class="o">*</span><span class="n">x_range</span>
+    <span class="n">x_points</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">)</span>
+    <span class="n">y_points</span> <span class="o">=</span> <span class="p">(</span><span class="n">initial_D2Di0</span><span class="p">,</span> <span class="n">y_final</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x_points</span><span class="p">,</span> <span class="n">y_points</span><span class="p">,</span> <span class="n">slope</span>
+
+<span class="k">def</span> <span class="nf">init2current</span><span class="p">(</span><span class="n">samples0</span><span class="p">,</span> <span class="n">samples</span><span class="p">):</span>
+    <span class="c"># Compute the lines connecting initital and final points for plotting</span>
+    <span class="n">n_pts</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples0</span><span class="p">)</span>
+
+    <span class="n">xlist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ylist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">pt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_pts</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="n">samples0</span><span class="p">[</span><span class="s">'P2Di'</span><span class="p">][</span><span class="n">pt</span><span class="p">],</span> <span class="n">samples</span><span class="p">[</span><span class="s">'P2Di'</span><span class="p">][</span><span class="n">pt</span><span class="p">]</span> <span class="p">])</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="n">samples0</span><span class="p">[</span><span class="s">'D2Di'</span><span class="p">][</span><span class="n">pt</span><span class="p">],</span> <span class="n">samples</span><span class="p">[</span><span class="s">'D2Di'</span><span class="p">][</span><span class="n">pt</span><span class="p">]</span> <span class="p">])</span>
+        <span class="n">xlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">ylist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    
+    <span class="k">return</span><span class="p">(</span><span class="n">xlist</span><span class="p">,</span> <span class="n">ylist</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">HL_changed</span><span class="p">(</span><span class="n">change</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">isotope</span><span class="p">,</span> <span class="n">sample</span><span class="p">,</span> <span class="n">initial_samples</span><span class="p">,</span> <span class="n">dots_current</span><span class="p">,</span> <span class="n">line_current</span><span class="p">,</span> <span class="n">connectors</span><span class="p">,</span> <span class="n">slope_label</span>
+    
+    <span class="c"># Determine half-life of this isotope</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">isotope_info</span><span class="o">.</span><span class="n">Name</span> <span class="o">==</span> <span class="n">isotope</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">HL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">isotope_info</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">HalfLife</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+    
+    <span class="c"># How many half-lives have passed?  Use this to get new sample and line info</span>
+    <span class="n">this_tau</span> <span class="o">=</span> <span class="n">HL_slider</span><span class="o">.</span><span class="n">value</span> <span class="o">/</span> <span class="n">HL</span>
+    <span class="n">sample</span> <span class="o">=</span> <span class="n">amt_left</span><span class="p">(</span><span class="n">initial_samples</span><span class="p">,</span> <span class="n">this_tau</span><span class="p">)</span>
+    <span class="n">x_sample</span><span class="p">,</span> <span class="n">y_sample</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span>  <span class="n">line_points</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+    
+    <span class="c"># Update plot</span>
+    <span class="n">dots_current</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="s">'P2Di'</span><span class="p">]</span>
+    <span class="n">dots_current</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="s">'D2Di'</span><span class="p">]</span>
+    <span class="n">line_current</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x_sample</span>
+    <span class="n">line_current</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y_sample</span>
+    <span class="n">slope_label</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s">'Slope: {0:0.4f}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">slope</span><span class="p">)</span>
+    <span class="n">xlist</span><span class="p">,</span> <span class="n">ylist</span> <span class="o">=</span> <span class="n">init2current</span><span class="p">(</span><span class="n">initial_samples</span><span class="p">,</span> <span class="n">sample</span><span class="p">)</span>
+    <span class="n">connectors</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">xlist</span>
+    <span class="n">connectors</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">ylist</span>
+    
+    
+<span class="k">def</span> <span class="nf">isotope_changed</span><span class="p">(</span><span class="n">change</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">ax_x_P2Di</span><span class="p">,</span> <span class="n">ax_y_D2Di</span><span class="p">,</span> <span class="n">HL_slider</span><span class="p">,</span> <span class="n">HLlabel</span><span class="p">,</span> <span class="n">UnitsText</span><span class="p">,</span> <span class="n">Max_half_lives</span>
+
+    <span class="c"># Extract the necessary isotope descriptors from the Pandas DataFrame</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">isotope_info</span><span class="o">.</span><span class="n">Name</span> <span class="o">==</span> <span class="n">change</span><span class="o">.</span><span class="n">new</span><span class="p">)</span>
+    <span class="n">HL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">isotope_info</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">HalfLife</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">HLUnits</span> <span class="o">=</span> <span class="n">isotope_info</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">HLUnits</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">PAbbrev</span> <span class="o">=</span> <span class="n">isotope_info</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">PAbbrev</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">DAbbrev</span> <span class="o">=</span> <span class="n">isotope_info</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">DAbbrev</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">DiAbbrev</span> <span class="o">=</span> <span class="n">isotope_info</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">DiAbbrev</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c"># Get old half-life</span>
+    <span class="n">idx_old</span> <span class="o">=</span> <span class="p">(</span><span class="n">isotope_info</span><span class="o">.</span><span class="n">Name</span> <span class="o">==</span> <span class="n">change</span><span class="o">.</span><span class="n">old</span><span class="p">)</span>
+    <span class="n">HL_old</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">isotope_info</span><span class="p">[</span><span class="n">idx_old</span><span class="p">]</span><span class="o">.</span><span class="n">HalfLife</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c"># Determine current age reading from slider and adjust to new units</span>
+    <span class="n">init_age</span> <span class="o">=</span> <span class="n">HL_slider</span><span class="o">.</span><span class="n">value</span> 
+    
+    <span class="c"># Hard code generic versus others</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">change</span><span class="o">.</span><span class="n">new</span> <span class="o">!=</span> <span class="n">isotope_info</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s">'generic'</span><span class="p">]</span><span class="o">.</span><span class="n">Name</span><span class="p">):</span>
+        <span class="n">HL_slider</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s">"Time"</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="n">HL_slider</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s">"Half-lives"</span>    
+
+    <span class="c"># Adjust time scales</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">HL_old</span> <span class="o">&lt;</span> <span class="n">HL</span><span class="p">):</span>
+        <span class="c"># Adjust maximum limits first before adjusting values (since new HL &gt; old HL)</span>
+        <span class="n">HL_slider</span><span class="o">.</span><span class="nb">max</span> <span class="o">=</span> <span class="n">Max_half_lives</span><span class="o">*</span><span class="n">HL</span>
+        <span class="n">HLlabel</span><span class="o">.</span><span class="nb">max</span> <span class="o">=</span> <span class="n">HL_slider</span><span class="o">.</span><span class="nb">max</span> 
+        <span class="n">HL_slider</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">HL</span><span class="o">*</span><span class="p">(</span><span class="n">init_age</span><span class="o">/</span><span class="n">HL_old</span><span class="p">)</span>
+        <span class="n">HLlabel</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">HL_slider</span><span class="o">.</span><span class="n">value</span>       
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c"># Adjust maximum limits after adjusting values (since new HL &lt; old HL)</span>
+        <span class="n">HL_slider</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">HL</span><span class="o">*</span><span class="p">(</span><span class="n">init_age</span><span class="o">/</span><span class="n">HL_old</span><span class="p">)</span>
+        <span class="n">HLlabel</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">HL_slider</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">HL_slider</span><span class="o">.</span><span class="nb">max</span> <span class="o">=</span> <span class="n">Max_half_lives</span><span class="o">*</span><span class="n">HL</span>
+        <span class="n">HLlabel</span><span class="o">.</span><span class="nb">max</span> <span class="o">=</span> <span class="n">HL_slider</span><span class="o">.</span><span class="nb">max</span> 
+                
+    <span class="c"># Set the axes and other labels to display</span>
+    <span class="n">UnitsText</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">HLUnits</span>
+    <span class="n">ax_x_P2Di</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s">'{0} / {1}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PAbbrev</span><span class="p">,</span> <span class="n">DiAbbrev</span><span class="p">)</span>
+    <span class="n">ax_y_D2Di</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s">'{0} / {1}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">DAbbrev</span><span class="p">,</span> <span class="n">DiAbbrev</span><span class="p">)</span>
+
+
+
+</code></pre></div>    </div>
+  </div>
+
+</div>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">##</span>
+<span class="c">## Set up isochron plot</span>
+<span class="c">##</span>
+
+<span class="c"># Largest possible fraction of decay (only go out to 5 half-lives)</span>
+<span class="n">Max_half_lives</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">Max_decay_fraction</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">Max_half_lives</span><span class="p">)</span>
+
+<span class="c"># detemine maximum and minimum values of X and Y axes</span>
+<span class="n">x_step</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">x_min</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">x_max</span> <span class="o">=</span> <span class="n">x_step</span> <span class="o">*</span> <span class="n">ceil</span><span class="p">(</span><span class="n">initial_samples</span><span class="p">[</span><span class="s">'P2Di'</span><span class="p">][</span><span class="n">n_samples</span><span class="p">]</span> <span class="o">/</span> <span class="n">x_step</span><span class="p">)</span>
+<span class="n">y_step</span> <span class="o">=</span> <span class="mf">0.04</span>
+<span class="n">y_min</span> <span class="o">=</span> <span class="n">y_step</span> <span class="o">*</span> <span class="n">floor</span><span class="p">(</span><span class="n">initial_D2Di0</span> <span class="o">/</span> <span class="n">y_step</span><span class="p">)</span>
+<span class="n">y_max</span> <span class="o">=</span> <span class="n">y_step</span> <span class="o">*</span> <span class="n">ceil</span><span class="p">((</span><span class="n">initial_D2Di0</span> <span class="o">+</span> <span class="n">initial_samples</span><span class="p">[</span><span class="s">'P2Di'</span><span class="p">][</span><span class="n">n_samples</span><span class="p">]</span> <span class="o">*</span> <span class="n">Max_decay_fraction</span><span class="p">)</span> <span class="o">/</span> <span class="n">y_step</span><span class="p">)</span>
+
+<span class="c"># Labels and scales for Axes</span>
+<span class="n">x_P2Di</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">LinearScale</span><span class="p">(</span><span class="nb">min</span> <span class="o">=</span> <span class="n">x_min</span><span class="p">,</span> <span class="nb">max</span> <span class="o">=</span> <span class="n">x_max</span><span class="p">)</span>
+<span class="n">y_D2Di</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">LinearScale</span><span class="p">(</span><span class="nb">min</span> <span class="o">=</span> <span class="n">y_min</span><span class="p">,</span> <span class="nb">max</span> <span class="o">=</span> <span class="n">y_max</span><span class="p">)</span>
+<span class="n">ax_x_P2Di</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">'P / D_i'</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">x_P2Di</span><span class="p">)</span>
+<span class="n">ax_y_D2Di</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s">'D / D_i'</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">y_D2Di</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s">'vertical'</span><span class="p">)</span>
+
+<span class="c"># Set up initial conditions</span>
+<span class="n">taus</span> <span class="o">=</span> <span class="mi">0</span>    <span class="c"># zero half lives past</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="n">amt_left</span><span class="p">(</span><span class="n">initial_samples</span><span class="p">,</span> <span class="n">taus</span><span class="p">)</span>
+
+<span class="c">##</span>
+<span class="c">## Define the lines</span>
+<span class="c">##</span>
+
+<span class="c"># Initial amount of daughter line (with dots for initial amounts of parent)</span>
+<span class="n">x_init</span><span class="p">,</span> <span class="n">y_init</span><span class="p">,</span> <span class="n">slope_init</span> <span class="o">=</span>  <span class="n">line_points</span><span class="p">(</span><span class="n">initial_samples</span><span class="p">)</span>
+<span class="n">line_initial</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Lines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_init</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_init</span><span class="p">,</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_P2Di</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_D2Di</span><span class="p">},</span> 
+                   <span class="n">line_style</span><span class="o">=</span><span class="s">'dashed'</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s">'red'</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s">'Initial Sample'</span><span class="p">])</span>
+<span class="n">dots_initial</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">initial_samples</span><span class="p">[</span><span class="s">'P2Di'</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">initial_samples</span><span class="p">[</span><span class="s">'D2Di'</span><span class="p">],</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_P2Di</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_D2Di</span><span class="p">},</span> 
+                   <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s">'white'</span><span class="p">],</span> <span class="n">stroke</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s">'Initial Isochron'</span><span class="p">])</span>
+
+<span class="c"># Current quantities on isochron line</span>
+<span class="n">x_sample</span><span class="p">,</span> <span class="n">y_sample</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span>  <span class="n">line_points</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+<span class="n">line_current</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Lines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_sample</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_sample</span><span class="p">,</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_P2Di</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_D2Di</span><span class="p">},</span> 
+                   <span class="n">line_style</span><span class="o">=</span><span class="s">'solid'</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s">'red'</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s">'Current Isochron'</span><span class="p">])</span>
+<span class="n">dots_current</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">sample</span><span class="p">[</span><span class="s">'P2Di'</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">sample</span><span class="p">[</span><span class="s">'D2Di'</span><span class="p">],</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_P2Di</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_D2Di</span><span class="p">},</span> 
+                   <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s">'red'</span><span class="p">],</span> <span class="n">stroke</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s">'Current Isochron'</span><span class="p">])</span>
+
+<span class="c"># Connect Initial and Current quantities on isochron line</span>
+<span class="n">xlist</span><span class="p">,</span> <span class="n">ylist</span> <span class="o">=</span> <span class="n">init2current</span><span class="p">(</span><span class="n">initial_samples</span><span class="p">,</span> <span class="n">sample</span><span class="p">)</span>
+<span class="n">connectors</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Lines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xlist</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">ylist</span><span class="p">,</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="n">x_P2Di</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="n">y_D2Di</span><span class="p">},</span> 
+                   <span class="n">line_style</span><span class="o">=</span><span class="s">'dotted'</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s">'black'</span><span class="p">])</span>
+
+<span class="c">##</span>
+<span class="c">## Construct plot</span>
+<span class="c">##</span>
+<span class="n">isochron</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="p">[</span><span class="n">ax_x_P2Di</span><span class="p">,</span> <span class="n">ax_y_D2Di</span><span class="p">],</span> 
+                     <span class="n">marks</span><span class="o">=</span><span class="p">[</span><span class="n">connectors</span><span class="p">,</span> <span class="n">line_initial</span><span class="p">,</span> <span class="n">dots_initial</span><span class="p">,</span> <span class="n">line_current</span><span class="p">,</span> <span class="n">dots_current</span><span class="p">],</span>
+                     <span class="n">title</span><span class="o">=</span><span class="s">'Geochron Diagram'</span><span class="p">,</span> 
+                     <span class="n">layout</span><span class="o">=</span><span class="p">{</span><span class="s">'width'</span><span class="p">:</span> <span class="s">'700px'</span><span class="p">,</span> <span class="s">'height'</span><span class="p">:</span> <span class="s">'500px'</span><span class="p">,</span> 
+                             <span class="s">'max_width'</span><span class="p">:</span> <span class="s">'700px'</span><span class="p">,</span> <span class="s">'max_height'</span><span class="p">:</span> <span class="s">'500px'</span><span class="p">,</span>
+                             <span class="s">'min_width'</span><span class="p">:</span> <span class="s">'600px'</span><span class="p">,</span> <span class="s">'min_height'</span><span class="p">:</span> <span class="s">'400px'</span><span class="p">})</span>
+
+<span class="c">##</span>
+<span class="c">## Construct controls</span>
+<span class="c">##</span>
+
+<span class="c"># Select Generic or Specific Isotopes</span>
+<span class="n">isotope</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">RadioButtons</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">isotope_info</span><span class="o">.</span><span class="n">Name</span><span class="p">),</span> 
+                               <span class="n">value</span><span class="o">=</span><span class="n">isotope_info</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">init_isotope</span><span class="p">]</span><span class="o">.</span><span class="n">Name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">'Isotope:'</span><span class="p">,</span> 
+                               <span class="n">disabled</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> 
+                               <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="s">'75px'</span><span class="p">,</span> <span class="n">max_height</span><span class="o">=</span><span class="s">'100px'</span><span class="p">,</span> <span class="n">min_height</span><span class="o">=</span><span class="s">'50px'</span><span class="p">,</span> 
+                                                    <span class="n">width</span><span class="o">=</span><span class="s">'200px'</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="s">'300px'</span><span class="p">,</span>  <span class="n">min_width</span><span class="o">=</span><span class="s">'100px'</span><span class="p">))</span>
+<span class="n">isotope</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">isotope_changed</span><span class="p">,</span> <span class="s">'value'</span><span class="p">)</span>
+
+<span class="c"># Slider and text field controling age</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">isotope_info</span><span class="o">.</span><span class="n">Name</span> <span class="o">==</span> <span class="n">isotope</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="n">HL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">isotope_info</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">HalfLife</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">HLUnits</span> <span class="o">=</span> <span class="n">isotope_info</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">HLUnits</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">HL_slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">Max_half_lives</span><span class="o">*</span><span class="n">HL</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+                                <span class="n">description</span><span class="o">=</span><span class="s">'Half-lives'</span><span class="p">,</span> <span class="n">disabled</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                <span class="n">continuous_update</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s">'horizontal'</span><span class="p">,</span>
+                                <span class="n">readout</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">readout_format</span><span class="o">=</span><span class="s">'.2f'</span><span class="p">,</span>
+                                <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="s">'75px'</span><span class="p">,</span> <span class="n">max_height</span><span class="o">=</span><span class="s">'100px'</span><span class="p">,</span> <span class="n">min_height</span><span class="o">=</span><span class="s">'50px'</span><span class="p">,</span> 
+                                                    <span class="n">width</span><span class="o">=</span><span class="s">'200px'</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="s">'300px'</span><span class="p">,</span>  <span class="n">min_width</span><span class="o">=</span><span class="s">'100px'</span><span class="p">))</span>
+<span class="n">HL_slider</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">HL_changed</span><span class="p">,</span> <span class="s">'value'</span><span class="p">)</span>
+
+<span class="c"># Get units value and units for age label, then apply them</span>
+<span class="n">HLlabel</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">BoundedFloatText</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="n">HL_slider</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="nb">min</span> <span class="o">=</span> <span class="n">HL_slider</span><span class="o">.</span><span class="nb">min</span><span class="p">,</span> <span class="nb">max</span> <span class="o">=</span> <span class="n">HL_slider</span><span class="o">.</span><span class="nb">max</span><span class="p">,</span> 
+                                   <span class="n">step</span> <span class="o">=</span> <span class="n">HL_slider</span><span class="o">.</span><span class="n">step</span><span class="p">,</span>
+                                       <span class="n">layout</span><span class="o">=</span><span class="p">{</span><span class="s">'width'</span><span class="p">:</span> <span class="s">'75px'</span><span class="p">,</span> <span class="s">'height'</span><span class="p">:</span> <span class="s">'50px'</span><span class="p">,</span> 
+                                               <span class="s">'max_width'</span><span class="p">:</span> <span class="s">'75px'</span><span class="p">,</span> <span class="s">'max_height'</span><span class="p">:</span> <span class="s">'75px'</span><span class="p">,</span>
+                                               <span class="s">'min_width'</span><span class="p">:</span> <span class="s">'50px'</span><span class="p">,</span> <span class="s">'min_height'</span><span class="p">:</span> <span class="s">'50px'</span><span class="p">})</span>
+<span class="n">UnitsText</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">HLUnits</span><span class="p">)</span>
+<span class="n">age_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">HLlabel</span><span class="p">,</span> <span class="n">UnitsText</span><span class="p">])</span>
+<span class="c"># Link HL slider with this text</span>
+<span class="n">widgets</span><span class="o">.</span><span class="n">jslink</span><span class="p">((</span><span class="n">HL_slider</span><span class="p">,</span> <span class="s">'value'</span><span class="p">),</span> <span class="p">(</span><span class="n">HLlabel</span><span class="p">,</span> <span class="s">'value'</span><span class="p">))</span>
+
+<span class="c"># Describe slope</span>
+<span class="n">slope_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">'Slope: {0:0.4f}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">slope</span><span class="p">),</span>
+                                       <span class="n">layout</span><span class="o">=</span><span class="p">{</span><span class="s">'align_items'</span><span class="p">:</span><span class="s">'center'</span><span class="p">,</span><span class="s">'align_content'</span><span class="p">:</span><span class="s">'center'</span><span class="p">,</span> 
+                                               <span class="s">'justify_content'</span><span class="p">:</span><span class="s">'center'</span><span class="p">,</span> 
+                                               <span class="s">'width'</span><span class="p">:</span> <span class="s">'100px'</span><span class="p">,</span> <span class="s">'height'</span><span class="p">:</span> <span class="s">'50px'</span><span class="p">,</span> 
+                                               <span class="s">'max_width'</span><span class="p">:</span> <span class="s">'100px'</span><span class="p">,</span> <span class="s">'max_height'</span><span class="p">:</span> <span class="s">'75px'</span><span class="p">,</span>
+                                               <span class="s">'min_width'</span><span class="p">:</span> <span class="s">'50px'</span><span class="p">,</span> <span class="s">'min_height'</span><span class="p">:</span> <span class="s">'50px'</span><span class="p">})</span>
+
+
+<span class="n">controls</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">(</span> <span class="p">[</span><span class="n">isotope</span><span class="p">,</span> <span class="n">HL_slider</span><span class="p">,</span> <span class="n">age_label</span><span class="p">,</span> <span class="n">slope_label</span><span class="p">],</span> 
+                        <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">align_content</span><span class="o">=</span><span class="s">'center'</span><span class="p">,</span> <span class="n">align_items</span><span class="o">=</span><span class="s">'center'</span><span class="p">,</span> 
+                                              <span class="n">justify_content</span><span class="o">=</span><span class="s">'center'</span><span class="p">,</span> 
+                                              <span class="n">width</span><span class="o">=</span><span class="s">'300px'</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="s">'500px'</span><span class="p">,</span> 
+                                              <span class="n">max_width</span><span class="o">=</span><span class="s">'300px'</span><span class="p">,</span> <span class="n">max_height</span><span class="o">=</span><span class="s">'500px'</span><span class="p">,</span>
+                                              <span class="n">min_width</span><span class="o">=</span><span class="s">'100px'</span><span class="p">,</span> <span class="n">min_height</span><span class="o">=</span><span class="s">'400px'</span><span class="p">,</span>
+                                              <span class="n">overflow_x</span><span class="o">=</span><span class="s">'hidden'</span><span class="p">,</span> <span class="n">overflow_y</span><span class="o">=</span><span class="s">'hidden'</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">(</span> <span class="p">[</span><span class="n">isochron</span><span class="p">,</span> <span class="n">controls</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span>
+
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HBox(children=(Figure(axes=[Axis(label='P / D_i', scale=LinearScale(max=0.4, min=0.0)), Axis(label='D / D_i', …
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+
+              <nav class="c-page__nav">
+  
+    
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/astronomy.html">
+      〈 <span class="u-margin-right-tiny"></span> Astronomy
+    </a>
+  
+
+  
+    
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/02/DopplerShift.html">
+      Dopple Shift <span class="u-margin-right-tiny"></span> 〉
+    </a>
+  
+</nav>
+
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+  </body>
+</html>

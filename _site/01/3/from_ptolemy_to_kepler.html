@@ -7,16 +7,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
-  <title>Home</title>
-  <meta name="description" content="ASTRO200 Jupyter Book">
+  <title>From Ptolemy To Kepler</title>
+  <meta name="description" content="      ```pythonfrom IPython.display import HTML  ">
 
-  <link rel="canonical" href="http://0.0.0.0:4000//intro.html">
+  <link rel="canonical" href="http://0.0.0.0:4000//01/3/from_ptolemy_to_kepler.html">
   <link rel="alternate" type="application/rss+xml" title="ASTRO200 UoA" href="http://0.0.0.0:4000//feed.xml">
 
-  <meta property="og:url"         content="http://0.0.0.0:4000//intro.html" />
+  <meta property="og:url"         content="http://0.0.0.0:4000//01/3/from_ptolemy_to_kepler.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Home" />
-<meta property="og:description" content="ASTRO200 Jupyter Book" />
+<meta property="og:title"       content="From Ptolemy To Kepler" />
+<meta property="og:description" content="      ```pythonfrom IPython.display import HTML  " />
 <meta property="og:image"       content="" />
 
 
@@ -25,15 +25,15 @@
   "@context": "http://schema.org",
   "@type": "NewsArticle",
   "mainEntityOfPage":
-    "http://0.0.0.0:4000//intro.html",
+    "http://0.0.0.0:4000//01/3/from_ptolemy_to_kepler.html",
   "headline":
-    "Home",
+    "From Ptolemy To Kepler",
   "datePublished":
     "2019-08-25T22:23:30-05:00",
   "dateModified":
     "2019-08-25T22:23:30-05:00",
   "description":
-    "ASTRO200 Jupyter Book",
+    "      ```pythonfrom IPython.display import HTML  ",
   "author": {
     "@type": "Person",
     "name": "Evert Duran"
@@ -140,6 +140,38 @@ initFunction(function () {
 
   <!-- Load nbinteract for widgets -->
   
+<!-- Include nbinteract for interactive widgets -->
+<script src="https://unpkg.com/nbinteract-core" async></script>
+
+<script>
+let interact
+
+const initializeNbinteract = () => {
+  // If NbInteract hasn't loaded, wait one second and try again
+  if (window.NbInteract === undefined) {
+    setTimeout(initializeNbinteract, 1000)
+    return
+  }
+
+  if (interact === undefined) {
+    console.log('Initializing nbinteract...')
+    interact = new window.NbInteract({
+      baseUrl: 'https://mybinder.org',
+      spec: 'edur409/ASTRO200/master',
+      provider: 'gh',
+    })
+    window.interact = interact
+  } else {
+    console.log("nbinteract already initialized...")
+  }
+
+  interact.prepare()
+}
+
+// Initialize nbinteract
+initFunction(initializeNbinteract);
+</script>
+
 
   <!-- Load Thebelab for interactive widgets -->
   <!-- Include Thebelab for interactive code if it's enabled -->
@@ -707,7 +739,7 @@ initFunction(initQuery);
       
       
       <li class="c-sidebar__chapter">
-        <a class="c-sidebar__entry c-sidebar__entry--active"
+        <a class="c-sidebar__entry "
           href="/intro.html"
         >
           
@@ -761,7 +793,7 @@ initFunction(initQuery);
       
       
       <li class="c-sidebar__chapter">
-        <a class="c-sidebar__entry c-sidebar__entry--active"
+        <a class="c-sidebar__entry "
           href="/intro.html"
         >
           
@@ -823,7 +855,7 @@ initFunction(initQuery);
               
 
               <li class="c-sidebar__section">
-                <a class="c-sidebar__entry "
+                <a class="c-sidebar__entry c-sidebar__entry--active"
                   href="/01/3/from_ptolemy_to_kepler.html"
                 >
                   
@@ -992,88 +1024,215 @@ initFunction(initQuery);
 </div>
 
             
+<div class="buttons">
+<a href="/content/01/3/from_ptolemy_to_kepler.ipynb" download>
+<button id="interact-button-download" class="interact-button">Download</button>
+</a>
+
+<button id="interact-button-thebelab" class="interact-button">Thebelab</button>
+
+<button id="interact-button-show-widgets" class="interact-button js-nbinteract-widget">Show Widgets</button>
+
+
+
+
+
+
+
+
+<a href="https://mybinder.org/v2/gh/edur409/ASTRO200/master?filepath=content%2F01%2F3%2Ffrom_ptolemy_to_kepler.ipynb"><button class="interact-button" id="interact-button-binder"><img class="interact-button-logo" src="/assets/images/logo_binder.svg" alt="Interact" />Interact</button></a>
+
+
+</div>
+
 
             <div class="c-textbook__content">
-              <h1 id="astro200-jupyter-book">ASTRO200 Jupyter Book</h1>
+              <div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
 
-<p>This book is an attempt to organize the content for the students of Astrobiology 200 at 
-The University of Auckland.</p>
+<span class="n">HTML</span><span class="p">(</span><span class="s">'''&lt;script&gt;
+code_show=true; 
+function code_toggle() {
+ if (code_show){
+ $('div.input').hide();
+ } else {
+ $('div.input').show();
+ }
+ code_show = !code_show
+} 
+$( document ).ready(code_toggle);
+&lt;/script&gt;
+The raw code for this IPython notebook is by default hidden for easier reading.
+To toggle on/off the raw code, click &lt;a href="javascript:code_toggle()"&gt;here&lt;/a&gt;.'''</span><span class="p">)</span>
 
-<h1 id="books-with-jupyter-and-jekyll">Books with Jupyter and Jekyll</h1>
+</code></pre></div>    </div>
+  </div>
 
-<p><img src="https://circleci.com/gh/jupyter/jupyter-book.svg?style=svg" class="left" /></p>
+  <div class="output_wrapper">
+    <div class="output_subarea">
 
-<p>Jupyter Books lets you build an online book using a collection of Jupyter Notebooks
-and Markdown files. Its output is similar to the excellent <a href="https://bookdown.org/yihui/bookdown/">Bookdown</a> tool,
-and adds extra functionality for people running a Jupyter stack.</p>
+      <div class="output output_html">
+<script>
+code_show=true; 
+function code_toggle() {
+ if (code_show){
+ $('div.input').hide();
+ } else {
+ $('div.input').show();
+ }
+ code_show = !code_show
+} 
+$( document ).ready(code_toggle);
+</script>
+The raw code for this IPython notebook is by default hidden for easier reading.
+To toggle on/off the raw code, click <a href="javascript:code_toggle()">here</a>.
+</div>
 
-<p>For an example of a book built with Jupyter Books, see the <a href="https://www.textbook.ds100.org/">textbook for Data 100</a> at UC Berkeley.</p>
+    </div>
+  </div>
+</div>
 
-<p>Here are a few features of Jupyter Books</p>
+<p><a id="top-title"></a></p>
+<h1 id="from-ptolemy-to-kepler">From Ptolemy to Kepler</h1>
 
-<ul>
-  <li>All course content is written in markdown and Jupyter Notebooks, stored in <code class="highlighter-rouge">notebooks/</code></li>
-  <li>The Jupyter Book repo comes packaged with helper scripts to convert these into Jekyll pages (in <code class="highlighter-rouge">scripts/</code>) that can be hosted for free on GitHub</li>
-  <li>Pages can have <a href="https://mybinder.org">Binder</a> or JupyterHub links automatically added for interactivity.</li>
-  <li>The website itself is based on Jekyll, and is highly extensible and can be freely-hosted on GitHub.</li>
-  <li>There are lots of nifty HTML features under-the-hood, such as Turbolinks fast-navigation and
-click-to-copy in code cells.</li>
-</ul>
+<p>Ptolemy, Copernicus, Brahe, Kepler</p>
 
-<h2 id="getting-started">Getting started</h2>
+<p><a id="CC-2.1"></a></p>
+<h1 id="cosmic-calculations-21-keplers-third-law">Cosmic Calculations 2.1: Kepler’s Third Law</h1>
 
-<p>To get started, you may be interested in the following links.
-Here are a few links of interest:</p>
+<p>First, let’s review the three laws discovered by Kepler from the careful measurements of <a href="https://physicsworld.com/a/kepler-and-tycho-brahe-the-odd-couple/">Tycho Brache</a>.  This is one of the most ineteresting stories of scientific collaboration that transformed years of observations into laws about the universe.  I recommend to read/watch <a href="https://www.youtube.com/watch?v=j3mhkYbznBk"><strong><em>The Character of Physical Law</em></strong></a> by Richard Feynman if you want to indulge in the details.</p>
 
-<ul>
-  <li>
-    <p><strong><a href="features/features">Quickstart</a></strong> is a quick demo and overview of Jupyter Books.</p>
-  </li>
-  <li>
-    <p><strong><a href="guide/01_overview">The Jupyter Book Guide</a></strong>
-will step you through the process of configuring and building your own Jupyter Book.</p>
-  </li>
-  <li>
-    <p><strong><a href="https://github.com/jupyter/jupyter-book">The Jupyter Book template repo</a></strong> is the template
-repository you’ll use as a start for your Jupyter Book.</p>
-  </li>
-  <li>
-    <p><strong>A demo of the Jupyter Book</strong> can be browsed via the sidebar to the left.</p>
-  </li>
-</ul>
+<p><a href="https://commons.wikimedia.org/wiki/File:Tycho-Kepler-Statue-Prague.jpg#/media/File:Tycho-Kepler-Statue-Prague.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Tycho-Kepler-Statue-Prague.jpg" alt="Tycho-Kepler-Statue-Prague.jpg" width="360" height="480" /></a><br />By <a href="https://en.wikipedia.org/wiki/hu:User:Both_El%C5%91d" class="extiw" title="w:hu:User:Both Előd">Both Előd</a> at <a href="https://en.wikipedia.org/wiki/hu:" class="extiw" title="w:hu:">Hungarian Wikipedia</a>, <a href="https://creativecommons.org/licenses/by-sa/2.5" title="Creative Commons Attribution-Share Alike 2.5">CC BY-SA 2.5</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=47229075">Link</a></p>
 
-<h2 id="installation">Installation</h2>
+<h2 id="keplers-laws">Kepler’s laws:</h2>
 
-<p>Here’s a brief rundown of how to create your own Jupyter Book using this site. For a more
-complete guide, see <a href="guide/01_overview">the Jupyter Book guide</a>.</p>
+<p><strong><em>1. The orbit of every planet is an ellipse with the Sun at one of the two foci.</em></strong></p>
 
-<ul>
-  <li>Fork the Jupyter Book template repo</li>
-  <li>Replace the demo notebooks in <code class="highlighter-rouge">content/</code> with your own notebooks and markdown files.</li>
-  <li>Create a Table of Contents yaml file by editing <code class="highlighter-rouge">_data/toc.yaml</code>.</li>
-  <li>Generate the Jekyll markdown for your notebooks by running <code class="highlighter-rouge">scripts/generate_book.py</code></li>
-  <li>Push your changes to GitHub (or wherever you host your site)!</li>
-</ul>
+<p>In the figure below, you can imagine the yellow dot as the sun, and a planet would be moving on the blue curve a certain distance away from it.  The elliptical orbit can be described by the semi-major and semi-minor axes, which define the eccentricity of the orbit.</p>
 
-<h2 id="acknowledgements">Acknowledgements</h2>
+<p>Look for the <em>perihelion</em> and <em>aphelion</em> of Earth’s orbit. From those values, what’s the flattening of Earth’s orbit and its eccentricity?</p>
 
-<p>Jupyter Books was originally created by <a href="http://www.samlau.me/">Sam Lau</a> and <a href="https://predictablynoisy.com">Chris Holdgraf</a>
-with support of the <strong>UC Berkeley Data Science Education Program and the Berkeley
-Institute for Data Science</strong>.</p>
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">fixed</span><span class="p">,</span> <span class="n">interact_manual</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="n">widgets</span>
+
+<span class="c"># Set default font size for plots:</span>
+<span class="n">font</span> <span class="o">=</span> <span class="p">{</span><span class="s">'size'</span>   <span class="p">:</span> <span class="mi">18</span><span class="p">}</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s">'font'</span><span class="p">,</span><span class="o">**</span><span class="n">font</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">elliptic_orbit</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+    <span class="s">'''Plot an elliptical orbit and see the radial distance from one focal point
+    a= semi-major axis
+    b=semi-minor axis
+    t=location at an angle between 0 and 360'''</span>
+    <span class="n">p</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">360</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> 
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="s">'Ellipse2'</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s">'-'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">'equal'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+    <span class="c">#t is the angle varying from 0 to 360 degrees</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">)</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">)</span>
+    <span class="c">#Conditionals in case of changing length of largest semi-major axis</span>
+    <span class="k">if</span> <span class="n">a</span><span class="o">&gt;=</span><span class="n">b</span><span class="p">:</span>
+        <span class="n">c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s">'y'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">facecolors</span><span class="o">=</span><span class="s">'none'</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s">'y'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">X</span><span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s">'red'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s">'b'</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">=</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">a</span>
+        <span class="n">e</span><span class="o">=</span><span class="n">c</span><span class="o">/</span><span class="n">a</span>
+        <span class="c">#print('Orbital flattening : ',f)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Orbital eccentricity : '</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+        <span class="c">#plt.show()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s">'y'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">facecolors</span><span class="o">=</span><span class="s">'none'</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s">'y'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s">'red'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s">'b'</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">b</span>
+        <span class="n">e</span><span class="o">=</span><span class="n">c</span><span class="o">/</span><span class="n">b</span>
+        <span class="c">#print('Orbital flattening : ',f)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Orbital eccentricity : '</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">return</span>
+
+<span class="n">interactive</span><span class="p">(</span><span class="n">elliptic_orbit</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">b</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">t</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">360</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">continuous_update</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        
+
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea output_widget_view">
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A Jupyter Widget
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>The reason the orbits are ellipses, and not circles, would not be understood until the arrival of Newton’s equations on Gravitation.</p>
+
+<p><strong><em>2. A line joining a planet and the Sun sweeps out equal areas during equal intervals of time.</em></strong></p>
+
+<p><a href="https://commons.wikimedia.org/wiki/File:Kepler-second-law.gif#/media/File:Kepler-second-law.gif"><img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Kepler-second-law.gif" alt="Kepler-second-law.gif" /></a><br />By <a href="https://en.wikipedia.org/wiki/User:Gonfer" class="extiw" title="en:User:Gonfer">Gonfer</a> (<a href="//commons.wikimedia.org/wiki/User_talk:Gonfer" title="User talk:Gonfer">talk</a>) - <a href="https://en.wikipedia.org/wiki/User:Gonfer" class="extiw" title="en:User:Gonfer">Gonfer</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=24871608">Link</a></p>
+
+<p>When Kepler discovered his third law ($p^2 = a^3$), he knew only that it applied to the orbits of planets about the Sun. In fact, it applies to any orbiting object as long as the following two conditions are met:</p>
+
+<ol>
+  <li>The object orbits the Sun or another star of precisely the same mass.</li>
+  <li>We use units of years for the orbital period and AU for the orbital distance. (Newton extended the law to all orbiting objects; see <a href="#CC-7.1">Cosmic Calculations 7.1</a>.)</li>
+</ol>
+
+<p>In other words, these two conditions make the relationship a perfect equality.</p>
+
+<p><strong>Example 1:</strong> The largest asteroid, Ceres, orbits the Sun at an average distance (semimajor axis) of 2.77 AU. What is its orbital period?</p>
+
+<p><strong><em>Solution:</em></strong> Both conditions are met, so we solve Kepler’s third law for the orbital period $p$ and substitute the given orbital distance, $a = 2.77~AU$.</p>
+
+<script type="math/tex; mode=display">p^2 = a^3</script>
+
+<script type="math/tex; mode=display">p = \sqrt{a^3} = \sqrt{2.77^3} \approx 4.6~y</script>
+
+<p>Ceres has an orbital period of 4.6 years.</p>
+
+<p><strong>Example 2:</strong> A planet is discovered orbiting every three months around a star of the same mass as our Sun. What is the planet’s average orbital distance?</p>
+
+<p><strong><em>Solution:</em></strong> The ﬁrst condition is met, and we can satisfy the second by converting the orbital period from months to years: $p = 3$ months = 0.25 year. We now solve Kepler’s third law for the average distance a:</p>
+
+<p>$a = \sqrt[3]{p^2}$</p>
+
+<p>$a = \sqrt[3]{0.25^2} \approx 0.40~AU$</p>
+
+<p>The planet orbits its star at an average distance of $0.40~AU$, which is nearly the same as Mercury’s average distance from the Sun.</p>
+
+<p>These observations offered clear proof that Earth is not the center of everything.* Although we now recognize that Galileo won the day, the story was more complex in his own time, when Catholic Church doctrine still held Earth to be the center of the universe. On June 22, 1633, Galileo was brought before a Church inquisition in Rome and ordered to recant his claim that Earth orbits the Sun. Nearly 70 years old and fearing for his life, Galileo did as ordered and his life was spared. However, legend has it that as he rose from his knees, he whispered under his breath, Eppur si muove— Italian for “And yet it moves.” (Given the likely consequences if Church ofﬁcials had heard him say this, most historians doubt the legend.) The Church did not formally vindicate Galileo until 1992, but the Church had given up the argument long before that. Today, Catholic scientists are at the forefront of much astronomical research, and ofﬁcial Church teachings are compatible not only with Earth’s planetary status but also with the theories of the Big Bang and the subsequent evolution of the cosmos and of life.</p>
+
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="750" height="400"><param name="movie" value="KeplerFirstLaw.swf" /><!--[if !IE]>--><object type="application/x-shockwave-flash" data="KeplerFirstLaw.swf" width="750" height="400"><!--<![endif]--><p>flash animation</p><!--[if !IE]>--></object><!--<![endif]--></object>
+
+<p><a href="#top-title">Go back to the top of the page</a></p>
 
 
               <nav class="c-page__nav">
   
     
-    <a id="js-page__nav__prev" class="c-page__nav__prev" href="">
-      〈 <span class="u-margin-right-tiny"></span> 
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/01/2/the-ways-of-science.html">
+      〈 <span class="u-margin-right-tiny"></span> The-ways-of-science
     </a>
   
 
   
     
-    <a id="js-page__nav__next" class="c-page__nav__next" href="https://github.com/edur409/ASTRO200.git">
-      GitHub repository <span class="u-margin-right-tiny"></span> 〉
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/01/4/distances_in_the_universe.html">
+      Distances In The Universe <span class="u-margin-right-tiny"></span> 〉
     </a>
   
 </nav>
