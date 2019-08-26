@@ -3,7 +3,7 @@ redirect_from:
   - "/01/3/from-ptolemy-to-kepler"
 interact_link: content/01/3/from_ptolemy_to_kepler.ipynb
 kernel_name: python3
-has_widgets: false
+has_widgets: true
 title: 'From Ptolemy To Kepler'
 prev_page:
   url: /01/2/the-ways-of-science.html
@@ -100,7 +100,6 @@ Look for the *perihelion* and *aphelion* of Earth's orbit. From those values, wh
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
-from __future__ import print_function
 from ipywidgets import interact, interactive, fixed, interact_manual
 import ipywidgets as widgets
 
@@ -155,7 +154,7 @@ interactive(elliptic_orbit, a = (0,20,1),b=(0,20,1),t=(0,360,20),continuous_upda
 </div>
 
 <div class="output_wrapper" markdown="1">
-<div class="output_subarea" markdown="1">
+<div class="output_subarea output_widget_view" markdown="1">
 {:.output_data_text}
 ```
 A Jupyter Widget
