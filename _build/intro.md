@@ -8,61 +8,38 @@ next_page:
   title: 'GitHub repository'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
-# ASTRO200 Jupyter Book
+# ASTROBIOLOGY 200
 
-This book is an attempt to organize the content for the students of Astrobiology 200 at 
-The University of Auckland.
+**By KC and ED**
 
-# Books with Jupyter and Jekyll
+This book contains the topics covered in **Astrobiology 200** at [The University of Auckland](https://www.auckland.ac.nz/en.html).  The book is broadly divided in four parts:
 
-<img src="https://circleci.com/gh/jupyter/jupyter-book.svg?style=svg" class="left">
+- **PART I: THE CONTEXT FOR LIFE IN THE UNIVERSE.**
+- **PART II: LIFE ON EARTH.**
+- **PART III: LIFE IN THE SOLAR SYSTEM.**
+- **PART IV: LIFE AMONGST THE STARS.**
 
-Jupyter Books lets you build an online book using a collection of Jupyter Notebooks
-and Markdown files. Its output is similar to the excellent [Bookdown](https://bookdown.org/yihui/bookdown/) tool,
-and adds extra functionality for people running a Jupyter stack.
+**Astrobiology 200** is a stage 2 paper in the School of Environment. The course assumes no background in the sciences, therefore it is designed for anyone interested in *Astrobiology* with high-school level education.
 
-For an example of a book built with Jupyter Books, see the [textbook for Data 100](https://www.textbook.ds100.org/) at UC Berkeley.
+# Textbook and Literature for The Course
 
-Here are a few features of Jupyter Books
+The main book of the course is the 4th edition of ***Life in the Universe*** by Jeffrey Bennett and Seth Shostak. Special readings will be assigned on relevant content as the course progresses.
 
-* All course content is written in markdown and Jupyter Notebooks, stored in `notebooks/`
-* The Jupyter Book repo comes packaged with helper scripts to convert these into Jekyll pages (in `scripts/`) that can be hosted for free on GitHub
-* Pages can have [Binder](https://mybinder.org) or JupyterHub links automatically added for interactivity.
-* The website itself is based on Jekyll, and is highly extensible and can be freely-hosted on GitHub.
-* There are lots of nifty HTML features under-the-hood, such as Turbolinks fast-navigation and
-  click-to-copy in code cells.
+# About this Book
 
-## Getting started
+This book was created using the [Jupyter Book](https://jupyter.org/jupyter-book/intro.html) template. A few features of this book are:
 
-To get started, you may be interested in the following links.
-Here are a few links of interest:
-
-* **[Quickstart](features/features)** is a quick demo and overview of Jupyter Books.
-
-* **[The Jupyter Book Guide](guide/01_overview)**
-  will step you through the process of configuring and building your own Jupyter Book.
-
-* **[The Jupyter Book template repo](https://github.com/jupyter/jupyter-book)** is the template
-  repository you'll use as a start for your Jupyter Book.
-
-* **A demo of the Jupyter Book** can be browsed via the sidebar to the left.
-
-## Installation
-
-Here's a brief rundown of how to create your own Jupyter Book using this site. For a more
-complete guide, see [the Jupyter Book guide](guide/01_overview).
-
-* Fork the Jupyter Book template repo
-* Replace the demo notebooks in `content/` with your own notebooks and markdown files.
-* Create a Table of Contents yaml file by editing `_data/toc.yaml`.
-* Generate the Jekyll markdown for your notebooks by running `scripts/generate_book.py`
-* Push your changes to GitHub (or wherever you host your site)!
+* All course content is written in markdown and Jupyter Notebooks.
+* It is in the form of a website based on Jekyll and hosted for free on GitHub. 
+* You can use Python code.  Some pages have [Binder](https://mybinder.org) or JupyterHub links automatically added for interactivity.
 
 ## Acknowledgements
 
-Jupyter Books was originally created by [Sam Lau][sam] and [Chris Holdgraf][chris]
-with support of the **UC Berkeley Data Science Education Program and the Berkeley
-Institute for Data Science**.
+We are indebted to AC and SG for support with content material for the lectures and valuable advice on how to cover the material.
+
+This book contains free-resources on the net, ranging from Jupyter Notebooks to Flash animations from sources we acknowledge in the corresponding pages. 
+
+We owe this format to [Sam Lau][sam] and [Chris Holdgraf][chris] that created Jupyter Books with support of the **UC Berkeley Data Science Education Program and the Berkeley Institute for Data Science**.
 
 [sam]: http://www.samlau.me/
 [chris]: https://predictablynoisy.com
