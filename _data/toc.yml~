@@ -40,13 +40,13 @@
 - divider: true
 
 # Add a header and sample content section
-- header: ASTRO200 Demo textbook
+- header: ASTRO200 Draft textbook
 # ===== PART I ========================================
 # === Chapter 1 =======================================
 - title: Introduction
-  url: introduction
+  url: 01-introduction
   sections:
-  - title: What-is-astrobiology
+  - title: What is astrobiology?
     url: /01/1/what-is-astrobiology
   - title: The-ways-of-science
     url: /01/2/the-ways-of-science
@@ -62,7 +62,7 @@
 
 # ===== Chapter 2 ========================================
 - title: Scales of the Universe
-  url: scales-in-astronomy
+  url: 02-scales-in-astronomy
   sections:
   - title: Radioactive decay
     url: /02/Radioactivity
@@ -71,7 +71,7 @@
 
 # ===== Chapter 3 ========================================
 - title: Intro to Geology
-  url: intro-to-geology 
+  url: 03-intro-to-geology 
   sections:
   - title: Mineral_Evolution
     url: /03/1/Mineral_Evolution
@@ -80,10 +80,18 @@
 
 # ===== Chapter 4 ========================================
 - title: Earth's Habitability and Climate
-  url: earth's habitability
+  url: 04-earth-habitability
   sections:
   - title: Habitable Zones
-    url: /04/Habitable_Zones
+    url: /04/1/Habitable_Zones
+
+# ===== PART III ========================================
+# ===== Chapter 5 ========================================
+- title: The Biology of Life
+  url: 05-biology-of-life
+  sections:
+  - title: What is Life?
+    url: /05/1/what-is-life
   
 # ===== PART III ========================================
 
