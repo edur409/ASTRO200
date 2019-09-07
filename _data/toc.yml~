@@ -40,7 +40,7 @@
 - divider: true
 
 # Add a header and sample content section
-- header: ASTRO200 Draft textbook
+- header: THE CONTEXT FOR LIFE IN THE UNIVERSE
 # ===== PART I ========================================
 # === Chapter 1 =======================================
 - title: Introduction
@@ -101,8 +101,22 @@
   - title: What is Life?
     url: /06/1/early-earth
   
+- header: LIFE IN THE SOLAR SYSTEM
 # ===== PART III ========================================
+# ===== Chapter 8 ========================================
+- title: Habitability in the Solar System
+  url: 08-habitability-our-system
+  sections:
+  - title: Geology of Mars
+    url: /08/1/early-ancient-mars
 
 
-
+- header: LIFE AMONGST THE STARS
 # ===== PART IV ========================================
+# ===== Chapter 11 ========================================
+- title: SETI and Drake's Equation
+  url: 11-seti-drake
+  sections:
+  - title: Implications of Extraterrestrial Life
+    url: /11/1/implications-ET-life
+
