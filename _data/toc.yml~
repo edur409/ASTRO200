@@ -102,7 +102,7 @@
     url: /06/1/early-earth
 
 # ===== Chapter 7 ========================================
-- title: Life's Limits
+- title: The Origin of Life
   url: 07-origin-of-life
   sections:
   - title: History of Complex Life?
@@ -114,9 +114,22 @@
 - title: Habitability in the Solar System
   url: 08-habitability-our-system
   sections:
-  - title: Geology of Mars
-    url: /08/1/early-ancient-mars
+  - title: Our Sun
+    url: /08/1/sun-and-stars
 
+# ===== Chapter 9 ========================================
+- title: Mars
+  url: 09-geology-of-mars
+  sections:
+  - title: Exploration of Mars
+    url: /09/1/mars-missions
+
+# ===== Chapter 10 ========================================
+- title: The Moons of the Giants
+  url: 10-moons-giants
+  sections:
+  - title: Summary on Habitable Zones
+    url: /10/1/habitable-summary
 
 - header: IV. LIFE AMONGST THE STARS
 # ===== PART IV ========================================
@@ -128,7 +141,7 @@
     url: /11/1/implications-ET-life
 
 # ===== Chapter 12 ========================================
-- title: SETI and Drake's Equation
+- title: Future of Earth
   url: 12-future-of-earth
   sections:
   - title: Planetary Migrations?
