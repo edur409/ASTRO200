@@ -85,13 +85,21 @@
   - title: Habitable Zones
     url: /04/1/Habitable_Zones
 
-# ===== PART III ========================================
+- header: LIFE ON EARTH
+# ===== PART II ========================================
 # ===== Chapter 5 ========================================
 - title: The Biology of Life
   url: 05-biology-of-life
   sections:
   - title: What is Life?
     url: /05/1/what-is-life
+
+# ===== Chapter 6 ========================================
+- title: Life's Limits
+  url: 06-life-limits
+  sections:
+  - title: What is Life?
+    url: /06/1/early-earth
   
 # ===== PART III ========================================
 
