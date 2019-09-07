@@ -100,6 +100,13 @@
   sections:
   - title: What is Life?
     url: /06/1/early-earth
+
+# ===== Chapter 7 ========================================
+- title: Life's Limits
+  url: 07-origin-of-life
+  sections:
+  - title: History of Complex Life?
+    url: /07/1/complex-life
   
 - header: III. LIFE IN THE SOLAR SYSTEM
 # ===== PART III ========================================
@@ -119,4 +126,11 @@
   sections:
   - title: Implications of Extraterrestrial Life
     url: /11/1/implications-ET-life
+
+# ===== Chapter 12 ========================================
+- title: SETI and Drake's Equation
+  url: 12-future-of-earth
+  sections:
+  - title: Planetary Migrations?
+    url: /12/1/planetary-migration
 

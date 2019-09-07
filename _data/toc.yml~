@@ -40,7 +40,7 @@
 - divider: true
 
 # Add a header and sample content section
-- header: THE CONTEXT FOR LIFE IN THE UNIVERSE
+- header: I. THE CONTEXT FOR LIFE IN THE UNIVERSE
 # ===== PART I ========================================
 # === Chapter 1 =======================================
 - title: Introduction
@@ -85,7 +85,7 @@
   - title: Habitable Zones
     url: /04/1/Habitable_Zones
 
-- header: LIFE ON EARTH
+- header: II. LIFE ON EARTH
 # ===== PART II ========================================
 # ===== Chapter 5 ========================================
 - title: The Biology of Life
@@ -100,8 +100,15 @@
   sections:
   - title: What is Life?
     url: /06/1/early-earth
+
+# ===== Chapter 7 ========================================
+- title: Life's Limits
+  url: 07-origin-of-life
+  sections:
+  - title: History of Complex Life?
+    url: /07/1/complex-life
   
-- header: LIFE IN THE SOLAR SYSTEM
+- header: III. LIFE IN THE SOLAR SYSTEM
 # ===== PART III ========================================
 # ===== Chapter 8 ========================================
 - title: Habitability in the Solar System
@@ -111,7 +118,7 @@
     url: /08/1/early-ancient-mars
 
 
-- header: LIFE AMONGST THE STARS
+- header: IV. LIFE AMONGST THE STARS
 # ===== PART IV ========================================
 # ===== Chapter 11 ========================================
 - title: SETI and Drake's Equation
