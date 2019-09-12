@@ -19,7 +19,7 @@ This book contains the topics covered in **Astrobiology 200** at [The University
 - **PART III: LIFE IN THE SOLAR SYSTEM.**
 - **PART IV: LIFE AMONGST THE STARS.**
 
-**Astrobiology 200** is a stage 2 paper in the School of Environment. The course assumes no background in the sciences, therefore it is designed for anyone interested in *Astrobiology* with high-school level education.
+**Astrobiology 200** is a stage 2 paper in the [School of Environment](http://www.env.auckland.ac.nz/en.html). The course assumes no background in the sciences, therefore it is designed for anyone interested in *Astrobiology* with high-school level education.
 
 # Textbook and Literature for The Course
 
