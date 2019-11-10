@@ -66,7 +66,7 @@
   sections:
   - title: Radioactive decay
     url: /02/Radioactivity
-  - title: Dopple Shift
+  - title: Doppler Shift
     url: /02/DopplerShift
 
 # ===== Chapter 3 ========================================
@@ -107,6 +107,8 @@
   sections:
   - title: History of Complex Life?
     url: /07/1/complex-life
+  - title: RNA World
+    url: /07/2/RNA World
   
 - header: III. LIFE IN THE SOLAR SYSTEM
 # ===== PART III ========================================
@@ -126,7 +128,7 @@
 
 # ===== Chapter 10 ========================================
 - title: The Moons of the Giants
-  url: 10-moons-giants
+  url: 10-moons-of-giants
   sections:
   - title: Summary on Habitable Zones
     url: /10/1/habitable-summary
