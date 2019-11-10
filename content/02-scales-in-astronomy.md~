@@ -28,6 +28,7 @@ Leavitt studied one type of stars known as Cepheid Variables.  These stars chang
 > ''Since the variables are probably at nearly the same distance from the Earth, their periods are apparently associated with their actual emission of light''
 
 **Table of Leavitt on the 25 Cepheid Variables.** 
+
 |  H.  | Max. | Min. | Epoch. | Period. | Res. M. | Res. m. |
 |:----:|:----:|:----:|:------:|:-------:|:-------:|:-------:|
 | 1505 | 14.8 | 16.1 |  0.02  | 1.25336 |   -0.6  |   -0.5  |
