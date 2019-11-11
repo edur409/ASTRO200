@@ -6,8 +6,8 @@ prev_page:
   url: /05/1/what-is-life.html
   title: 'What is Life?'
 next_page:
-  url: /06-life-limits.html
-  title: 'Life's Limits'
+  url: /05/2/subsection/A_diffraction_experiment.html
+  title: 'A Diffraction Experiment'
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
 Biology's Jewel: The Double Helix
