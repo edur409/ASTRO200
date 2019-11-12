@@ -138,9 +138,29 @@ plt.show()
 
 
 
+# The Diffraction Model
+
+In order to understand the variables involved in the diffraction please answer the following questions. 
+
+## Questions:
+
+1) Change the distance to the background wall.  Describe what happens
+2) What is the effect of changing the width of the hair?
+
+
+
 <div markdown="1" class="cell code_cell">
-<div class="input_area" markdown="1">
+<div class="input_area hidecode" markdown="1">
 ```python
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+from ipywidgets import interact, interactive, fixed, interact_manual
+import ipywidgets as widgets
+# Set default font size for plots:
+font = {'size'   : 20}
+plt.rc('font',**font)
+
 def hair_diffrac(slitWidth,wavelength,distance):
     '''
     slitWidth  = float(input("slitWidth: ")) #2500          # 2.5mm
@@ -191,7 +211,7 @@ interactive(hair_diffrac, slitWidth = (20,80,20),wavelength=(630,670,10),distanc
 <div class="output_subarea" markdown="1">
 {:.output_data_text}
 ```
-interactive(children=(IntSlider(value=40, description='slitWidth', max=80, min=20, step=20), IntSlider(value=6…
+A Jupyter Widget
 ```
 
 </div>
