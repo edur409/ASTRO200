@@ -1,0 +1,239 @@
+---
+redirect_from:
+  - "/01/3/from-ptolemy-to-kepler"
+interact_link: content/01/3/from_ptolemy_to_kepler.ipynb
+kernel_name: python3
+has_widgets: true
+title: |-
+  From Ptolemy To Kepler
+prev_page:
+  url: /01/2/the-ways-of-science.html
+  title: |-
+    The-ways-of-science
+next_page:
+  url: /01/4/distances_in_the_universe.html
+  title: |-
+    Distances In The Universe
+suffix: .ipynb
+
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
+
+    <main class="jupyter-page">
+    
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">HTML</span>
+
+<span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;&lt;script&gt;</span>
+<span class="s1">code_show=true; </span>
+<span class="s1">function code_toggle() {</span>
+<span class="s1"> if (code_show){</span>
+<span class="s1"> $(&#39;div.input&#39;).hide();</span>
+<span class="s1"> } else {</span>
+<span class="s1"> $(&#39;div.input&#39;).show();</span>
+<span class="s1"> }</span>
+<span class="s1"> code_show = !code_show</span>
+<span class="s1">} </span>
+<span class="s1">$( document ).ready(code_toggle);</span>
+<span class="s1">&lt;/script&gt;</span>
+<span class="s1">The raw code for this IPython notebook is by default hidden for easier reading.</span>
+<span class="s1">To toggle on/off the raw code, click &lt;a href=&quot;javascript:code_toggle()&quot;&gt;here&lt;/a&gt;.&#39;&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<script>
+code_show=true; 
+function code_toggle() {
+ if (code_show){
+ $('div.input').hide();
+ } else {
+ $('div.input').show();
+ }
+ code_show = !code_show
+} 
+$( document ).ready(code_toggle);
+</script>
+The raw code for this IPython notebook is by default hidden for easier reading.
+To toggle on/off the raw code, click <a href="javascript:code_toggle()">here</a>.
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id="top-title"></a></p>
+<h1 id="From-Ptolemy-to-Kepler">From Ptolemy to Kepler<a class="anchor-link" href="#From-Ptolemy-to-Kepler"> </a></h1><p>Ptolemy, Copernicus, Brahe, Kepler</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id="CC-2.1"></a></p>
+<h1 id="Cosmic-Calculations-2.1:-Kepler&#8217;s-Third-Law">Cosmic Calculations 2.1: Kepler&#8217;s Third Law<a class="anchor-link" href="#Cosmic-Calculations-2.1:-Kepler&#8217;s-Third-Law"> </a></h1><p>First, let's review the three laws discovered by Kepler from the careful measurements of <a href="https://physicsworld.com/a/kepler-and-tycho-brahe-the-odd-couple/">Tycho Brache</a>.  This is one of the most ineteresting stories of scientific collaboration that transformed years of observations into laws about the universe.  I recommend to read/watch <a href="https://www.youtube.com/watch?v=j3mhkYbznBk"><strong><em>The Character of Physical Law</em></strong></a> by Richard Feynman if you want to indulge in the details.</p>
+<p><a href="https://commons.wikimedia.org/wiki/File:Tycho-Kepler-Statue-Prague.jpg#/media/File:Tycho-Kepler-Statue-Prague.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Tycho-Kepler-Statue-Prague.jpg" alt="Tycho-Kepler-Statue-Prague.jpg" width="360" height="480"></a><br>By <a href="https://en.wikipedia.org/wiki/hu:User:Both_El%C5%91d" class="extiw" title="w:hu:User:Both Előd">Both Előd</a> at <a href="https://en.wikipedia.org/wiki/hu:" class="extiw" title="w:hu:">Hungarian Wikipedia</a>, <a href="https://creativecommons.org/licenses/by-sa/2.5" title="Creative Commons Attribution-Share Alike 2.5">CC BY-SA 2.5</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=47229075">Link</a></p><h2 id="Kepler's-laws:">Kepler's laws:<a class="anchor-link" href="#Kepler's-laws:"> </a></h2><p><strong><em>1. The orbit of every planet is an ellipse with the Sun at one of the two foci.</em></strong></p>
+<p>In the figure below, you can imagine the yellow dot as the sun, and a planet would be moving on the blue curve a certain distance away from it.  The elliptical orbit can be described by the semi-major and semi-minor axes, which define the eccentricity of the orbit.</p>
+<p>Look for the <em>perihelion</em> and <em>aphelion</em> of Earth's orbit. From those values, what's the flattening of Earth's orbit and its eccentricity?</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell tag_interactive">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="k">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">fixed</span><span class="p">,</span> <span class="n">interact_manual</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+
+<span class="c1"># Set default font size for plots:</span>
+<span class="n">font</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;size&#39;</span>   <span class="p">:</span> <span class="mi">18</span><span class="p">}</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span><span class="o">**</span><span class="n">font</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">elliptic_orbit</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Plot an elliptical orbit and see the radial distance from one focal point</span>
+<span class="sd">    a= semi-major axis</span>
+<span class="sd">    b=semi-minor axis</span>
+<span class="sd">    t=location at an angle between 0 and 360&#39;&#39;&#39;</span>
+    <span class="n">p</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">360</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> 
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="s1">&#39;Ellipse2&#39;</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1">#t is the angle varying from 0 to 360 degrees</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">)</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">)</span>
+    <span class="c1">#Conditionals in case of changing length of largest semi-major axis</span>
+    <span class="k">if</span> <span class="n">a</span><span class="o">&gt;=</span><span class="n">b</span><span class="p">:</span>
+        <span class="n">c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">facecolors</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">X</span><span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">=</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">a</span>
+        <span class="n">e</span><span class="o">=</span><span class="n">c</span><span class="o">/</span><span class="n">a</span>
+        <span class="c1">#print(&#39;Orbital flattening : &#39;,f)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Orbital eccentricity : &#39;</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+        <span class="c1">#plt.show()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">facecolors</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">b</span>
+        <span class="n">e</span><span class="o">=</span><span class="n">c</span><span class="o">/</span><span class="n">b</span>
+        <span class="c1">#print(&#39;Orbital flattening : &#39;,f)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Orbital eccentricity : &#39;</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">return</span>
+
+<span class="n">interactive</span><span class="p">(</span><span class="n">elliptic_orbit</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">b</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">t</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">360</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">continuous_update</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper output_widget_view  }}">
+<div class="output_area">
+
+
+
+
+ 
+ 
+<div id="c2f18b0b-2be6-49f0-9960-4217a68e27df"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#c2f18b0b-2be6-49f0-9960-4217a68e27df');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "717f13d1e26a41e493e8b619f48435eb", "version_major": 2, "version_minor": 0}
+</script>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The reason the orbits are ellipses, and not circles, would not be understood until the arrival of Newton's equations on Gravitation.</p>
+<p><strong><em>2. A line joining a planet and the Sun sweeps out equal areas during equal intervals of time.</em></strong></p>
+<p><a href="https://commons.wikimedia.org/wiki/File:Kepler-second-law.gif#/media/File:Kepler-second-law.gif"><img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Kepler-second-law.gif" alt="Kepler-second-law.gif"></a><br>By <a href="https://en.wikipedia.org/wiki/User:Gonfer" class="extiw" title="en:User:Gonfer">Gonfer</a> (<a href="//commons.wikimedia.org/wiki/User_talk:Gonfer" title="User talk:Gonfer">talk</a>) - <a href="https://en.wikipedia.org/wiki/User:Gonfer" class="extiw" title="en:User:Gonfer">Gonfer</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=24871608">Link</a></p><p>When Kepler discovered his third law ($p^2 = a^3$), he knew only that it applied to the orbits of planets about the Sun. In fact, it applies to any orbiting object as long as the following two conditions are met:</p>
+<ol>
+<li>The object orbits the Sun or another star of precisely the same mass. </li>
+<li>We use units of years for the orbital period and AU for the orbital distance. (Newton extended the law to all orbiting objects; see <a href="#CC-7.1">Cosmic Calculations 7.1</a>.) </li>
+</ol>
+<p>In other words, these two conditions make the relationship a perfect equality.</p>
+<p><strong>Example 1:</strong> The largest asteroid, Ceres, orbits the Sun at an average distance (semimajor axis) of 2.77 AU. What is its orbital period?</p>
+<p><strong><em>Solution:</em></strong> Both conditions are met, so we solve Kepler’s third law for the orbital period $p$ and substitute the given orbital distance, $a = 2.77~AU$.</p>
+<p>$$p^2 = a^3$$</p>
+<p>$$ p = \sqrt{a^3} = \sqrt{2.77^3} \approx 4.6~y$$</p>
+<p>Ceres has an orbital period of 4.6 years.</p>
+<p><strong>Example 2:</strong> A planet is discovered orbiting every three months around a star of the same mass as our Sun. What is the planet’s average orbital distance?</p>
+<p><strong><em>Solution:</em></strong> The ﬁrst condition is met, and we can satisfy the second by converting the orbital period from months to years: $p = 3$ months = 0.25 year. We now solve Kepler’s third law for the average distance a:</p>
+<p>$a = \sqrt[3]{p^2}$</p>
+<p>$a = \sqrt[3]{0.25^2} \approx 0.40~AU$</p>
+<p>The planet orbits its star at an average distance of $0.40~AU$, which is nearly the same as Mercury’s average distance from the Sun.</p>
+<p>These observations offered clear proof that Earth is not the center of everything.* Although we now recognize that Galileo won the day, the story was more complex in his own time, when Catholic Church doctrine still held Earth to be the center of the universe. On June 22, 1633, Galileo was brought before a Church inquisition in Rome and ordered to recant his claim that Earth orbits the Sun. Nearly 70 years old and fearing for his life, Galileo did as ordered and his life was spared. However, legend has it that as he rose from his knees, he whispered under his breath, Eppur si muove— Italian for “And yet it moves.” (Given the likely consequences if Church ofﬁcials had heard him say this, most historians doubt the legend.) The Church did not formally vindicate Galileo until 1992, but the Church had given up the argument long before that. Today, Catholic scientists are at the forefront of much astronomical research, and ofﬁcial Church teachings are compatible not only with Earth’s planetary status but also with the theories of the Big Bang and the subsequent evolution of the cosmos and of life.</p>
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="750" height="400"><param name="movie" value="KeplerFirstLaw.swf" /><!--[if !IE]>--><object type="application/x-shockwave-flash" data="KeplerFirstLaw.swf" width="750" height="400"><!--<![endif]--><p>flash animation</p><!--[if !IE]>--></object><!--<![endif]--></object><p><a href="#top-title">Go back to the top of the page</a></p>
+
+</div>
+</div>
+</div>
+</div>
+
+ 
+
+
+    </main>
+    

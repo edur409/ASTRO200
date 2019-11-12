@@ -1,0 +1,1140 @@
+---
+redirect_from:
+  - "/02/dopplershift"
+interact_link: content/02/DopplerShift.ipynb
+kernel_name: python3
+has_widgets: false
+title: |-
+  Doppler Shift
+prev_page:
+  url: /02/Radioactivity.html
+  title: |-
+    Radioactive decay
+next_page:
+  url: /03-intro-to-geology.html
+  title: |-
+    Intro to Geology
+suffix: .ipynb
+
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
+
+    <main class="jupyter-page">
+    
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">HTML</span>
+
+<span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;&lt;script&gt;</span>
+<span class="s1">code_show=true; </span>
+<span class="s1">function code_toggle() {</span>
+<span class="s1"> if (code_show){</span>
+<span class="s1"> $(&#39;div.input&#39;).hide();</span>
+<span class="s1"> } else {</span>
+<span class="s1"> $(&#39;div.input&#39;).show();</span>
+<span class="s1"> }</span>
+<span class="s1"> code_show = !code_show</span>
+<span class="s1">} </span>
+<span class="s1">$( document ).ready(code_toggle);</span>
+<span class="s1">&lt;/script&gt;</span>
+<span class="s1">The raw code for this IPython notebook is by default hidden for easier reading.</span>
+<span class="s1">To toggle on/off the raw code, click &lt;a href=&quot;javascript:code_toggle()&quot;&gt;here&lt;/a&gt;.&#39;&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<script>
+code_show=true; 
+function code_toggle() {
+ if (code_show){
+ $('div.input').hide();
+ } else {
+ $('div.input').show();
+ }
+ code_show = !code_show
+} 
+$( document ).ready(code_toggle);
+</script>
+The raw code for this IPython notebook is by default hidden for easier reading.
+To toggle on/off the raw code, click <a href="javascript:code_toggle()">here</a>.
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Doppler-Shift-Interactive">Doppler Shift Interactive<a class="anchor-link" href="#Doppler-Shift-Interactive"> </a></h1><p>This interactive allows you to see how the spectrum of a star is affected by the presense of another object orbiting it, causing the star to move, and therefore for its lines to shift in wavelength.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Interactive-Figure-1:-Doppler-Shift-versus-Radial-Velocity">Interactive Figure 1: Doppler Shift versus Radial Velocity<a class="anchor-link" href="#Interactive-Figure-1:-Doppler-Shift-versus-Radial-Velocity"> </a></h2><p>This first figure show the spectrum of a hydrogen cloud in space versus the labratory spectrum of hydrogen gas.  The slider on the right hand side lets you adjust the hydrogen cloud's radial veleocity, that is, its speed directly towards, or away from, us.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Author: Samuel Holen</span>
+
+<span class="c1"># Date Created: 11Jun2018</span>
+<span class="c1"># Last Modified: 14Oct2018 by Juan Cabanela</span>
+<span class="c1">#</span>
+<span class="c1"># Hacked on by Andrew Louwagie Gordon to get absorbtion spectrum plotted.</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">bqplot</span> <span class="k">as</span> <span class="nn">bq</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+<span class="kn">import</span> <span class="nn">tempNcolor</span> <span class="k">as</span> <span class="nn">tc</span>
+<span class="kn">import</span> <span class="nn">number_formatting</span> <span class="k">as</span> <span class="nn">e2l</span>
+<span class="kn">import</span> <span class="nn">starlib</span> <span class="k">as</span> <span class="nn">star</span>
+<span class="kn">import</span> <span class="nn">traitlets</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Set up all the function to use in this interactive</span>
+
+<span class="c1"># Tracking where the center of each of the lines is in the spectra_arrays, UPDATE if you redefine the </span>
+<span class="c1"># spectra arrays. - jec 10.13.2018</span>
+<span class="n">d_idx</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">g_idx</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">b_idx</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">a_idx</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="k">def</span> <span class="nf">New_Lambda</span><span class="p">(</span><span class="n">lamda</span><span class="p">,</span> <span class="n">vel</span><span class="p">):</span>
+    <span class="c1"># Updates the wavelength of the observed spectra using non-relativistic Doppler Shift Equation</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="mi">299792458</span>
+    <span class="c1"># Removed the relativistic and replaced with non-relativistic formula. - jec 10.13.2018</span>
+    <span class="c1">#return np.sqrt((1+vel/c)/(1-vel/c))*lamda</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">vel</span><span class="o">/</span><span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">lamda</span>
+
+<span class="k">def</span> <span class="nf">simple_update</span><span class="p">(</span><span class="n">change</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># updates the display of the observed spectral lines and</span>
+    <span class="c1"># changes their color accordingly. Also changes the </span>
+    <span class="c1"># displayed value of the observed wavelength.</span>
+    <span class="n">vel</span> <span class="o">=</span> <span class="n">fig1_vel_slider</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">new_H_spectra</span> <span class="o">=</span> <span class="n">New_Lambda</span><span class="p">(</span><span class="n">H_spectra_array</span><span class="p">,</span> <span class="n">vel</span><span class="p">)</span>
+    <span class="n">hydrogen_line_moving_simple</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">new_H_spectra</span>
+    
+     <span class="c1"># Update the shift in wavelength for the source</span>
+    <span class="n">fig1_dval</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">d_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">H_spectra_array</span><span class="p">[</span><span class="n">d_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">fig1_gval</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">g_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">H_spectra_array</span><span class="p">[</span><span class="n">g_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">fig1_bval</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">b_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">H_spectra_array</span><span class="p">[</span><span class="n">b_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">fig1_aval</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">a_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">H_spectra_array</span><span class="p">[</span><span class="n">a_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    
+    <span class="c1"># Indicate the direction the source is moving relative to earth</span>
+    <span class="n">Vel</span> <span class="o">=</span> <span class="n">e2l</span><span class="o">.</span><span class="n">exp2LaTeX</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">vel</span><span class="o">/</span><span class="mi">1000</span><span class="p">),</span><span class="mi">3</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">vel</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">vel_label</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">Vel</span>
+        <span class="n">direction</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39; (&lt;b&gt;moving away&lt;/b&gt; from us)&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">vel_label</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">Vel</span>
+        <span class="n">direction</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39; (&lt;b&gt;moving toward&lt;/b&gt; us)&#39;</span>
+
+<span class="k">def</span> <span class="nf">simple_reset</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
+    <span class="c1"># Resets the velocity slider to 0 when the reset button is clicked </span>
+    <span class="c1"># Updated to also reset the labels appropriately. - jec 14oct2018</span>
+    <span class="n">fig1_vel_slider</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">direction</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    
+    
+<span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">change</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># updates the display of the observed spectral lines and</span>
+    <span class="c1"># changes their color accordingly. Also changes the </span>
+    <span class="c1"># displayed value of the observed wavelength.</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="mf">6.84</span>
+    
+    <span class="c1"># Update position of stars</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">theta_slider</span><span class="o">.</span><span class="n">value</span><span class="o">*</span><span class="mf">3.6</span>  <span class="c1"># Assume theta_slider in % fraction of orbit</span>
+    <span class="n">phi_step</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
+    <span class="n">bsm</span><span class="o">.</span><span class="n">phi</span> <span class="o">=</span> <span class="n">phi</span>
+
+    <span class="k">global</span> <span class="n">r</span><span class="p">,</span><span class="n">r2</span>
+    <span class="c1"># Velocities to determine shifted wavelengths</span>
+    <span class="k">if</span> <span class="n">planet_star</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;Star&#39;</span><span class="p">:</span>
+        <span class="n">bsm</span><span class="o">.</span><span class="n">mass1</span> <span class="o">=</span> <span class="n">mass1a</span>
+        <span class="n">bsm</span><span class="o">.</span><span class="n">mass2</span> <span class="o">=</span> <span class="n">mass2a</span> 
+        <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">V1</span> <span class="o">=</span> <span class="n">vel1</span><span class="p">[</span><span class="n">phi_step</span><span class="p">]</span>
+        <span class="n">V2</span> <span class="o">=</span> <span class="n">vel2</span><span class="p">[</span><span class="n">phi_step</span><span class="p">]</span>
+        <span class="c1"># update the display for the velocity of each star</span>
+        <span class="n">vel1_label</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">V1</span><span class="p">)</span>
+        <span class="n">vunits1</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;km/s&#39;</span>
+        <span class="n">ax_x</span><span class="o">.</span><span class="n">num_ticks</span> <span class="o">=</span> <span class="mi">12</span>
+        <span class="n">ax_x</span><span class="o">.</span><span class="n">tick_format</span> <span class="o">=</span> <span class="s1">&#39;.1f&#39;</span>
+        <span class="n">vel2_label</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">V2</span><span class="p">)</span>
+        <span class="n">shift</span> <span class="o">=</span> <span class="mf">0.005</span>
+        <span class="c1"># Update the star spectral lines</span>
+        <span class="n">new_H_spectra</span> <span class="o">=</span> <span class="n">New_Lambda</span><span class="p">(</span><span class="n">H_spectra_array</span><span class="p">,</span><span class="n">V1</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="n">new_H_spectra2</span> <span class="o">=</span> <span class="n">New_Lambda</span><span class="p">(</span><span class="n">H_spectra_array</span><span class="p">,</span><span class="n">V2</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="n">star2</span><span class="o">.</span><span class="n">default_size</span> <span class="o">=</span> <span class="mi">60</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">bsm</span><span class="o">.</span><span class="n">mass1</span> <span class="o">=</span> <span class="n">mass1b</span>
+        <span class="n">bsm</span><span class="o">.</span><span class="n">mass2</span> <span class="o">=</span> <span class="n">mass2b</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="n">V1</span> <span class="o">=</span> <span class="n">vel1</span><span class="p">[</span><span class="n">phi_step</span><span class="p">]</span>
+        <span class="n">V2</span> <span class="o">=</span> <span class="n">vel2</span><span class="p">[</span><span class="n">phi_step</span><span class="p">]</span>
+        <span class="n">vel1_label</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">V1</span><span class="p">)</span>
+        <span class="n">vunits1</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;m/s&#39;</span>
+        <span class="n">ax_x</span><span class="o">.</span><span class="n">num_ticks</span> <span class="o">=</span> <span class="mi">4</span>
+        <span class="n">ax_x</span><span class="o">.</span><span class="n">tick_format</span> <span class="o">=</span> <span class="s1">&#39;.5f&#39;</span>
+        <span class="n">vel2_label</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">V2</span><span class="p">)</span>
+        <span class="n">shift</span> <span class="o">=</span> <span class="mf">5e-7</span>
+        <span class="c1"># Update the star spectral lines</span>
+        <span class="n">new_H_spectra</span> <span class="o">=</span> <span class="n">New_Lambda</span><span class="p">(</span><span class="n">H_spectra_array</span><span class="p">,</span><span class="n">V1</span><span class="p">)</span>
+        <span class="n">new_H_spectra2</span> <span class="o">=</span> <span class="n">New_Lambda</span><span class="p">(</span><span class="n">H_spectra_array</span><span class="p">,</span><span class="n">V2</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="n">star2</span><span class="o">.</span><span class="n">default_size</span> <span class="o">=</span> <span class="mi">20</span>
+    
+    <span class="n">d1</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span>
+    <span class="n">k1</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span>
+    <span class="n">star1</span><span class="o">.</span><span class="n">x</span><span class="p">,</span><span class="n">star1</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">d1</span><span class="p">],[</span><span class="n">k1</span><span class="p">]</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="o">-</span><span class="n">r2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="o">-</span><span class="n">r2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span>
+    <span class="n">star2</span><span class="o">.</span><span class="n">x</span><span class="p">,</span><span class="n">star2</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">d2</span><span class="p">],[</span><span class="n">k2</span><span class="p">]</span>
+        
+    <span class="k">if</span> <span class="n">picker</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;entire spectrum&#39;</span><span class="p">:</span>
+        <span class="n">hydrogen_line2</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">new_H_spectra</span>
+        <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">new_H_spectra2</span>
+    <span class="k">elif</span> <span class="n">picker</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;violet&#39;</span><span class="p">:</span>
+        <span class="n">hydrogen_line2</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">shift</span><span class="p">,</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">d_idx</span><span class="p">],</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">d_idx</span><span class="p">]</span><span class="o">+</span><span class="n">shift</span><span class="p">]</span>
+        <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_H_spectra2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">shift</span><span class="p">,</span><span class="n">new_H_spectra2</span><span class="p">[</span><span class="n">d_idx</span><span class="p">],</span><span class="n">new_H_spectra2</span><span class="p">[</span><span class="n">d_idx</span><span class="p">]</span><span class="o">+</span><span class="n">shift</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">picker</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;blue&#39;</span><span class="p">:</span>
+        <span class="n">hydrogen_line2</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">-</span><span class="n">shift</span><span class="p">,</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">g_idx</span><span class="p">],</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">g_idx</span><span class="p">]</span><span class="o">+</span><span class="n">shift</span><span class="p">]</span>
+        <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_H_spectra2</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">-</span><span class="n">shift</span><span class="p">,</span><span class="n">new_H_spectra2</span><span class="p">[</span><span class="n">g_idx</span><span class="p">],</span><span class="n">new_H_spectra2</span><span class="p">[</span><span class="n">g_idx</span><span class="p">]</span><span class="o">+</span><span class="n">shift</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">picker</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;cyan&#39;</span><span class="p">:</span>
+        <span class="n">hydrogen_line2</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">-</span><span class="n">shift</span><span class="p">,</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">b_idx</span><span class="p">],</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">b_idx</span><span class="p">]</span><span class="o">+</span><span class="n">shift</span><span class="p">]</span>
+        <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_H_spectra2</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">-</span><span class="n">shift</span><span class="p">,</span><span class="n">new_H_spectra2</span><span class="p">[</span><span class="n">b_idx</span><span class="p">],</span><span class="n">new_H_spectra2</span><span class="p">[</span><span class="n">b_idx</span><span class="p">]</span><span class="o">+</span><span class="n">shift</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">hydrogen_line2</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">-</span><span class="n">shift</span><span class="p">,</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">a_idx</span><span class="p">],</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">a_idx</span><span class="p">]</span><span class="o">+</span><span class="n">shift</span><span class="p">]</span>
+        <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_H_spectra2</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">-</span><span class="n">shift</span><span class="p">,</span><span class="n">new_H_spectra2</span><span class="p">[</span><span class="n">a_idx</span><span class="p">],</span><span class="n">new_H_spectra2</span><span class="p">[</span><span class="n">a_idx</span><span class="p">]</span><span class="o">+</span><span class="n">shift</span><span class="p">]</span>
+
+    <span class="c1"># Update the shift in wavelength for the large (blue) star</span>
+    <span class="k">if</span> <span class="n">planet_star</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;Star&#39;</span><span class="p">:</span>
+        <span class="n">dval1</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">d_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">H_spectra_array</span><span class="p">[</span><span class="n">d_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">gval1</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">g_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">H_spectra_array</span><span class="p">[</span><span class="n">g_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">bval1</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">b_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">H_spectra_array</span><span class="p">[</span><span class="n">b_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">aval1</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">a_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">H_spectra_array</span><span class="p">[</span><span class="n">a_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dval1</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.7f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">d_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">H_spectra_array</span><span class="p">[</span><span class="n">d_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">gval1</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.7f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">g_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">H_spectra_array</span><span class="p">[</span><span class="n">g_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">bval1</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.7f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">b_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">H_spectra_array</span><span class="p">[</span><span class="n">b_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">aval1</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.7f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_H_spectra</span><span class="p">[</span><span class="n">a_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">H_spectra_array</span><span class="p">[</span><span class="n">a_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1"># Update the shift in wavelength for the small (red) star</span>
+    <span class="n">dval2</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_H_spectra2</span><span class="p">[</span><span class="n">d_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">H_spectra_array</span><span class="p">[</span><span class="n">d_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">gval2</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_H_spectra2</span><span class="p">[</span><span class="n">g_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">H_spectra_array</span><span class="p">[</span><span class="n">g_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">bval2</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_H_spectra2</span><span class="p">[</span><span class="n">b_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">H_spectra_array</span><span class="p">[</span><span class="n">b_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">aval2</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_H_spectra2</span><span class="p">[</span><span class="n">a_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">H_spectra_array</span><span class="p">[</span><span class="n">a_idx</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1"># Indicate the direction each star is moving relative to earth</span>
+    <span class="k">if</span> <span class="n">V1</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">direction1</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;moving away&#39;</span>
+        <span class="n">direction2</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;moving toward&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">direction1</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;moving toward&#39;</span>
+        <span class="n">direction2</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;moving away&#39;</span>
+
+<span class="k">def</span> <span class="nf">update_lumen</span><span class="p">(</span><span class="n">change</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># Update the luminosity of the small orbiting star. This is for the </span>
+    <span class="c1"># simulation going to the limit where the orbiting star is actually a planet.</span>
+    <span class="k">if</span> <span class="n">planet_star</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;Star&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Lumen</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">opacities</span> <span class="o">=</span> <span class="p">[</span><span class="n">Lumen</span><span class="o">.</span><span class="n">value</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">Lumen</span><span class="o">.</span><span class="n">value</span><span class="p">,</span><span class="n">Lumen</span><span class="o">.</span><span class="n">value</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span>
+                                        <span class="n">Lumen</span><span class="o">.</span><span class="n">value</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">Lumen</span><span class="o">.</span><span class="n">value</span><span class="p">,</span><span class="n">Lumen</span><span class="o">.</span><span class="n">value</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span>
+                                        <span class="n">Lumen</span><span class="o">.</span><span class="n">value</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">Lumen</span><span class="o">.</span><span class="n">value</span><span class="p">,</span><span class="n">Lumen</span><span class="o">.</span><span class="n">value</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span>
+                                        <span class="n">Lumen</span><span class="o">.</span><span class="n">value</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">Lumen</span><span class="o">.</span><span class="n">value</span><span class="p">,</span><span class="n">Lumen</span><span class="o">.</span><span class="n">value</span><span class="o">-</span><span class="mf">0.5</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">opacities</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span><span class="n">Lumen</span><span class="o">.</span><span class="n">value</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="n">Lumen</span><span class="o">.</span><span class="n">value</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span>
+                                        <span class="mf">0.01</span><span class="p">,</span><span class="n">Lumen</span><span class="o">.</span><span class="n">value</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="n">Lumen</span><span class="o">.</span><span class="n">value</span><span class="p">,</span><span class="mf">0.01</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Lumen</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">opacities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">12</span>
+
+<span class="k">def</span> <span class="nf">update_view</span><span class="p">(</span><span class="n">change</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">y_sc</span><span class="p">,</span><span class="n">ax_y</span>
+    <span class="n">wave</span> <span class="o">=</span> <span class="n">wavelengths</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">lines_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">410.2</span><span class="p">,</span><span class="mf">410.2</span><span class="p">],[</span><span class="mf">410.2</span><span class="p">,</span><span class="mf">410.2</span><span class="p">],[</span><span class="mf">410.2</span><span class="p">,</span><span class="mf">410.2</span><span class="p">],[</span><span class="mf">434.0</span><span class="p">,</span><span class="mf">434.0</span><span class="p">],[</span><span class="mf">434.0</span><span class="p">,</span><span class="mf">434.0</span><span class="p">],[</span><span class="mf">434.0</span><span class="p">,</span><span class="mf">434.0</span><span class="p">],[</span><span class="mf">486.1</span><span class="p">,</span><span class="mf">486.1</span><span class="p">],[</span><span class="mf">486.1</span><span class="p">,</span><span class="mf">486.1</span><span class="p">],[</span><span class="mf">486.1</span><span class="p">,</span><span class="mf">486.1</span><span class="p">],[</span><span class="mf">656.3</span><span class="p">,</span><span class="mf">656.3</span><span class="p">],[</span><span class="mf">656.3</span><span class="p">,</span><span class="mf">656.3</span><span class="p">],[</span><span class="mf">656.3</span><span class="p">,</span><span class="mf">656.3</span><span class="p">]])</span>
+    <span class="k">if</span> <span class="n">planet_star</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;Star&#39;</span><span class="p">:</span>
+        <span class="n">adjust</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.005</span><span class="p">,</span><span class="o">-</span><span class="mf">0.005</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mf">0.005</span><span class="p">,</span><span class="mf">0.005</span><span class="p">]])</span>
+        <span class="n">shift</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">adjust</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">5e-7</span><span class="p">,</span><span class="o">-</span><span class="mf">5e-7</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mf">5e-7</span><span class="p">,</span><span class="mf">5e-7</span><span class="p">]])</span>
+        <span class="n">shift</span> <span class="o">=</span> <span class="mf">5e-5</span>
+        
+    <span class="k">if</span> <span class="n">picker</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;entire spectrum&#39;</span><span class="p">:</span>
+        <span class="n">x_sc</span><span class="o">.</span><span class="n">min</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">))</span>
+        <span class="n">x_sc</span><span class="o">.</span><span class="n">max</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">))</span>
+        <span class="n">ax_x</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">x_sc</span>
+        
+        <span class="c1"># Adjust spectra scales</span>
+        <span class="n">hydrogen_line1</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        <span class="n">hydrogen_line2</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        <span class="n">wide_line</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">axes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ax_x</span><span class="p">,</span><span class="n">ax_y</span><span class="p">]</span>
+        
+        <span class="n">hydrogen_line1</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">H_spectra_array</span>
+        <span class="n">hydrogen_line2</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">H_spectra_array</span>
+        <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">H_spectra_array</span>
+        
+        <span class="n">wide_line</span><span class="o">.</span><span class="n">opacities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">)</span>
+
+        <span class="n">Lab_label</span><span class="o">.</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">580</span><span class="p">,</span><span class="mi">580</span><span class="p">]</span>
+        <span class="n">Lab_label</span><span class="o">.</span><span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">background_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fill&#39;</span> <span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">}</span>
+    <span class="k">elif</span> <span class="n">picker</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;violet&#39;</span><span class="p">:</span>
+        <span class="n">x_sc</span><span class="o">.</span><span class="n">min</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">shift</span>
+        <span class="n">x_sc</span><span class="o">.</span><span class="n">max</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">shift</span>
+        <span class="n">ax_x</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">x_sc</span>
+        <span class="c1"># Adjust spectra scales</span>
+        <span class="n">hydrogen_line1</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        <span class="n">hydrogen_line2</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        <span class="n">wide_line</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        
+        <span class="n">fig</span><span class="o">.</span><span class="n">axes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ax_x</span><span class="p">,</span> <span class="n">ax_y</span><span class="p">]</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">background_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fill&#39;</span> <span class="p">:</span> <span class="n">colors_array</span><span class="p">[</span><span class="n">wave</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">410</span><span class="p">)]}</span>
+        
+        <span class="n">hydrogen_line1</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">adjust</span>
+        <span class="n">hydrogen_line2</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">adjust</span>
+        <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">adjust</span>
+        
+        <span class="n">wide_line</span><span class="o">.</span><span class="n">opacities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">)</span>
+        
+        <span class="n">Lab_label</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">lines_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">shift</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">lines_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">shift</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">Lab_label</span><span class="o">.</span><span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+    <span class="k">elif</span> <span class="n">picker</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;blue&#39;</span><span class="p">:</span>
+        <span class="n">x_sc</span><span class="o">.</span><span class="n">min</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">shift</span>
+        <span class="n">x_sc</span><span class="o">.</span><span class="n">max</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">shift</span>
+        <span class="n">ax_x</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">x_sc</span>
+        <span class="c1"># Adjust spectra scales</span>
+        <span class="n">hydrogen_line1</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        <span class="n">hydrogen_line2</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        <span class="n">wide_line</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        
+        <span class="n">fig</span><span class="o">.</span><span class="n">axes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ax_x</span><span class="p">,</span><span class="n">ax_y</span><span class="p">]</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">background_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fill&#39;</span> <span class="p">:</span> <span class="n">colors_array</span><span class="p">[</span><span class="n">wave</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">432</span><span class="p">)]}</span>
+        
+        <span class="n">hydrogen_line1</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span> <span class="o">+</span> <span class="n">adjust</span>
+        <span class="n">hydrogen_line2</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span> <span class="o">+</span> <span class="n">adjust</span>
+        <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span> <span class="o">+</span> <span class="n">adjust</span>
+        
+        <span class="n">wide_line</span><span class="o">.</span><span class="n">opacities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">)</span>
+        
+        <span class="n">Lab_label</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">lines_arr</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">shift</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">lines_arr</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">shift</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">Lab_label</span><span class="o">.</span><span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+    <span class="k">elif</span> <span class="n">picker</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;cyan&#39;</span><span class="p">:</span>
+        <span class="n">x_sc</span><span class="o">.</span><span class="n">min</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">shift</span>
+        <span class="n">x_sc</span><span class="o">.</span><span class="n">max</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">shift</span>
+        <span class="n">ax_x</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">x_sc</span>
+        <span class="c1"># Adjust spectra scales</span>
+        <span class="n">hydrogen_line1</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        <span class="n">hydrogen_line2</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        <span class="n">wide_line</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        
+        <span class="n">fig</span><span class="o">.</span><span class="n">axes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ax_x</span><span class="p">,</span><span class="n">ax_y</span><span class="p">]</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">background_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fill&#39;</span> <span class="p">:</span> <span class="n">colors_array</span><span class="p">[</span><span class="n">wave</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">485</span><span class="p">)]}</span>
+        
+        <span class="n">hydrogen_line1</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span> <span class="o">+</span> <span class="n">adjust</span>
+        <span class="n">hydrogen_line2</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span> <span class="o">+</span> <span class="n">adjust</span>
+        <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span> <span class="o">+</span> <span class="n">adjust</span>
+        
+        <span class="n">wide_line</span><span class="o">.</span><span class="n">opacities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">)</span>
+        
+        <span class="n">Lab_label</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">lines_arr</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">shift</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">lines_arr</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">shift</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">Lab_label</span><span class="o">.</span><span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x_sc</span><span class="o">.</span><span class="n">min</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">shift</span>
+        <span class="n">x_sc</span><span class="o">.</span><span class="n">max</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">shift</span>
+        <span class="n">ax_x</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">x_sc</span>
+        
+        <span class="c1"># Adjust spectra scales</span>
+        <span class="n">hydrogen_line1</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        <span class="n">hydrogen_line2</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        <span class="n">wide_line</span><span class="o">.</span><span class="n">scales</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        
+        <span class="n">fig</span><span class="o">.</span><span class="n">axes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ax_x</span><span class="p">,</span><span class="n">ax_y</span><span class="p">]</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">background_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fill&#39;</span> <span class="p">:</span> <span class="n">colors_array</span><span class="p">[</span><span class="n">wave</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">656</span><span class="p">)]}</span>
+        
+        <span class="n">hydrogen_line1</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">12</span><span class="p">]</span> <span class="o">+</span> <span class="n">adjust</span>
+        <span class="n">hydrogen_line2</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">12</span><span class="p">]</span> <span class="o">+</span> <span class="n">adjust</span>
+        <span class="n">hydrogen_line3</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">lines_arr</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">12</span><span class="p">]</span> <span class="o">+</span> <span class="n">adjust</span>
+        
+        <span class="n">wide_line</span><span class="o">.</span><span class="n">opacities</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">)</span>
+        
+        <span class="n">Lab_label</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">lines_arr</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">shift</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">lines_arr</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">shift</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">Lab_label</span><span class="o">.</span><span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">}</span>
+        
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Creates an array of the visible light wavelengths</span>
+<span class="n">wavelengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">700</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Makes an array to plot vertical lines for each of the spectral lines</span>
+<span class="n">H_spectra_list</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">409.2</span><span class="p">,</span><span class="mf">409.2</span><span class="p">],[</span><span class="mf">410.2</span><span class="p">,</span><span class="mf">410.2</span><span class="p">],[</span><span class="mf">411.2</span><span class="p">,</span><span class="mf">411.2</span><span class="p">],[</span><span class="mf">433.0</span><span class="p">,</span><span class="mf">433.0</span><span class="p">],[</span><span class="mf">434.0</span><span class="p">,</span><span class="mf">434.0</span><span class="p">],[</span><span class="mf">435.0</span><span class="p">,</span><span class="mf">435.0</span><span class="p">],[</span><span class="mf">485.1</span><span class="p">,</span><span class="mf">485.1</span><span class="p">],[</span><span class="mf">486.1</span><span class="p">,</span><span class="mf">486.1</span><span class="p">],[</span><span class="mf">487.1</span><span class="p">,</span><span class="mf">487.1</span><span class="p">],[</span><span class="mf">655.3</span><span class="p">,</span><span class="mf">655.3</span><span class="p">],[</span><span class="mf">656.3</span><span class="p">,</span><span class="mf">656.3</span><span class="p">],[</span><span class="mf">657.3</span><span class="p">,</span><span class="mf">657.3</span><span class="p">]]</span>
+
+<span class="c1">#H_spec_list2</span>
+<span class="n">H_spectra_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">H_spectra_list</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##</span>
+<span class="c1">## Set up some material for both figures</span>
+<span class="c1">##</span>
+
+<span class="c1">## Set up some widths here</span>
+<span class="n">speed_label_width</span> <span class="o">=</span> <span class="s1">&#39;300px&#39;</span>
+<span class="n">longspeed_label_width</span> <span class="o">=</span> <span class="s1">&#39;400px&#39;</span>
+<span class="n">vel_value_width</span> <span class="o">=</span> <span class="s1">&#39;60px&#39;</span>
+<span class="n">longvel_value_width</span> <span class="o">=</span> <span class="s1">&#39;150px&#39;</span>
+<span class="n">label_width</span> <span class="o">=</span> <span class="s1">&#39;240px&#39;</span>
+<span class="n">direction_width</span> <span class="o">=</span> <span class="s1">&#39;170px&#39;</span>
+<span class="n">longdirection_width</span> <span class="o">=</span> <span class="s1">&#39;300px&#39;</span>
+<span class="n">line_height</span><span class="o">=</span><span class="s1">&#39;35px&#39;</span>
+<span class="n">box_width</span> <span class="o">=</span> <span class="s1">&#39;450px&#39;</span>
+<span class="n">value_width</span> <span class="o">=</span> <span class="s1">&#39;100px&#39;</span>
+
+<span class="c1"># Creates label widgets to display the observed wavelengths of each</span>
+<span class="c1"># of the &#39;shifted&#39; spectral lines. (Both Figures 1 and 2)</span>
+<span class="n">shift_label1</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;&lt;b&gt;H&amp;delta; (410.2 nm):&lt;/b&gt;&#39;</span><span class="p">)</span>
+<span class="n">shift_label2</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;&lt;b&gt;H&amp;gamma; (434.0 nm):&lt;/b&gt;&#39;</span><span class="p">)</span>
+<span class="n">shift_label3</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;&lt;b&gt;H&amp;beta; (486.1 nm):&lt;/b&gt;&#39;</span><span class="p">)</span>
+<span class="n">shift_label4</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;&lt;b&gt;H&amp;alpha; (656.3 nm):&lt;/b&gt;&#39;</span><span class="p">)</span>
+<span class="n">shift_label1</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">label_width</span>
+<span class="n">shift_label2</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">label_width</span>
+<span class="n">shift_label3</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">label_width</span>
+<span class="n">shift_label4</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">label_width</span>
+
+<span class="n">shift_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;Shift:&amp;nbsp;&#39;</span><span class="p">)</span>
+<span class="n">shift_text_width</span> <span class="o">=</span> <span class="s1">&#39;50px&#39;</span>
+<span class="n">shift_label</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">shift_text_width</span>
+
+<span class="n">units</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;nm&#39;</span><span class="p">)</span>
+<span class="n">unit_text_width</span> <span class="o">=</span> <span class="s1">&#39;30px&#39;</span>
+<span class="n">units</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">unit_text_width</span>
+
+<span class="c1">## Create spectral lines display for both figures</span>
+<span class="c1"># Axes for spectra</span>
+<span class="c1"># Set the scales</span>
+<span class="n">x_sc_fig1</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">LinearScale</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">)),</span> <span class="nb">max</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">)))</span>
+<span class="n">y_sc_fig1</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">LinearScale</span><span class="p">()</span>
+<span class="n">x_sc</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">LinearScale</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">)),</span> <span class="nb">max</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">)))</span>
+<span class="n">y_sc</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">LinearScale</span><span class="p">()</span>
+
+<span class="c1"># Define the axes</span>
+<span class="n">ax_x_fig1</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Wavelength (nm)&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">x_sc_fig1</span><span class="p">,</span> <span class="n">grid_lines</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">num_ticks</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax_y_fig1</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">y_sc_fig1</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">,</span> <span class="n">grid_lines</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">num_ticks</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ax_x</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Wavelength (nm)&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">x_sc</span><span class="p">,</span> <span class="n">grid_lines</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">num_ticks</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax_y</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">y_sc</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">,</span> <span class="n">grid_lines</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">num_ticks</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Arrays for the spectral lines. one for the stars (0.5 to 1) and one for </span>
+<span class="c1"># laboratory measurements (0 to 0.5).</span>
+<span class="n">height1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">]])</span>
+<span class="n">height2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.0</span><span class="p">],[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.0</span><span class="p">],[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.0</span><span class="p">],[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.0</span><span class="p">],[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.0</span><span class="p">],[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.0</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.0</span><span class="p">],[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.0</span><span class="p">],[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.0</span><span class="p">],[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.0</span><span class="p">],[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.0</span><span class="p">],[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.0</span><span class="p">],[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.0</span><span class="p">],[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.0</span><span class="p">]])</span>
+
+<span class="c1"># This code define the colors to be plotted and </span>
+<span class="c1"># which wavelengths they are plotted at, uses hexidecimal designation</span>
+<span class="n">colors_array</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">wav2hex</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">)</span>
+<span class="n">colors_list</span> <span class="o">=</span> <span class="n">colors_array</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="c1"># The curve for this figure is created by drawing a bunch of vertical lines that </span>
+<span class="c1"># go from zero to the blackbody curve, these </span>
+<span class="c1">#     arrays provide the proper pairs of points that define each individual line</span>
+<span class="n">x_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">wavelengths</span><span class="p">])</span>
+<span class="n">fin_x_array</span> <span class="o">=</span> <span class="n">x_array</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span> <span class="c1"># Arrays must be transposed to get pairs of numbers</span>
+<span class="n">y_zeros</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">)</span>
+<span class="n">y_ones</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">)</span>
+<span class="n">y_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">y_zeros</span><span class="p">,</span> <span class="n">y_ones</span><span class="p">])</span>
+<span class="n">fin_y_array</span> <span class="o">=</span> <span class="n">y_array</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span> <span class="c1"># Arrays must be transposed to get pairs of numbers</span>
+
+<span class="c1"># Create the spectral lines</span>
+<span class="c1"># Lab Spectra for Figure 1</span>
+<span class="n">hydrogen_line_lab_simple</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Lines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">H_spectra_array</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">height1</span><span class="p">,</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc_fig1</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc_fig1</span><span class="p">},</span> 
+                          <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;black&#39;</span><span class="p">]</span> <span class="p">,</span><span class="n">opacities</span><span class="o">=</span><span class="p">[</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">])</span>
+<span class="c1"># Star for Figure 1</span>
+<span class="n">hydrogen_line_moving_simple</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Lines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">H_spectra_array</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">height2</span><span class="p">,</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc_fig1</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc_fig1</span><span class="p">},</span> 
+                          <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;black&#39;</span><span class="p">]</span> <span class="p">,</span><span class="n">opacities</span><span class="o">=</span><span class="p">[</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="c1"># Lab Spectra for Figure 2</span>
+<span class="n">hydrogen_line1</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Lines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">H_spectra_array</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">height1</span><span class="p">,</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">},</span> 
+                          <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;black&#39;</span><span class="p">]</span> <span class="p">,</span><span class="n">opacities</span><span class="o">=</span><span class="p">[</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">])</span>
+<span class="c1"># Large star (blue) for Figure 2</span>
+<span class="n">hydrogen_line2</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Lines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">H_spectra_array</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">height2</span><span class="p">,</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">},</span> 
+                          <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;black&#39;</span><span class="p">]</span> <span class="p">,</span><span class="n">opacities</span><span class="o">=</span><span class="p">[</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">])</span>
+<span class="c1"># Small star (red) for Figure 2</span>
+<span class="n">hydrogen_line3</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Lines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">H_spectra_array</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">height2</span><span class="p">,</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">},</span> 
+                          <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#303030&#39;</span><span class="p">]</span> <span class="p">,</span><span class="n">opacities</span><span class="o">=</span><span class="p">[</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span><span class="o">.</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="c1"># This is the line command that draws all the lines</span>
+<span class="n">fig1_wide_line</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Lines</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">fin_x_array</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">fin_y_array</span><span class="p">,</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc_fig1</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc_fig1</span><span class="p">},</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors_list</span><span class="p">)</span>
+<span class="n">wide_line</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Lines</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">fin_x_array</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">fin_y_array</span><span class="p">,</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">},</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors_list</span><span class="p">)</span>
+
+<span class="c1"># Labels the lab and source spectra on the figure</span>
+<span class="n">fig1_Lab_label</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">580</span><span class="p">,</span><span class="mi">580</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.8</span><span class="p">],</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc_fig1</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc_fig1</span><span class="p">},</span>
+                   <span class="n">text</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Laboratory Spectrum&#39;</span><span class="p">,</span><span class="s1">&#39;Source Spectrum&#39;</span><span class="p">],</span> <span class="n">default_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bolder&#39;</span><span class="p">,</span>
+                   <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;black&#39;</span><span class="p">],</span> <span class="n">update_on_move</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;middle&#39;</span><span class="p">)</span>
+<span class="n">Lab_label</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">580</span><span class="p">,</span><span class="mi">580</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.8</span><span class="p">],</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x_sc</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y_sc</span><span class="p">},</span>
+                   <span class="n">text</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Laboratory Spectrum&#39;</span><span class="p">,</span><span class="s1">&#39;Source Spectrum&#39;</span><span class="p">],</span> <span class="n">default_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bolder&#39;</span><span class="p">,</span>
+                   <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;black&#39;</span><span class="p">],</span> <span class="n">update_on_move</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;middle&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##</span>
+<span class="c1">## Setup Figure 1</span>
+<span class="c1">##</span>
+
+<span class="c1"># Slider to adjust velocity (away or towards Earth) of the star in question</span>
+<span class="n">fig1_vel_slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="nb">min</span><span class="o">=-</span><span class="mf">5e6</span><span class="p">,</span>
+    <span class="nb">max</span><span class="o">=</span><span class="mf">5e6</span><span class="p">,</span>
+    <span class="n">step</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">continuous_update</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span>
+    <span class="n">readout</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;340px&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1"># Reset button</span>
+<span class="n">fig1_reset</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Reset&#39;</span><span class="p">)</span>
+
+<span class="c1"># Figure 1 shifts</span>
+<span class="n">fig1_dval</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="n">fig1_gval</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="n">fig1_bval</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="n">fig1_aval</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="n">fig1_dval</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">value_width</span>
+<span class="n">fig1_gval</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">value_width</span>
+<span class="n">fig1_bval</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">value_width</span>
+<span class="n">fig1_aval</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">value_width</span>
+
+<span class="c1"># Labels for the velocity slider in Figure 1</span>
+<span class="n">speed_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;&lt;b&gt;Radial Velocity of Source&lt;/b&gt;: &#39;</span><span class="p">)</span>
+<span class="n">speed_label</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">longspeed_label_width</span>
+
+<span class="n">vel_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">positioning</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="n">vel_label</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">vel_value_width</span> 
+<span class="n">vel_label</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">align_content</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span>
+
+<span class="n">vunits</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;km/s&#39;</span><span class="p">)</span>
+<span class="n">vunits</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">unit_text_width</span>
+
+<span class="n">direction</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">direction</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">longdirection_width</span>
+
+<span class="c1"># these boxes contain display commands for the velocity of each star</span>
+<span class="n">fig1controls_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">speed_label</span><span class="p">,</span> <span class="n">vel_label</span><span class="p">,</span> <span class="n">vunits</span><span class="p">,</span> <span class="n">direction</span><span class="p">])</span>
+<span class="n">fig1controls_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="s1">&#39;400px&#39;</span>
+
+<span class="c1"># Define Figure 1</span>
+<span class="n">figure1</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Hydrogen Cloud Absorbtion Spectrum&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">[</span><span class="n">ax_x_fig1</span><span class="p">,</span> <span class="n">ax_y_fig1</span><span class="p">],</span> <span class="n">animation</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+                    <span class="n">marks</span> <span class="o">=</span> <span class="p">[</span><span class="n">fig1_wide_line</span><span class="p">,</span> <span class="n">hydrogen_line_lab_simple</span><span class="p">,</span> <span class="n">hydrogen_line_moving_simple</span><span class="p">,</span> <span class="n">fig1_Lab_label</span><span class="p">],</span> 
+                    <span class="n">padding_y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">min_aspect_ratio</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">max_aspect_ratio</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">figure1</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="s1">&#39;500px&#39;</span>
+
+<span class="c1"># Update the widgets</span>
+<span class="n">fig1_vel_slider</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">simple_update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">fig1_dval</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">simple_update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">fig1_gval</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">simple_update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">fig1_bval</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">simple_update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">fig1_aval</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">simple_update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">fig1_reset</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">simple_reset</span><span class="p">)</span>
+
+<span class="c1"># These boxes contain the labels for the wavelengths and the shift in wavelength</span>
+<span class="c1"># text boxes.</span>
+<span class="n">fig1_shift_label1_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">shift_label1</span><span class="p">,</span> <span class="n">shift_label</span><span class="p">,</span> <span class="n">fig1_dval</span><span class="p">,</span> <span class="n">units</span><span class="p">])</span>
+<span class="n">fig1_shift_label2_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">shift_label2</span><span class="p">,</span> <span class="n">shift_label</span><span class="p">,</span> <span class="n">fig1_gval</span><span class="p">,</span> <span class="n">units</span><span class="p">])</span>
+<span class="n">fig1_shift_label3_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">shift_label3</span><span class="p">,</span> <span class="n">shift_label</span><span class="p">,</span> <span class="n">fig1_bval</span><span class="p">,</span> <span class="n">units</span><span class="p">])</span>
+<span class="n">fig1_shift_label4_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">shift_label4</span><span class="p">,</span> <span class="n">shift_label</span><span class="p">,</span> <span class="n">fig1_aval</span><span class="p">,</span> <span class="n">units</span><span class="p">])</span>
+<span class="n">fig1_shift_label1_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">height</span><span class="o">=</span><span class="n">line_height</span>
+<span class="n">fig1_shift_label2_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">height</span><span class="o">=</span><span class="n">line_height</span>
+<span class="n">fig1_shift_label3_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">height</span><span class="o">=</span><span class="n">line_height</span>
+<span class="n">fig1_shift_label4_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">height</span><span class="o">=</span><span class="n">line_height</span>
+<span class="n">fig1_shift_label1_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">overflow</span><span class="o">=</span><span class="s1">&#39;visible&#39;</span>
+<span class="n">fig1_shift_label2_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">overflow</span><span class="o">=</span><span class="s1">&#39;visible&#39;</span>
+<span class="n">fig1_shift_label3_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">overflow</span><span class="o">=</span><span class="s1">&#39;visible&#39;</span>
+<span class="n">fig1_shift_label4_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">overflow</span><span class="o">=</span><span class="s1">&#39;visible&#39;</span>
+
+<span class="c1"># Box to contain all of the above boxes</span>
+<span class="n">read_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">fig1_shift_label1_box</span><span class="p">,</span> <span class="n">fig1_shift_label2_box</span><span class="p">,</span> <span class="n">fig1_shift_label3_box</span><span class="p">,</span> <span class="n">fig1_shift_label4_box</span><span class="p">])</span>
+<span class="n">fig1_right_side_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">fig1_vel_slider</span><span class="p">,</span> <span class="n">fig1controls_box</span><span class="p">,</span> <span class="n">fig1_reset</span><span class="p">,</span> <span class="n">read_box</span><span class="p">])</span>
+<span class="c1">#fig1_right_side_box.layout.height = &#39;780px&#39;</span>
+
+<span class="c1"># Final box</span>
+<span class="n">boxy</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">figure1</span><span class="p">,</span> <span class="n">fig1_right_side_box</span><span class="p">])</span>
+<span class="n">fig1_right_side_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="s1">&#39;500px&#39;</span>
+<span class="c1">#fig1_right_side_box.layout.height = &#39;300px&#39;</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">boxy</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+
+ 
+ 
+<div id="af582f8a-b076-4d82-8e0f-6c9e111cafa1"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#af582f8a-b076-4d82-8e0f-6c9e111cafa1');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "acbc2d2d00d347c09943699b95b33c48", "version_major": 2, "version_minor": 0}
+</script>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Interactive-Figure-2:-Spectrum-of-a-Moving-Stellar-System">Interactive Figure 2: Spectrum of a Moving Stellar System<a class="anchor-link" href="#Interactive-Figure-2:-Spectrum-of-a-Moving-Stellar-System"> </a></h2><p>The following interactive let's you simulate the expected spectrum from</p>
+<ul>
+<li>a binary star system where both stars have visible hydrogen absorption lines and </li>
+<li>an exoplanetary system where both objects have hydrogen in their spectra, but only the star's spectral lines are visible because the exoplanet's spectrum is much too faint to see.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##</span>
+<span class="c1">## Setup Figure 2</span>
+<span class="c1">##</span>
+
+<span class="c1"># Slider to adjust velocity (away or towards Earth) of the star in question</span>
+
+<span class="c1"># Each hydrogen spectral line for blue star (central star)</span>
+<span class="c1"># Note: d-delta,g-gamma,b-beta,a-alpha</span>
+<span class="n">dval1</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="n">gval1</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="n">bval1</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="n">aval1</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="c1"># Each hydrogen spectral line for red star (outer star)</span>
+<span class="n">dval2</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="n">gval2</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="n">bval2</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="n">aval2</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+
+<span class="c1"># Label for the velocity slider</span>
+<span class="n">speed_label1</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;&lt;b&gt;Radial velocity of Star&lt;/b&gt;: &#39;</span><span class="p">)</span>
+<span class="n">speed_label2</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;&lt;b&gt;Radial velocity of Orbiting Object&lt;/b&gt;:&#39;</span><span class="p">)</span>
+<span class="c1"># velocity output for each star</span>
+<span class="n">vel1_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">positioning</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="n">vel2_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">positioning</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="n">vunits1</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;km/s&#39;</span><span class="p">)</span>
+<span class="n">vunits2</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;km/s&#39;</span><span class="p">)</span>
+<span class="c1"># labels direction each star is moving</span>
+<span class="n">direction1</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">direction2</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="c1"># Creates a slider to animate the motion of the stars.</span>
+<span class="n">theta_slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="nb">max</span><span class="o">=</span><span class="mi">99</span><span class="p">,</span>
+    <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">continuous_update</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span>
+    <span class="n">readout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">readout_format</span><span class="o">=</span><span class="s1">&#39;.0f&#39;</span><span class="p">,</span>
+    <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;200px&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Animate the stars</span>
+<span class="n">theta_play</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Play</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="n">theta_slider</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">theta_slider</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> 
+                          <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Press play&quot;</span><span class="p">,</span> 
+                          <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">_repeat</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_repeat</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">widgets</span><span class="o">.</span><span class="n">jslink</span><span class="p">((</span><span class="n">theta_play</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">theta_slider</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">))</span>
+
+<span class="c1"># Slider to adjust the &#39;brightness&#39; (opacity) of the small outer star.</span>
+<span class="n">Lumen</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="nb">max</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">step</span><span class="o">=.</span><span class="mi">01</span><span class="p">,</span>
+    <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">continuous_update</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span>
+    <span class="n">readout</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;340px&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">lumen_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;&lt;b&gt;Brightness of Orbiting Object&lt;/b&gt;&#39;</span><span class="p">)</span>
+<span class="n">star1_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;&lt;b&gt;Central Star&lt;/b&gt;&#39;</span><span class="p">)</span>
+<span class="n">star2_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;&lt;b&gt;Orbiting Object&lt;/b&gt;&#39;</span><span class="p">)</span>
+<span class="n">line_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;&lt;b&gt;Line Name (Lab Wavelength)&lt;/b&gt;&#39;</span><span class="p">)</span>
+
+<span class="n">picker</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">RadioButtons</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;entire spectrum&#39;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;entire spectrum&#39;</span> <span class="p">,</span> <span class="s1">&#39;entire spectrum&#39;</span><span class="p">),(</span><span class="s1">&#39;near 410.2nm&#39;</span> <span class="p">,</span> <span class="s1">&#39;violet&#39;</span><span class="p">),(</span><span class="s1">&#39;near 434.0nm&#39;</span> <span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">),(</span><span class="s1">&#39;near 486.1nm&#39;</span> <span class="p">,</span> <span class="s1">&#39;cyan&#39;</span><span class="p">),(</span><span class="s1">&#39;near 656.3nm&#39;</span> <span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">)])</span>
+<span class="n">picker_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;&lt;b&gt;Display Range&lt;/b&gt;&#39;</span><span class="p">)</span>
+
+<span class="n">planet_star</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">RadioButtons</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;Star&#39;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Star&#39;</span><span class="p">,</span><span class="s1">&#39;Planet&#39;</span><span class="p">])</span>
+<span class="n">planet_star_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;&lt;b&gt;Orbiting Object&lt;/b&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### STAR VELOCITY INFO ###</span>
+
+<span class="n">mass1a</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># solar masses</span>
+<span class="n">mass2a</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># solar masses</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># semimajor axis in AU</span>
+<span class="n">e</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="c1"># eccentricity</span>
+<span class="n">incl</span> <span class="o">=</span> <span class="mi">88</span> <span class="c1"># inclination angle of 88 degrees</span>
+
+<span class="n">mass1b</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">mass2b</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">1000</span>
+
+<span class="c1"># Create a binary star model and radial velocity data in it</span>
+<span class="n">bsm</span> <span class="o">=</span> <span class="n">star</span><span class="o">.</span><span class="n">BinaryStarModel</span><span class="p">(</span><span class="n">mass1a</span><span class="p">,</span> <span class="n">mass2a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">rv_init</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">incl</span><span class="o">=</span><span class="n">incl</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">360</span><span class="p">)</span>
+<span class="n">bsm_b</span> <span class="o">=</span> <span class="n">star</span><span class="o">.</span><span class="n">BinaryStarModel</span><span class="p">(</span><span class="n">mass1a</span><span class="p">,</span> <span class="n">mass2a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">incl</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rv_init</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">#This created two pandas Dataframes</span>
+<span class="c1">#bsm.orbit_info</span>
+<span class="c1">#bsm.radvel_info</span>
+
+<span class="n">phase</span> <span class="o">=</span> <span class="n">bsm</span><span class="o">.</span><span class="n">radvel_info</span><span class="p">[</span><span class="s1">&#39;phase&#39;</span><span class="p">]</span>
+<span class="n">vel1</span> <span class="o">=</span> <span class="n">bsm</span><span class="o">.</span><span class="n">radvel_info</span><span class="p">[</span><span class="s1">&#39;v1r&#39;</span><span class="p">]</span>
+<span class="n">vel2</span> <span class="o">=</span> <span class="n">bsm</span><span class="o">.</span><span class="n">radvel_info</span><span class="p">[</span><span class="s1">&#39;v2r&#39;</span><span class="p">]</span>
+
+<span class="c1">#binary_view = star.BinaryStarViewer(bsm=bsm, t_idx0=0, view_width=400, view_height=400)</span>
+<span class="c1">#binary_renderer = binary_view.renderer</span>
+
+<span class="c1"># The BinaryStarModel will automatically update if you change sthe masses or semi-major axis</span>
+<span class="c1"># but to get the BinaryStarViewer to change automatically for these changes, you need to link</span>
+<span class="c1"># it using a traitlet link.</span>
+<span class="c1">#orbit_change_link = traitlets.directional_link((bsm, &#39;mdl_counter&#39;), (binary_view, &#39;mdl_counter&#39;))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Define Figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Hydrogen Absorbtion Spectra&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">[</span><span class="n">ax_x</span><span class="p">,</span> <span class="n">ax_y</span><span class="p">],</span> <span class="n">animation</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> 
+                <span class="n">marks</span> <span class="o">=</span> <span class="p">[</span><span class="n">wide_line</span><span class="p">,</span> <span class="n">hydrogen_line1</span><span class="p">,</span> <span class="n">hydrogen_line2</span><span class="p">,</span><span class="n">hydrogen_line3</span><span class="p">,</span><span class="n">Lab_label</span><span class="p">],</span> 
+                <span class="n">padding_y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">min_aspect_ratio</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">max_aspect_ratio</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="c1"># Size figure</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="s1">&#39;500px&#39;</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="s1">&#39;200px&#39;</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">overflow</span> <span class="o">=</span> <span class="s1">&#39;hidden&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Create star animation </span>
+<span class="c1"># Setup intial conditions for the orbiting stars.</span>
+<span class="c1"># d1,d2 are x positions and k1,k2 are y positions</span>
+<span class="n">phi</span> <span class="o">=</span> <span class="n">theta_slider</span><span class="o">.</span><span class="n">value</span><span class="o">*</span><span class="mf">3.60</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">d1</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span>
+<span class="n">k1</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="o">-</span><span class="n">r2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span>
+<span class="n">k2</span> <span class="o">=</span> <span class="o">-</span><span class="n">r2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span>
+
+<span class="c1"># Axes for stars</span>
+<span class="c1"># Sets axis scale for x and y to </span>
+<span class="n">sc_x</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">LinearScale</span><span class="p">(</span><span class="nb">min</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span><span class="nb">max</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">sc_y</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">LinearScale</span><span class="p">(</span><span class="nb">min</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span><span class="nb">max</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Sets up the axes, grid-lines are set to black so that they blend in with the background.</span>
+<span class="n">x_ax</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">sc_x</span><span class="p">,</span> <span class="n">grid_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">num_ticks</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">y_ax</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">sc_y</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">,</span> <span class="n">grid_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">num_ticks</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Create the stars and the figure to contain them</span>
+<span class="n">star1</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">d1</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">k1</span><span class="p">],</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">sc_x</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">sc_y</span><span class="p">},</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">],</span><span class="n">default_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">star2</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">d2</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">k2</span><span class="p">],</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">sc_x</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">sc_y</span><span class="p">},</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">])</span>
+<span class="c1"># Gives reference to Earth</span>
+<span class="n">to_earth</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Lines</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">],[</span><span class="mi">10</span><span class="p">,</span><span class="mi">9</span><span class="p">],[</span><span class="mi">10</span><span class="p">,</span><span class="mi">9</span><span class="p">]],</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">],[</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">]],</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">sc_x</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">sc_y</span><span class="p">},</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;yellow&#39;</span><span class="p">])</span>
+<span class="n">earth_label</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;To Earth&quot;</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;yellow&#39;</span><span class="p">],</span> <span class="n">scales</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">sc_x</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">sc_y</span><span class="p">})</span>
+<span class="n">fig_star</span> <span class="o">=</span> <span class="n">bq</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Stellar System Top-Down View&#39;</span><span class="p">,</span> <span class="n">marks</span><span class="o">=</span><span class="p">[</span><span class="n">star1</span><span class="p">,</span><span class="n">star2</span><span class="p">,</span><span class="n">to_earth</span><span class="p">,</span><span class="n">earth_label</span><span class="p">],</span> <span class="n">axes</span><span class="o">=</span><span class="p">[</span><span class="n">x_ax</span><span class="p">,</span> <span class="n">y_ax</span><span class="p">],</span> 
+                <span class="n">padding_y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">animation</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">background_style</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fill&#39;</span> <span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">},</span>
+               <span class="n">min_aspect_ratio</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_aspect_ratio</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fig_star</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span>
+<span class="n">fig_star</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Update the widgets</span>
+<span class="n">dval1</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">gval1</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">bval1</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">aval1</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+
+<span class="n">vel1_label</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">vunits1</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">direction1</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+
+<span class="n">dval2</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">gval2</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">bval2</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">aval2</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+
+<span class="n">vel2_label</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">direction2</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+
+<span class="n">theta_slider</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">Lumen</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update_lumen</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+
+<span class="n">picker</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update_view</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">picker</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">planet_star</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="n">planet_star</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">update_view</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Display to the screen</span>
+
+<span class="c1"># these boxes contain display commands for the velocity of each star</span>
+<span class="n">speed1_label_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">speed_label1</span> <span class="p">,</span><span class="n">vel1_label</span><span class="p">,</span> <span class="n">vunits1</span><span class="p">,</span> <span class="n">direction1</span><span class="p">])</span>
+<span class="n">speed2_label_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">speed_label2</span><span class="p">,</span> <span class="n">vel2_label</span><span class="p">,</span> <span class="n">vunits2</span><span class="p">,</span> <span class="n">direction2</span><span class="p">])</span>
+
+<span class="c1"># Commands to properly size the velocity boxes</span>
+<span class="n">speed_label1</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">speed_label_width</span> 
+<span class="n">speed_label2</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">speed_label_width</span> 
+<span class="n">vel1_label</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">vel_value_width</span> 
+<span class="n">vel2_label</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">vel_value_width</span> 
+<span class="n">vunits1</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">unit_text_width</span>
+<span class="n">vunits2</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">unit_text_width</span>
+<span class="n">direction1</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">direction_width</span>
+<span class="n">direction2</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">direction_width</span>
+<span class="n">speed1_label_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">height</span><span class="o">=</span><span class="n">line_height</span>
+<span class="n">speed2_label_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">height</span><span class="o">=</span><span class="n">line_height</span>
+<span class="n">speed1_label_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">overflow</span><span class="o">=</span><span class="s1">&#39;visible&#39;</span>
+<span class="n">speed2_label_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">overflow</span><span class="o">=</span><span class="s1">&#39;visible&#39;</span>
+
+<span class="c1"># Set display elements for spectral line Doppler shift data</span>
+<span class="n">dval1</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">value_width</span>
+<span class="n">gval1</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">value_width</span>
+<span class="n">bval1</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">value_width</span>
+<span class="n">aval1</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">value_width</span>
+<span class="n">dval2</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">value_width</span>
+<span class="n">gval2</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">value_width</span>
+<span class="n">bval2</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">value_width</span>
+<span class="n">aval2</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">value_width</span>
+
+<span class="c1"># These boxes contain the labels for the wavelengths and the shift in wavelength</span>
+<span class="c1"># text boxes.</span>
+<span class="n">shift_label1_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">shift_label1</span><span class="p">,</span> <span class="n">shift_label</span><span class="p">,</span> <span class="n">dval1</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">dval2</span><span class="p">,</span> <span class="n">units</span><span class="p">])</span>
+<span class="n">shift_label2_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">shift_label2</span><span class="p">,</span> <span class="n">shift_label</span><span class="p">,</span> <span class="n">gval1</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">gval2</span><span class="p">,</span> <span class="n">units</span><span class="p">])</span>
+<span class="n">shift_label3_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">shift_label3</span><span class="p">,</span> <span class="n">shift_label</span><span class="p">,</span> <span class="n">bval1</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">bval2</span><span class="p">,</span> <span class="n">units</span><span class="p">])</span>
+<span class="n">shift_label4_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">shift_label4</span><span class="p">,</span> <span class="n">shift_label</span><span class="p">,</span> <span class="n">aval1</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">aval2</span><span class="p">,</span> <span class="n">units</span><span class="p">])</span>
+<span class="n">shift_label1_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">height</span><span class="o">=</span><span class="n">line_height</span>
+<span class="n">shift_label2_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">height</span><span class="o">=</span><span class="n">line_height</span>
+<span class="n">shift_label3_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">height</span><span class="o">=</span><span class="n">line_height</span>
+<span class="n">shift_label4_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">height</span><span class="o">=</span><span class="n">line_height</span>
+<span class="n">shift_label1_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">overflow</span><span class="o">=</span><span class="s1">&#39;visible&#39;</span>
+<span class="n">shift_label2_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">overflow</span><span class="o">=</span><span class="s1">&#39;visible&#39;</span>
+<span class="n">shift_label3_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">overflow</span><span class="o">=</span><span class="s1">&#39;visible&#39;</span>
+<span class="n">shift_label4_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">overflow</span><span class="o">=</span><span class="s1">&#39;visible&#39;</span>
+
+<span class="n">star_labels</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">line_label</span><span class="p">,</span> <span class="n">star1_label</span><span class="p">,</span> <span class="n">star2_label</span><span class="p">])</span>
+<span class="n">line_label_width</span> <span class="o">=</span> <span class="s1">&#39;240px&#39;</span>  <span class="c1"># About labelwidth + shift_text_width</span>
+<span class="n">col_label_width</span> <span class="o">=</span> <span class="s1">&#39;130px&#39;</span>  <span class="c1"># About value_width + unit_text_width</span>
+<span class="n">line_label</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">line_label_width</span>
+<span class="n">star1_label</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">col_label_width</span>
+<span class="n">star2_label</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">col_label_width</span>
+
+<span class="c1"># Box to contain all of the above boxes</span>
+<span class="n">read_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">speed1_label_box</span><span class="p">,</span> <span class="n">speed2_label_box</span><span class="p">,</span> <span class="n">star_labels</span><span class="p">,</span>
+                         <span class="n">shift_label1_box</span><span class="p">,</span> <span class="n">shift_label2_box</span><span class="p">,</span> <span class="n">shift_label3_box</span><span class="p">,</span> <span class="n">shift_label4_box</span><span class="p">])</span>
+<span class="n">read_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">box_width</span>
+
+<span class="c1"># box for the star animation control</span>
+<span class="n">theta_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;b&gt;Percent of Orbit Done:&lt;/b&gt;&#39;</span><span class="p">)</span>
+<span class="n">theta_label</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">speed_label_width</span>
+<span class="n">phase_angle_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">theta_label</span><span class="p">,</span> <span class="n">theta_slider</span><span class="p">,</span> <span class="n">theta_play</span><span class="p">])</span>
+<span class="n">phase_angle_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">box_width</span>
+
+<span class="c1"># selectors</span>
+<span class="n">col_width</span> <span class="o">=</span> <span class="s1">&#39;150px&#39;</span>
+<span class="n">line_select</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">picker_label</span><span class="p">,</span> <span class="n">picker</span><span class="p">])</span>
+<span class="n">obj_select</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">planet_star_label</span><span class="p">,</span> <span class="n">planet_star</span><span class="p">])</span>
+<span class="n">planet_star_label</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">col_width</span>
+<span class="n">planet_star</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">col_width</span>
+<span class="n">picker_label</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">col_width</span>
+<span class="n">picker</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">col_width</span>
+<span class="n">select</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">line_select</span><span class="p">,</span> <span class="n">obj_select</span><span class="p">])</span>
+
+<span class="c1"># combines the above boxes and brightness controls into one box</span>
+<span class="n">right_side_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">read_box</span><span class="p">,</span> <span class="n">phase_angle_box</span><span class="p">,</span> <span class="n">lumen_label</span><span class="p">,</span> <span class="n">Lumen</span><span class="p">,</span> <span class="n">select</span><span class="p">])</span>
+<span class="n">right_side_box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">box_width</span>
+
+<span class="c1"># box for the figures</span>
+<span class="n">fig_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">fig</span><span class="p">,</span> <span class="n">fig_star</span><span class="p">])</span>
+
+<span class="c1"># Bring it all together</span>
+<span class="n">boxy</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">fig_box</span><span class="p">,</span> <span class="n">right_side_box</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Make sure lumen slider value is reflected in opacities</span>
+<span class="n">update_lumen</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">boxy</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+
+ 
+ 
+<div id="8d6bc350-0118-4d65-8583-25a8974660b8"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#8d6bc350-0118-4d65-8583-25a8974660b8');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "306293ab3d234e2990bd71040ad74bdf", "version_major": 2, "version_minor": 0}
+</script>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+ 
+
+
+    </main>
+    

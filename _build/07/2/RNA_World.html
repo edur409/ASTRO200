@@ -1,0 +1,1709 @@
+---
+redirect_from:
+  - "/07/2/rna-world"
+interact_link: content/07/2/RNA_World.ipynb
+kernel_name: python3
+has_widgets: false
+title: |-
+  RNA World
+prev_page:
+  url: /07/1/complex-life.html
+  title: |-
+    History of Complex Life?
+next_page:
+  url: /08-habitability-our-system.html
+  title: |-
+    Habitability in the Solar System
+suffix: .ipynb
+
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
+
+    <main class="jupyter-page">
+    
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="RNA-World-Hypothesis">RNA World Hypothesis<a class="anchor-link" href="#RNA-World-Hypothesis"> </a></h1><p>RNA is a simpler cousin of DNA.  As you may know, RNA is widely thought to be the first self replicating life-form to arise perhaps around 4 billion years ago. One of the strongest arguments for this theory is that RNA is able to carry information in its nucleotides like DNA, and like protein, it is able to adopt higher order structures to catalyze reactions, such as self replication. So it is likely, and there is growing evidence that this is the case, that the first form of replicating life was RNA. And because of this dual property of RNA as a hereditary information vessel as well as a structural/functional element we can use RNA molecules to build very nice population models.</p>
+<p>So in this section, we'll be walking you through building genetic populations, simulating their evolution, and using statistics and other mathematical tools for understanding key properties of populations.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">HTML</span>
+
+<span class="c1"># Youtube</span>
+<span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/K1xnYFCZ9Yg&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/K1xnYFCZ9Yg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#HTML(&#39;&lt;iframe width=&quot;784&quot; height=&quot;441&quot; src=&quot;https://scaleofuniverse.com/&quot; /iframe&gt;&#39;)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Population-Evolution-in-an-RNA-World">Population Evolution in <em>an</em> RNA World<a class="anchor-link" href="#Population-Evolution-in-an-RNA-World"> </a></h2><p>In order to study the evolution of a population, we first need a model of a population. And even before that, we need to define what we mean by <em>population</em>. Populations can be defined on many levels and with many diffferent criteria. For our purposes, we will simply say that a population is a set of individuals sharing a common environment. And because this is population <em>genetics</em> we can think of individuals as entities comprising of specific genes or chromosomes.</p>
+<p>So where do we get a population from? As you may have discussed in previous workshops, there are very large datasets containing sequencing information from different populations. So we could download one of these datasets and perform some analysis on it. But I find this can be dry and tedious. So why download data when we can simply create our own?</p>
+<p>In this section we're going to be creating and studying our own "artificial" populations to illustrate some important population genetics concepts and methodologies. Not only will this help you learn population genetics, but you will get a lot more programming practice than if we were to simply parse data files and go from there.</p>
+<p>More specifically, we're going to build our own RNA world.</p>
+<h3 id="Building-an-RNA-population">Building an RNA population<a class="anchor-link" href="#Building-an-RNA-population"> </a></h3><p>As we saw earlier, RNA has the nice property of posessing a strong mapping between information carrying (sequence) and function (structure). This is analogous to what is known in evolutionary terms as a genotype and a phenotype. With these properties, we have everything we need to model a population, and simulate its evolution.</p>
+<h4 id="RNA-sequence-structure">RNA sequence-structure<a class="anchor-link" href="#RNA-sequence-structure"> </a></h4><p>We can think of the genotype as a sequence $s$ consisting of letters/nucleotides from the alphabet $\{U,A,C,G\}$. The corresponding phenotype $\omega$ is the secondary structure of $s$ which can be thought of as a pairing between nucleotides in the primary sequence that give rise to a 2D architecture. Because it has been shown that the function of many biomolecules, including RNA, is driven by structure this gives us a good proxy for phenotype.</p>
+<p>Below is an example of what an RNA secondary structure, or pairing, looks like.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### 1</span>
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="c1">#This will load an image of an RNA secondary structure</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://viennarna.github.io/forgi/_images/1y26_ss.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<img src="https://viennarna.github.io/forgi/_images/1y26_ss.png"/>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">HTML</span>
+
+<span class="c1"># Youtube</span>
+<span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/JQByjprj_mA&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;&#39;</span><span class="p">)</span>
+<span class="c1">#import matplotlib.pyplot as plt</span>
+<span class="c1">#import forgi.visual.mplotlib as fvm</span>
+<span class="c1">#import forgi</span>
+<span class="c1">#cg = forgi.load_rna(&quot;1y26.fx&quot;, allow_many=False)</span>
+<span class="c1">#fvm.plot_rna(cg, text_kwargs={&quot;fontweight&quot;:&quot;black&quot;}, lighten=0.7,</span>
+<span class="c1">#             backbone_kwargs={&quot;linewidth&quot;:3})</span>
+<span class="c1">#plt.show()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JQByjprj_mA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As you can see, unpaired positions are forming loop-like structures, and paired positions are forming stem-like structures. It is this spatial arrangement of nucleotides that drives RNA's function. Therefore, another sequence that adopts a similar shape, is likely to behave in a similar manner. Another thing to notice is that, although in reality this is often not the case, in general we only allow pairs between $\{C,G\}$ and $\{A, U\}$ nucleotides, most modern approaches allow for non-canonical pairings and you will find some examples of this in the above structure.</p>
+<p><em>How do we go from a sequence to a structure?</em></p>
+<p>So a secondary structure is just a list of pairings between positions. How do we get the optimal pairing?</p>
+<p>The algorithm we're going to be using in our simulations is known as the Nussinov Algorithm. The Nussinov algorithm is one of the first and simplest attempts at predicting RNA structure. Because bonds tend to stabilize RNA, the algorithm tries to maximize the number of pairs in the structure and return that as its solution. Current approaches achieve more accurate solutions by using energy models based one experimental values to then obtain a structure that minimizes free energy. But since we're not really concerned with the accuracy of our predictions, Nussinov is a good entry point. Furthermore, the main algorithmic concepts are the same between Nussinov and state of the art RNA structure prediction algorithms. I implemented the algorithm in a separate file called <code>fold.py</code> that we can import and use its functions. I'm not going to go into detail here on how the algorithm works because it is beyond the scope of this workshop but there is a bonus exercise at the end if you're curious.</p>
+<p>You can predict a secondary structure by calling <code>nussinov()</code> with a sequence string and it will return a tuple in the form <code>(structure, pairs)</code>.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### 2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">fold</span> <span class="k">import</span> <span class="n">nussinov</span> <span class="c1">#Codes by Carlos G. Oliver (https://github.com/cgoliver)</span>
+
+<span class="n">sequence_to_fold</span> <span class="o">=</span> <span class="s2">&quot;ACCCGAUGUUAUAUAUACCU&quot;</span>
+<span class="n">struc</span> <span class="o">=</span> <span class="n">nussinov</span><span class="p">(</span><span class="n">sequence_to_fold</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&gt;test&quot;</span><span class="p">)</span> <span class="c1">#creates the structure of a .fx file for &quot;forna&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sequence_to_fold</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">struc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1">#Check the molecule at: http://rna.tbi.univie.ac.at/forna/</span>
+<span class="c1"># Paste the text below in the webpage and see the structure</span>
+<span class="c1">#&gt;test</span>
+<span class="c1">#ACCCGAUGUUAUAUAUACCU</span>
+<span class="c1">#(...(..(((....).))))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt;test
+ACCCGAUGUUAUAUAUACCU
+(...(..(((....).))))
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You will see a funny dot-bracket string in the output. This is a representation of the structure of an RNA. Quite simply, a matching parir of parentheses (open and close) correspond to the nucleotides at those positions being paried. Whereas, a dot means that that position is unpaired in the structure. Feel free to play around with the input sequence to get a better understanding of the notation.</p>
+<p>If you want to visually check the sequence, go to: <a href="http://rna.tbi.univie.ac.at/forna/forna.html">forna</a> and copy the text above with the sequence and its structure in the <strong>Add Molecule</strong> button.  The webpage is embedded below.</p>
+<p>So that's enough about RNA structure prediction. Let's move on to building our populations.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;iframe width=&quot;784&quot; height=&quot;441&quot; src=&quot;http://rna.tbi.univie.ac.at/forna/forna.html&quot; /iframe&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<iframe width="784" height="441" src="http://rna.tbi.univie.ac.at/forna/forna.html" /iframe>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span><span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[2 2 0]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Fitness-of-a-sequence:-Target-Structure">Fitness of a sequence: Target Structure<a class="anchor-link" href="#Fitness-of-a-sequence:-Target-Structure"> </a></h3><p>Now that we have a good way of getting a phenotype (secondary structure), we need a way to evaluate the fitness of that phenotype. If we think in real life terms, fitness is the ability of a genotype to replicate into the next generation. If you have a gene carrying a mutation that causes some kind of disease, your fitness is decreased and you have a lower chance of contributing offspring to the next generation. On a molecular level the same concept applies. A molecule needs to accomplish a certain function, i.e. bind to some other molecule or send some kind of signal. And as we've seen before, the most important factor that determines how well it can carry out this function is its structure. So we can imagine that a certain structure, we can call this a 'target' structure, is required in order to accomplish a certain function. So a sequence that folds correctly to a target structure is seen as having a greater fitness than one that does not. Since we've encoded structures as simple dot-bracket strings, we can easily compare structures and thus evaluate the fitness between a given structure and the target, or 'correct' structure.</p>
+<p>There are many ways to compare structures $w_{1}$ and $w_{2}$, but we're going to use one of the simplest ways, which is base-pair distance. This is just the number of pairs in $w_{1}$ that are not in $w_{2}$. Again, this is beyond the scope of this workshop so I'll just give you the code for it and if you would like to know more you can ask me.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### 3</span>
+
+<span class="c1">#ss_to_bp() and bp_distance() by Vladimir Reinharz.</span>
+<span class="k">def</span> <span class="nf">ss_to_bp</span><span class="p">(</span><span class="n">ss</span><span class="p">):</span>
+    <span class="n">bps</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ss</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;(&#39;</span><span class="p">:</span>
+                    <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;)&#39;</span><span class="p">:</span>
+                    <span class="n">bps</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">(),</span> <span class="n">i</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">bps</span>
+
+<span class="k">def</span> <span class="nf">bp_distance</span><span class="p">(</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    return base pair distance between structures w1 and w1. </span>
+<span class="sd">    w1 and w1 are lists of tuples representing pairing indices.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">w1</span><span class="p">)</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">w2</span><span class="p">)))</span>
+
+<span class="c1">#let&#39;s fold two sequences</span>
+<span class="n">w1</span> <span class="o">=</span> <span class="n">nussinov</span><span class="p">(</span><span class="s2">&quot;CCAAAAGG&quot;</span><span class="p">)</span>
+<span class="n">w2</span> <span class="o">=</span> <span class="n">nussinov</span><span class="p">(</span><span class="s2">&quot;ACAAAAGA&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">w1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">w2</span><span class="p">)</span>
+
+<span class="c1">#give the list of pairs to bp_distance and see what the distance is.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bp_distance</span><span class="p">(</span><span class="n">w1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">w2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;((....))&#39;, [(0, 7), (1, 6)])
+(&#39;.(....).&#39;, [(1, 6)])
+1
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Defining-a-cell">Defining a cell<a class="anchor-link" href="#Defining-a-cell"> </a></h2><p>The cell we will define here is a simple organism with two copies of an RNA gene, each with its own structure.  This simple definition of a cell will help us create populations to play around in our evolutionary reactor.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### 4</span>
+<span class="k">class</span> <span class="nc">Cell</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seq_1</span><span class="p">,</span> <span class="n">struc_1</span><span class="p">,</span> <span class="n">seq_2</span><span class="p">,</span> <span class="n">struc_2</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sequence_1</span> <span class="o">=</span> <span class="n">seq_1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sequence_2</span> <span class="o">=</span> <span class="n">seq_2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">structure_1</span> <span class="o">=</span> <span class="n">struc_1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">structure_2</span> <span class="o">=</span> <span class="n">struc_2</span>
+        
+<span class="c1">#for now just try initializing a Cell with made up sequences and structures</span>
+<span class="n">cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="s2">&quot;AACCCCUU&quot;</span><span class="p">,</span> <span class="s2">&quot;((.....))&quot;</span><span class="p">,</span> <span class="s2">&quot;GGAAAACA&quot;</span><span class="p">,</span> <span class="s2">&quot;(....).&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">sequence_1</span><span class="p">,</span> <span class="n">cell</span><span class="o">.</span><span class="n">structure_2</span><span class="p">,</span> <span class="n">cell</span><span class="o">.</span><span class="n">sequence_1</span><span class="p">,</span> <span class="n">cell</span><span class="o">.</span><span class="n">structure_2</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>AACCCCUU (....). AACCCCUU (....).
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Populations-of-Cells">Populations of Cells<a class="anchor-link" href="#Populations-of-Cells"> </a></h2><p>Now we've defined a 'Cell'. Since a population is a collection of individuals our populations will naturally consist of <strong>lists</strong> of 'Cell' objects, each with their own sequences. Here we initialize all the Cells with random sequences and add them to the 'population' list.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### 5</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">def</span> <span class="nf">populate</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">pop_size</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Creates a population of cells (pop_size) with a number of random RNA nucleotides (AUCG)</span>
+<span class="sd">    matching the length of the target structure&#39;&#39;&#39;</span>
+    <span class="n">population</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pop_size</span><span class="p">):</span>
+        <span class="c1">#get a random sequence to start with</span>
+        <span class="n">sequence</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s2">&quot;AUCG&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">))])</span>
+        <span class="c1">#use nussinov to get the secondary structure for the sequence</span>
+        <span class="n">structure</span> <span class="o">=</span> <span class="n">nussinov</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
+        <span class="c1">#add a new Cell object to the population list</span>
+        <span class="n">new_cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">structure</span><span class="p">)</span>
+        <span class="n">new_cell</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="n">new_cell</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="n">population</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_cell</span><span class="p">)</span>
+            
+    <span class="k">return</span> <span class="n">population</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Try creating a new population and printing the first 10 sequences and structures (in dot-bracket) on the first chromosome!</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### 6</span>
+<span class="n">target</span> <span class="o">=</span> <span class="s2">&quot;(((....)))&quot;</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">populate</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">pop_size</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pop</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">sequence_1</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">structure_1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="o">.</span><span class="n">sequence_2</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">structure_2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pop</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]:</span><span class="c1">#for p in pop[:10]:#for p in pop[-10:]:#for p in pop[:10]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">sequence_1</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">structure_1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="o">.</span><span class="n">sequence_2</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">structure_2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0 AAACUAGAGG ...(....). AAACUAGAGG ...(....).
+1 CGCGUAGACA (.....)... CGCGUAGACA (.....)...
+2 GGAUUAGAAU ..((....)) GGAUUAGAAU ..((....))
+3 GGUCUUCUAC ((....)..) GGUCUUCUAC ((....)..)
+4 CUCGCUUGUU (......).. CUCGCUUGUU (......)..
+5 UUUCCGCCCA (........) UUUCCGCCCA (........)
+6 AUCGUUACCA .(.(....)) AUCGUUACCA .(.(....))
+7 GCGGAAGGUU .(....)... GCGGAAGGUU .(....)...
+8 ACCCUGUAGU ((......)) ACCCUGUAGU ((......))
+9 UUCUCGGCCG ..(......) UUCUCGGCCG ..(......)
+290 ACUUUUAGUA ((.....)). ACUUUUAGUA ((.....)).
+291 CCGCGUAUAU .......... CCGCGUAUAU ..........
+292 AUUCACUUCU (.....)... AUUCACUUCU (.....)...
+293 CCGGAUCGCU (......).. CCGGAUCGCU (......)..
+294 AAACAUAAAG (....).... AAACAUAAAG (....)....
+295 GCCACCGUCC ((....).). GCCACCGUCC ((....).).
+296 CCUAGAGAGC ((....).). CCUAGAGAGC ((....).).
+297 CGACAAGGAA (.....)... CGACAAGGAA (.....)...
+298 GCCUUAACGC ((......)) GCCUUAACGC ((......))
+299 AUGUCGUUGA (.....)... AUGUCGUUGA (.....)...
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="The-Fitness-of-a-Cell">The Fitness of a Cell<a class="anchor-link" href="#The-Fitness-of-a-Cell"> </a></h2><p>Once we are able to create populations of cells, we need a way of asssessing their individual fitness.  In our model, a <em>Cell</em> is an object that contains two sequences of RNA, something analogous to having two copies of a gene in each chromosome.</p>
+<p>We could simply loop through each <em>Cell</em> in the population and check the base pair distance to the target structure we defined.  However, this approach of using base-pair distance is not the best for defining fitness. There are two reasons for this:</p>
+<ol>
+<li>We want fitness to represent a <em>probability</em> that a cell will reproduce (pass its genes to the next generation), and base pair distance is, in our case, an integer value.</li>
+<li>We want this probability to be a <em>relative</em> measure of fitness. That is, we want the fitness to be proportional to how good a cell is with respect to all others in the population. This touches on an important principle in evolution where we only need to be 'better' than the rest of the population (the competition) and not good in some absolute measure. For instance, if you and I are being chased by a predator. In order to survive, I only need to be faster than you, and not necessarily some absolute level of fitness.</li>
+</ol>
+<p>In order to get a probability (number between 0 and 1) we use the following equation to define the fitness of a structure $\omega$ on a target structure $T$:</p>
+<p>$$P(\omega, T) = N^{-1} exp(\frac{-\beta \texttt{dist}(\omega, T)}{\texttt{len}(\omega)})$$</p>
+<p>$$N = \sum_{i \in Pop}{P(\omega_i, T})$$</p>
+<p>Here, the $N$ is what gives us the 'relative' measure because we divide the fitness of the Cell by the sum of the fitness of every other Cell.</p>
+<p>Let's take a quick look at how this function behaves if we plot different base pair distance values.</p>
+<p>What is the effect of the parameter $\beta$? Try plotting the same function but with different values of $\beta$.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="n">target_length</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">beta</span> <span class="o">*</span> <span class="p">(</span><span class="n">bp_dist</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">target_length</span><span class="p">)))</span> <span class="k">for</span> <span class="n">bp_dist</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">target_length</span><span class="p">)])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Base pair distance to target structure&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;P(w, T)&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Text(0,0.5,&#39;P(w, T)&#39;)</pre>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../../images/07/2/RNA_World_20_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As you can see, it's a very simple function that evaluates to 1 (highest fitness) if the base pair distance is 0, and decreases as the structures get further and further away from the target. I didn't include the $N$ in the plotting as it will be a bit more annoying to compute, but it is simply a scaling factor so the shape and main idea won't be different.</p>
+<p>Now we can use this function to get a fitness value for each Cell in our population.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### 7</span>
+
+<span class="k">def</span> <span class="nf">compute_fitness</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">beta</span><span class="o">=-</span><span class="mi">3</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Assigns a fitness and bp_distance value to each cell in the population.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#store the fitness values of each cell</span>
+    <span class="n">tot</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1">#iterate through each cell</span>
+    <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">population</span><span class="p">:</span>
+        
+        <span class="c1">#calculate the bp_distance of each chromosome using the cell&#39;s structure</span>
+        <span class="n">bp_distance_1</span> <span class="o">=</span> <span class="n">bp_distance</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">structure_1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">ss_to_bp</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
+        <span class="n">bp_distance_2</span> <span class="o">=</span> <span class="n">bp_distance</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">structure_2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">ss_to_bp</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
+        
+        <span class="c1">#use the bp_distances and the above fitness equation to calculate the fitness of each chromosome</span>
+        <span class="n">fitness_1</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">beta</span> <span class="o">*</span> <span class="n">bp_distance_1</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">sequence_1</span><span class="p">))))</span>
+        <span class="n">fitness_2</span> <span class="o">=</span>  <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">beta</span> <span class="o">*</span> <span class="n">bp_distance_2</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">sequence_2</span><span class="p">))))</span>
+
+        <span class="c1">#get the fitness of the whole cell by multiplying the fitnesses of each chromosome</span>
+        <span class="n">cell</span><span class="o">.</span><span class="n">fitness</span> <span class="o">=</span> <span class="n">fitness_1</span> <span class="o">*</span> <span class="n">fitness_2</span>
+               
+        <span class="c1">#store the bp_distance of each chromosome.</span>
+        <span class="n">cell</span><span class="o">.</span><span class="n">bp_distance_1</span> <span class="o">=</span> <span class="n">bp_distance_1</span>
+        <span class="n">cell</span><span class="o">.</span><span class="n">bp_distance_2</span> <span class="o">=</span> <span class="n">bp_distance_2</span>
+    
+        
+        <span class="c1">#add the cell&#39;s fitness value to the list of all fitness values (used for normalization later)</span>
+        <span class="n">tot</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">fitness</span><span class="p">)</span>
+
+    <span class="c1">#normalization factor is sum of all fitness values in population</span>
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">tot</span><span class="p">)</span>
+    <span class="c1">#divide all fitness values by the normalization factor.</span>
+    <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">population</span><span class="p">:</span>
+        <span class="n">cell</span><span class="o">.</span><span class="n">fitness</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="n">fitness</span> <span class="o">/</span> <span class="n">norm</span>
+
+    <span class="k">return</span> <span class="kc">None</span>
+
+<span class="n">compute_fitness</span><span class="p">(</span><span class="n">pop</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">pop</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">fitness</span><span class="p">,</span> <span class="n">cell</span><span class="o">.</span><span class="n">bp_distance_1</span><span class="p">,</span> <span class="n">cell</span><span class="o">.</span><span class="n">bp_distance_2</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.0018560050231155713 4 4
+0.0018560050231155713 4 4
+0.0010185971533347876 5 5
+0.0033818616462381024 3 3
+0.0018560050231155713 4 4
+0.006162153685930042 2 2
+0.0010185971533347876 5 5
+0.0018560050231155713 4 4
+0.011228176082028805 1 1
+0.0018560050231155713 4 4
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Introducing-diversity:-Mutations">Introducing diversity: Mutations<a class="anchor-link" href="#Introducing-diversity:-Mutations"> </a></h2><p>Evolution would go nowhere without random mutations. While mutations are technically just random errors in the copying of genetic material, they are essential in the process of evolution. This is because they introduce novel diversity to populatons, which with a low frequency can be beneficial. And when a beneficial mutation arises (i.e. a mutation that increases fitness, or replication probability) it quickly takes over the population and the populatioin as a whole has a higher fitness.</p>
+<p>Implementing mutations in our model will be quite straightforward. Since mutations happen at the genotype/sequence level, we simply have to iterate through our strings of nucleotides (sequences) and randomly introduce changes.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">mutate</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="n">mutation_rate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Takes a sequence and mutates bases with probability mutation_rate&quot;&quot;&quot;</span>
+    
+    <span class="c1">#start an empty string to store the mutated sequence</span>
+    <span class="n">new_sequence</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="c1">#boolean storing whether or not the sequence got mutated</span>
+    <span class="n">mutated</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="c1">#go through every bp in the sequence</span>
+    <span class="k">for</span> <span class="n">bp</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+        <span class="c1">#generate a random number between 0 and 1</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+        <span class="c1">#if r is below mutation rate, introduce a mutation</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">mutation_rate</span><span class="p">:</span>
+            <span class="c1">#add a randomly sampled nucleotide to the new sequence</span>
+            <span class="n">new_sequence</span> <span class="o">=</span> <span class="n">new_sequence</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s2">&quot;aucg&quot;</span><span class="p">)</span>
+            <span class="n">mutated</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1">#if the mutation condition did not get met, copy the current bp to the new sequence</span>
+            <span class="n">new_sequence</span> <span class="o">=</span> <span class="n">new_sequence</span> <span class="o">+</span> <span class="n">bp</span>
+            
+    <span class="k">return</span> <span class="p">(</span><span class="n">new_sequence</span><span class="p">,</span> <span class="n">mutated</span><span class="p">)</span>
+
+<span class="n">sequence_to_mutate</span> <span class="o">=</span> <span class="s1">&#39;AAAAGGAGUGUGUAUGU&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sequence_to_mutate</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mutate</span><span class="p">(</span><span class="n">sequence_to_mutate</span><span class="p">,</span> <span class="n">mutation_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>AAAAGGAGUGUGUAUGU
+(&#39;uuacccAGuccGUAUGc&#39;, True)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Selection">Selection<a class="anchor-link" href="#Selection"> </a></h2><p>The final process in this evolution model is selection. Once you have populations with a diverse range of fitnesses, we need to select the fittest individuals and let them replicate and contribute offspring to the next generation. In real populations this is just the process of reproduction. If you're fit enough you will be likely to reproduce more than another individual who is not as well suited to the environment.</p>
+<p>In order to represent this process in our model, we will use the fitness values that we assigned to each Cell earlier and use that to select replicating Cells. This is equivalent to sampling from a population with the sampling being weighted by the fitness of each Cell. Thankfully, <code>numpy.random.choice</code> comes to the rescue here. Once we have sampled enough Cells to build our next generation, we introduce mutations and compute the fitness values of the new generation.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">selection</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">mutation_rate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">beta</span><span class="o">=-</span><span class="mi">3</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a new population with offspring of the input population</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#select the sequences that will be &#39;parents&#39; and contribute to the next generation</span>
+    <span class="n">parents</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">population</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="n">rna</span><span class="o">.</span><span class="n">fitness</span> <span class="k">for</span> <span class="n">rna</span> <span class="ow">in</span> <span class="n">population</span><span class="p">],</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1">#build the next generation using the parents list</span>
+    <span class="n">next_generation</span> <span class="o">=</span> <span class="p">[]</span>    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">parents</span><span class="p">):</span>
+        <span class="n">new_cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">sequence_1</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">structure_1</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">sequence_2</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">structure_2</span><span class="p">)</span>
+        <span class="n">new_cell</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="n">new_cell</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">id</span>
+        
+        <span class="n">next_generation</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_cell</span><span class="p">)</span>
+
+    <span class="c1">#introduce mutations in next_generation sequeneces and re-fold when a mutation occurs</span>
+    <span class="k">for</span> <span class="n">rna</span> <span class="ow">in</span> <span class="n">next_generation</span><span class="p">:</span>      
+        <span class="n">mutated_sequence_1</span><span class="p">,</span> <span class="n">mutated_1</span> <span class="o">=</span> <span class="n">mutate</span><span class="p">(</span><span class="n">rna</span><span class="o">.</span><span class="n">sequence_1</span><span class="p">,</span> <span class="n">mutation_rate</span><span class="o">=</span><span class="n">mutation_rate</span><span class="p">)</span>
+        <span class="n">mutated_sequence_2</span><span class="p">,</span> <span class="n">mutated_2</span> <span class="o">=</span> <span class="n">mutate</span><span class="p">(</span><span class="n">rna</span><span class="o">.</span><span class="n">sequence_2</span><span class="p">,</span> <span class="n">mutation_rate</span><span class="o">=</span><span class="n">mutation_rate</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">mutated_1</span><span class="p">:</span>
+            <span class="n">rna</span><span class="o">.</span><span class="n">sequence_1</span> <span class="o">=</span> <span class="n">mutated_sequence_1</span>
+            <span class="n">rna</span><span class="o">.</span><span class="n">structure_1</span> <span class="o">=</span> <span class="n">nussinov</span><span class="p">(</span><span class="n">mutated_sequence_1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mutated_2</span><span class="p">:</span>
+            <span class="n">rna</span><span class="o">.</span><span class="n">sequence_2</span> <span class="o">=</span> <span class="n">mutated_sequence_2</span>
+            <span class="n">rna</span><span class="o">.</span><span class="n">structure_2</span> <span class="o">=</span> <span class="n">nussinov</span><span class="p">(</span><span class="n">mutated_sequence_2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+    <span class="c1">#update fitness values for the new generation</span>
+    <span class="n">compute_fitness</span><span class="p">(</span><span class="n">next_generation</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">next_generation</span>
+
+<span class="n">next_gen</span> <span class="o">=</span> <span class="n">selection</span><span class="p">(</span><span class="n">pop</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">next_gen</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">sequence_1</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>GGGGAUGAAG
+AUGCUUACAU
+GCCAUGAUAC
+GCGUCAAUUU
+UAAUGGCCGA
+AACCACAGAC
+AUAGAAUUAG
+GACGUCUGUC
+ACCGGAUCGA
+GGGGAAAGUU
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Gathering-information-on-our-populations">Gathering information on our populations<a class="anchor-link" href="#Gathering-information-on-our-populations"> </a></h2><p>Here we simply store some statistics (in a dictionary) on the population at each generation such as the average base pair distance and the average fitness of the populations. No coding to do here, it's not a very interesting function but feel free to give it a look.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">record_stats</span><span class="p">(</span><span class="n">pop</span><span class="p">,</span> <span class="n">population_stats</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Takes a population list and a dictionary and updates it with stats on the population.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">generation_bp_distance_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">rna</span><span class="o">.</span><span class="n">bp_distance_1</span> <span class="k">for</span> <span class="n">rna</span> <span class="ow">in</span> <span class="n">pop</span><span class="p">]</span>
+    <span class="n">generation_bp_distance_2</span> <span class="o">=</span> <span class="p">[</span><span class="n">rna</span><span class="o">.</span><span class="n">bp_distance_2</span> <span class="k">for</span> <span class="n">rna</span> <span class="ow">in</span> <span class="n">pop</span><span class="p">]</span>
+
+    <span class="n">mean_bp_distance_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">generation_bp_distance_1</span><span class="p">)</span>
+    <span class="n">mean_bp_distance_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">generation_bp_distance_2</span><span class="p">)</span>
+    
+    <span class="n">mean_fitness</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">rna</span><span class="o">.</span><span class="n">fitness</span> <span class="k">for</span> <span class="n">rna</span> <span class="ow">in</span> <span class="n">pop</span><span class="p">])</span>
+
+
+    <span class="n">population_stats</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;mean_bp_distance_1&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_bp_distance_1</span><span class="p">)</span>
+    <span class="n">population_stats</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;mean_bp_distance_2&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_bp_distance_2</span><span class="p">)</span>
+    
+    <span class="n">population_stats</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;mean_fitness&#39;</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_fitness</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="And-finally....-evolution">And finally.... evolution<a class="anchor-link" href="#And-finally....-evolution"> </a></h2><p>We can put all the above parts together in a simple function that does the following:</p>
+<ol>
+<li>start a new population and compute its fitness</li>
+<li>repeat the following for the desired number of generations:<ol>
+<li>record statistics on population</li>
+<li>perform selection+mutation</li>
+<li>store new population</li>
+</ol>
+</li>
+</ol>
+<p>And that's it! We have an evolutionary reactor!</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">evolve</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">generations</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pop_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">mutation_rate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">beta</span><span class="o">=-</span><span class="mi">2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Takes target structure and sets up initial population, performs selection and iterates for desired generations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#store list of all populations throughotu generations [[cells from generation 1], [cells from gen. 2]...]</span>
+    <span class="n">populations</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1">#start a dictionary that will hold some stats on the populations.</span>
+    <span class="n">population_stats</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="c1">#get a starting population</span>
+    <span class="n">initial_population</span> <span class="o">=</span> <span class="n">populate</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">pop_size</span><span class="o">=</span><span class="n">pop_size</span><span class="p">)</span>
+    <span class="c1">#compute fitness of initial population</span>
+    <span class="n">compute_fitness</span><span class="p">(</span><span class="n">initial_population</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+    <span class="c1">#set current_generation to initial population.</span>
+    <span class="n">current_generation</span> <span class="o">=</span> <span class="n">initial_population</span>
+
+    <span class="c1">#iterate the selection process over the desired number of generations</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">generations</span><span class="p">):</span>
+
+        <span class="c1">#let&#39;s get some stats on the structures in the populations   </span>
+        <span class="n">record_stats</span><span class="p">(</span><span class="n">current_generation</span><span class="p">,</span> <span class="n">population_stats</span><span class="p">)</span>
+        
+        <span class="c1">#add the current generation to our list of populations.</span>
+        <span class="n">populations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_generation</span><span class="p">)</span>
+
+        <span class="c1">#select the next generation</span>
+        <span class="n">new_gen</span> <span class="o">=</span> <span class="n">selection</span><span class="p">(</span><span class="n">current_generation</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">mutation_rate</span><span class="o">=</span><span class="n">mutation_rate</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">)</span>
+        <span class="c1">#set current generation to be the generation we just obtained.</span>
+        <span class="n">current_generation</span> <span class="o">=</span> <span class="n">new_gen</span> 
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">populations</span><span class="p">,</span> <span class="n">population_stats</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Try a run of the <code>evolve()</code> function.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">target</span> <span class="o">=</span> <span class="s2">&quot;(((....)))&quot;</span>
+<span class="n">pops</span><span class="p">,</span> <span class="n">pops_stats</span> <span class="o">=</span> <span class="n">evolve</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">generations</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pop_size</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">mutation_rate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">beta</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1">#Print the first 10 sequences of the population</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pop</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">sequence_1</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">structure_1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="o">.</span><span class="n">sequence_2</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">structure_2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1">#Print the last 10 sequences of the population    </span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pop</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">sequence_1</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">structure_1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="o">.</span><span class="n">sequence_2</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">structure_2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0 AAACUAGAGG ...(....). AAACUAGAGG ...(....).
+1 CGCGUAGACA (.....)... CGCGUAGACA (.....)...
+2 GGAUUAGAAU ..((....)) GGAUUAGAAU ..((....))
+3 GGUCUUCUAC ((....)..) GGUCUUCUAC ((....)..)
+4 CUCGCUUGUU (......).. CUCGCUUGUU (......)..
+5 UUUCCGCCCA (........) UUUCCGCCCA (........)
+6 AUCGUUACCA .(.(....)) AUCGUUACCA .(.(....))
+7 GCGGAAGGUU .(....)... GCGGAAGGUU .(....)...
+8 ACCCUGUAGU ((......)) ACCCUGUAGU ((......))
+9 UUCUCGGCCG ..(......) UUCUCGGCCG ..(......)
+290 ACUUUUAGUA ((.....)). ACUUUUAGUA ((.....)).
+291 CCGCGUAUAU .......... CCGCGUAUAU ..........
+292 AUUCACUUCU (.....)... AUUCACUUCU (.....)...
+293 CCGGAUCGCU (......).. CCGGAUCGCU (......)..
+294 AAACAUAAAG (....).... AAACAUAAAG (....)....
+295 GCCACCGUCC ((....).). GCCACCGUCC ((....).).
+296 CCUAGAGAGC ((....).). CCUAGAGAGC ((....).).
+297 CGACAAGGAA (.....)... CGACAAGGAA (.....)...
+298 GCCUUAACGC ((......)) GCCUUAACGC ((......))
+299 AUGUCGUUGA (.....)... AUGUCGUUGA (.....)...
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's see if it actually worked by plotting the average base pair distance as a function of generations for both genes in each cell. We should expect a gradual decrease as the populations get closer to the target structure.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">evo_plot</span><span class="p">(</span><span class="n">pops_stats</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot base pair distance for each chromosome over generations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="s1">&#39;Mean base pair Distance&#39;</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;mean_bp_distance_1&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_bp_distance_2&#39;</span><span class="p">]:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pops_stats</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Generations&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Mean Base Pair Distance&quot;</span><span class="p">)</span>
+    
+<span class="n">evo_plot</span><span class="p">(</span><span class="n">pops_stats</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../../images/07/2/RNA_World_34_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's see the structure of random cells from each generation.  Run the code below and copy the output in the RNA folding webpage. Compare the base-pair distance plot with the structures.</p>
+<p>Questions:</p>
+<ul>
+<li>Do you notice some simmilarities from a particular generation onwards? Compare your observations to the plot with the Mean Base Pair Distance.</li>
+<li>What could trigger another evolutionary jump? </li>
+</ul>
+<p><img src="RNA_evolution.png" alt="Structure of RNA"></p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">HTML</span>
+<span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;iframe width=&quot;784&quot; height=&quot;441&quot; src=&quot;http://rna.tbi.univie.ac.at/forna/forna.html&quot; /iframe&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<iframe width="784" height="441" src="http://rna.tbi.univie.ac.at/forna/forna.html" /iframe>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Select a random RNA sequence from each generation to check its folding structure</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">randrange</span>
+<span class="c1">#print(randrange(999))</span>
+<span class="n">generations</span><span class="o">=</span><span class="mi">20</span>
+<span class="n">pop_size</span><span class="o">=</span><span class="mi">300</span>
+<span class="c1">#Print some random cells from each generation </span>
+<span class="c1">#pops[generation][cell in that generation].{quality to retrieve}</span>
+<span class="k">for</span> <span class="n">gen</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">generations</span><span class="p">):</span>
+    <span class="n">cid</span><span class="o">=</span><span class="n">randrange</span><span class="p">(</span><span class="n">pop_size</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&gt;Gen&#39;</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">str</span><span class="p">(</span><span class="n">gen</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_Cell_&#39;</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">str</span><span class="p">(</span><span class="n">pops</span><span class="p">[</span><span class="n">gen</span><span class="p">][</span><span class="n">cid</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pops</span><span class="p">[</span><span class="n">gen</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">sequence_1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">str</span><span class="p">(</span><span class="n">pops</span><span class="p">[</span><span class="n">gen</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">structure_1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt;Gen1_Cell_173
+UUCAAGGUGG
+..(.....).
+
+&gt;Gen2_Cell_18
+CACUUCUAAA
+.(....)...
+
+&gt;Gen3_Cell_163
+ACUUGGCACU
+(.(....).)
+
+&gt;Gen4_Cell_175
+CUCGUGCUAG
+((......))
+
+&gt;Gen5_Cell_163
+CACAGAUAUG
+((....)..)
+
+&gt;Gen6_Cell_192
+GGGGAUCCCC
+(((....)))
+
+&gt;Gen7_Cell_190
+GGAUUUGUGC
+(.(....).)
+
+&gt;Gen8_Cell_35
+CCGACACCGG
+(((....)))
+
+&gt;Gen9_Cell_294
+GGGGAUCCCC
+(((....)))
+
+&gt;Gen10_Cell_236
+GGGGAUCCCC
+(((....)))
+
+&gt;Gen11_Cell_42
+GUGCCACCAC
+(((....)))
+
+&gt;Gen12_Cell_108
+GGGGAUCCCC
+(((....)))
+
+&gt;Gen13_Cell_2
+GUGCCACCAC
+(((....)))
+
+&gt;Gen14_Cell_50
+GUGCCACCAC
+(((....)))
+
+&gt;Gen15_Cell_14
+GUGCCACCAC
+(((....)))
+
+&gt;Gen16_Cell_191
+GGGGAUCCCC
+(((....)))
+
+&gt;Gen17_Cell_110
+GGGGAUCCCC
+(((....)))
+
+&gt;Gen18_Cell_19
+GGGGAUCCCC
+(((....)))
+
+&gt;Gen19_Cell_134
+GUGCCACCAC
+(((....)))
+
+&gt;Gen20_Cell_10
+GGGGAUCCCC
+(((....)))
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You should see a nice drop in base pair distance! Another way of visualizing this is by plotting a histogram of the base pair distance of all Cells in the initial population versus the final population.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="k">def</span> <span class="nf">bp_distance_distributions</span><span class="p">(</span><span class="n">pops</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots histograms of base pair distance in initial and final populations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#plot bp_distance_1 for rnas in first population</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">([</span><span class="n">rna</span><span class="o">.</span><span class="n">bp_distance_1</span> <span class="k">for</span> <span class="n">rna</span> <span class="ow">in</span> <span class="n">pops</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;initial population&#39;</span><span class="p">)</span>
+    <span class="c1">#plot bp_distance_1 for rnas in first population</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">([</span><span class="n">rna</span><span class="o">.</span><span class="n">bp_distance_1</span> <span class="k">for</span> <span class="n">rna</span> <span class="ow">in</span> <span class="n">pops</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;final population&#39;</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Mean Base Pair Distance&#39;</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">bp_distance_distributions</span><span class="p">(</span><span class="n">pops</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../../images/07/2/RNA_World_39_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Introducing-mating-to-the-model">Introducing mating to the model<a class="anchor-link" href="#Introducing-mating-to-the-model"> </a></h2><p>The populations we generated evolved asexually. This means that individuals do not mate or exchange genetic information. So to make our simulation a bit more interesting let's let the Cells mate. This is going to require a few small changes in the <code>selection()</code> function. Previously, when we selected sequences to go into the next generation we just let them provide one offspring which was a copy of itself and introduced mutations. Now instead of choosing one Cell at a time, we will randomly choose two 'parents' that will mate. When they mate, each parent will contribute one of its chromosomes to the child. We'll repeat this process until we have filled the next generation.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">selection_with_mating</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">mutation_rate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">beta</span><span class="o">=-</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">next_generation</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">next_generation</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">population</span><span class="p">):</span>
+        <span class="c1">#select two parents based on their fitness</span>
+        <span class="n">parents_pair</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="n">rna</span><span class="o">.</span><span class="n">fitness</span> <span class="k">for</span> <span class="n">rna</span> <span class="ow">in</span> <span class="n">population</span><span class="p">],</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        
+        <span class="c1">#take the sequence and structure from the first parent&#39;s first chromosome and give it to the child</span>
+        <span class="n">child_chrom_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">parents_pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sequence_1</span><span class="p">,</span> <span class="n">parents_pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">structure_1</span><span class="p">)</span>
+
+        <span class="c1">#do the same for the child&#39;s second chromosome and the second parent.</span>
+        <span class="n">child_chrom_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">parents_pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sequence_2</span><span class="p">,</span> <span class="n">parents_pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">structure_2</span><span class="p">)</span>
+
+
+        <span class="c1">#initialize the new child Cell with the new chromosomes.</span>
+        <span class="n">child_cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="n">child_chrom_1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">child_chrom_1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">child_chrom_2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">child_chrom_2</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1">#give the child and id and store who its parents are</span>
+        <span class="n">child_cell</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">counter</span>
+        <span class="n">child_cell</span><span class="o">.</span><span class="n">parent_1</span> <span class="o">=</span> <span class="n">parents_pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">child_cell</span><span class="o">.</span><span class="n">parent_2</span> <span class="o">=</span> <span class="n">parents_pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
+
+        <span class="c1">#add the child to the new generation</span>
+        <span class="n">next_generation</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child_cell</span><span class="p">)</span>
+        
+        <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>
+            
+        
+    <span class="c1">#introduce mutations in next_generation sequeneces and re-fold when a mutation occurs (same as before)</span>
+    <span class="k">for</span> <span class="n">rna</span> <span class="ow">in</span> <span class="n">next_generation</span><span class="p">:</span>      
+        <span class="n">mutated_sequence_1</span><span class="p">,</span> <span class="n">mutated_1</span> <span class="o">=</span> <span class="n">mutate</span><span class="p">(</span><span class="n">rna</span><span class="o">.</span><span class="n">sequence_1</span><span class="p">,</span> <span class="n">mutation_rate</span><span class="o">=</span><span class="n">mutation_rate</span><span class="p">)</span>
+        <span class="n">mutated_sequence_2</span><span class="p">,</span> <span class="n">mutated_2</span> <span class="o">=</span> <span class="n">mutate</span><span class="p">(</span><span class="n">rna</span><span class="o">.</span><span class="n">sequence_2</span><span class="p">,</span> <span class="n">mutation_rate</span><span class="o">=</span><span class="n">mutation_rate</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">mutated_1</span><span class="p">:</span>
+            <span class="n">rna</span><span class="o">.</span><span class="n">sequence_1</span> <span class="o">=</span> <span class="n">mutated_sequence_1</span>
+            <span class="n">rna</span><span class="o">.</span><span class="n">structure_1</span> <span class="o">=</span> <span class="n">nussinov</span><span class="p">(</span><span class="n">mutated_sequence_1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mutated_2</span><span class="p">:</span>
+            <span class="n">rna</span><span class="o">.</span><span class="n">sequence_2</span> <span class="o">=</span> <span class="n">mutated_sequence_2</span>
+            <span class="n">rna</span><span class="o">.</span><span class="n">structure_2</span> <span class="o">=</span> <span class="n">nussinov</span><span class="p">(</span><span class="n">mutated_sequence_2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+    <span class="c1">#update fitness values for the new generation</span>
+    <span class="n">compute_fitness</span><span class="p">(</span><span class="n">next_generation</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">next_generation</span>    
+
+<span class="c1">#run a small test to make sure it works</span>
+<span class="n">next_gen</span> <span class="o">=</span> <span class="n">selection_with_mating</span><span class="p">(</span><span class="n">pop</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">next_gen</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">sequence_1</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>GGAGACAAUC
+AGCAACCGUC
+CUGACGGGCU
+GCUGCUCGCC
+GAGCGCAGGC
+AUCUGGGUUG
+GUUUAGUUAU
+CCGCGUAUAU
+AGUAUACAAU
+GACCGUAUUU
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we just have to update our <code>evolution()</code> function to call the new <code>selection_with_mating()</code> function.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">evolve_with_mating</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">generations</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">pop_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">mutation_rate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">beta</span><span class="o">=-</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">populations</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">population_stats</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="n">initial_population</span> <span class="o">=</span> <span class="n">populate</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">pop_size</span><span class="o">=</span><span class="n">pop_size</span><span class="p">)</span>
+    <span class="n">compute_fitness</span><span class="p">(</span><span class="n">initial_population</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        
+    <span class="n">current_generation</span> <span class="o">=</span> <span class="n">initial_population</span>
+
+    <span class="c1">#iterate the selection process over the desired number of generations</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">generations</span><span class="p">):</span>
+        <span class="c1">#let&#39;s get some stats on the structures in the populations   </span>
+        <span class="n">record_stats</span><span class="p">(</span><span class="n">current_generation</span><span class="p">,</span> <span class="n">population_stats</span><span class="p">)</span>
+        
+        <span class="c1">#add the current generation to our list of populations.</span>
+        <span class="n">populations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_generation</span><span class="p">)</span>
+
+        <span class="c1">#select the next generation, but this time with mutations</span>
+        <span class="n">new_gen</span> <span class="o">=</span> <span class="n">selection_with_mating</span><span class="p">(</span><span class="n">current_generation</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">mutation_rate</span><span class="o">=</span><span class="n">mutation_rate</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">)</span>
+        <span class="n">current_generation</span> <span class="o">=</span> <span class="n">new_gen</span> 
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">populations</span><span class="p">,</span> <span class="n">population_stats</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Try out the new evolution model!</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pops_mating</span><span class="p">,</span> <span class="n">pops_stats_mating</span> <span class="o">=</span> <span class="n">evolve_with_mating</span><span class="p">(</span><span class="s2">&quot;(((....)))&quot;</span><span class="p">,</span> <span class="n">generations</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">pop_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">beta</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">evo_plot</span><span class="p">(</span><span class="n">pops_stats_mating</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="../../images/07/2/RNA_World_45_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Select a random RNA sequence from each generation to check its folding structure</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">randrange</span>
+<span class="c1">#print(randrange(999))</span>
+<span class="n">generations</span><span class="o">=</span><span class="mi">20</span>
+<span class="n">pop_size</span><span class="o">=</span><span class="mi">1000</span>
+<span class="c1">#Print some random cells from each generation </span>
+<span class="c1">#pops[generation][cell in that generation].{quality to retrieve}</span>
+<span class="k">for</span> <span class="n">gen</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">generations</span><span class="p">):</span>
+    <span class="n">cid</span><span class="o">=</span><span class="n">randrange</span><span class="p">(</span><span class="n">pop_size</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&gt;Gen&#39;</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">str</span><span class="p">(</span><span class="n">gen</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_Cell_&#39;</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">str</span><span class="p">(</span><span class="n">pops_mating</span><span class="p">[</span><span class="n">gen</span><span class="p">][</span><span class="n">cid</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pops_mating</span><span class="p">[</span><span class="n">gen</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">sequence_1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">str</span><span class="p">(</span><span class="n">pops_mating</span><span class="p">[</span><span class="n">gen</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">structure_1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt;Gen1_Cell_363
+UCCGCCGCCA
+((....)..)
+
+&gt;Gen2_Cell_295
+AGUGGGAAAA
+..(....)..
+
+&gt;Gen3_Cell_715
+AUCAAGCCAA
+.(......).
+
+&gt;Gen4_Cell_503
+UAACGGCUUC
+.((....)).
+
+&gt;Gen5_Cell_396
+GCGGGCGCGC
+(((....)))
+
+&gt;Gen6_Cell_172
+UAUUGGUAUA
+(((....)))
+
+&gt;Gen7_Cell_336
+ACGAGAUAGU
+((......))
+
+&gt;Gen8_Cell_859
+ACGGAUGCGU
+(((....)))
+
+&gt;Gen9_Cell_244
+AGAGCAUUCC
+.((....)).
+
+&gt;Gen10_Cell_567
+CGUGUGGACC
+.((....)).
+
+&gt;Gen11_Cell_379
+CGAUCGAACG
+((......))
+
+&gt;Gen12_Cell_213
+GCGGGCGCGC
+(((....)))
+
+&gt;Gen13_Cell_692
+UGAGCAAUCA
+(((....)))
+
+&gt;Gen14_Cell_51
+UUCAUACGAA
+(((....)))
+
+&gt;Gen15_Cell_208
+UCUCUCUAGC
+.((....)).
+
+&gt;Gen16_Cell_640
+UUCAUACGAA
+(((....)))
+
+&gt;Gen17_Cell_211
+UAUUGGUAUA
+(((....)))
+
+&gt;Gen18_Cell_40
+CUGAUCCCAG
+(((....)))
+
+&gt;Gen19_Cell_925
+AUUUAUGAAU
+(((....)))
+
+&gt;Gen20_Cell_973
+CUGAUCCCAG
+(((....)))
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Acknowledgements">Acknowledgements<a class="anchor-link" href="#Acknowledgements"> </a></h1><p>The computational codes of this notebook were originally created by <a href="https://github.com/cgoliver">Carlos G. Oliver</a>, and adapted by Evert Durán for ASTRO200.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+ 
+
+
+    </main>
+    
